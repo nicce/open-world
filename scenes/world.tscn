@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://gavcqugynhaw"]
+[gd_scene load_steps=17 format=3 uid="uid://gavcqugynhaw"]
 
 [ext_resource type="PackedScene" uid="uid://c8xkbjmxthcvl" path="res://scenes/player.tscn" id="1_fur2i"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_wenw1"]
 [ext_resource type="PackedScene" uid="uid://c2wfqw3vnr1c0" path="res://scenes/lake_world.tscn" id="4_gp53r"]
 [ext_resource type="Texture2D" uid="uid://3sbphia8gbli" path="res://art/tiny_town_packed.png" id="7_mugiq"]
 [ext_resource type="AudioStream" uid="uid://dsnhv0d3m1n6j" path="res://music/area1.wav" id="9_kfjv0"]
@@ -981,8 +982,12 @@ height = 26.0
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(0, 2)
+script = ExtResource("1_wenw1")
 
 [node name="Player" parent="." instance=ExtResource("1_fur2i")]
+
+[node name="HomeAreaAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_kfjv0")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -998,10 +1003,6 @@ layer_1/tile_data = PackedInt32Array(-393227, 524293, 3, -393226, 589829, 3, -39
 layer_2/name = "3"
 layer_2/y_sort_enabled = true
 layer_2/tile_data = PackedInt32Array(327672, 720901, 6, 393214, 524293, 8, 327678, 524293, 7, -262131, 327685, 2, -262130, 262149, 1, -327666, 262149, 0, -196594, 262149, 2, -196595, 196613, 2, -393202, 327685, 0, -524274, 327685, 0, 196616, 327685, 2, -458738, 196613, 2, 327685, 196613, 0, 393221, 196613, 1, 262153, 393221, 0, 327689, 393221, 2, 262154, 524293, 0, 327690, 524293, 2, 262145, 262149, 0, 327681, 262149, 1, -458742, 589829, 0, -393206, 589829, 2, -458741, 720901, 0, -393205, 720901, 2, -196602, 196613, 2, 1, 262149, 2, -131073, 262149, 2, -327678, 196613, 2, 65549, 720901, 6, -524286, 720901, 6, 327667, 393221, 1, 262132, 458757, 0, 327668, 458757, 1, 393204, 458757, 2, 327669, 524293, 1, 131065, 5, 4, 196601, 5, 5, 262137, 5, 6, 327673, 5, 6, 131066, 65541, 4, 196602, 65541, 5, 262138, 5, 7, 327674, 65541, 6, 131067, 65541, 4, 196603, 196613, 5, 262139, 65541, 6, 327675, 65541, 7, 131068, 65541, 4, 196604, 65541, 5, 262140, 5, 7, 327676, 65541, 6, 131069, 131077, 4, 196605, 131077, 5, 262141, 196613, 6, 327677, 196613, 6)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TileMap"]
-stream = ExtResource("9_kfjv0")
-autoplay = true
 
 [node name="Collision" type="StaticBody2D" parent="."]
 
