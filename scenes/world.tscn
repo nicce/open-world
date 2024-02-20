@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://gavcqugynhaw"]
 
 [ext_resource type="PackedScene" uid="uid://c8xkbjmxthcvl" path="res://scenes/player.tscn" id="1_fur2i"]
-[ext_resource type="Texture2D" uid="uid://3sbphia8gbli" path="res://art/tilesets/tilemap_packed.png" id="7_mugiq"]
+[ext_resource type="Texture2D" uid="uid://3sbphia8gbli" path="res://art/tiny_town_packed.png" id="7_mugiq"]
 [ext_resource type="AudioStream" uid="uid://dsnhv0d3m1n6j" path="res://music/area1.wav" id="9_kfjv0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mp0pd"]
