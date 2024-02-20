@@ -241,5 +241,5 @@ shape = SubResource("CapsuleShape2D_bkdk2")
 zoom = Vector2(2.5, 2.5)
 limit_left = -270
 limit_top = -142
-limit_right = 238
-limit_bottom = 135
+limit_right = 655
+limit_bottom = 145
