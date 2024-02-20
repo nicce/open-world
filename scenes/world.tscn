@@ -979,6 +979,7 @@ height = 26.0
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+position = Vector2(0, 2)
 
 [node name="Player" parent="." instance=ExtResource("1_fur2i")]
 
