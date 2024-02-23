@@ -33,7 +33,4 @@ func play_animation(dir):
 			$AnimatedSprite2D.play("walk_east")
 		elif dir.x == 1:
 			$AnimatedSprite2D.play("walk_east")
-			
-func player(): # use collision layer instead!
-	pass
 

@@ -3292,6 +3292,7 @@ layer_2/tile_data = PackedInt32Array(524312, 262144, 6, 458777, 262144, 6, 52431
 
 [node name="DetectionAreaLake" type="Area2D" parent="."]
 position = Vector2(245, -3)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAreaLake"]
 position = Vector2(6, -5)
