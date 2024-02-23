@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=33 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
 [ext_resource type="Texture2D" uid="uid://6vabe4k51x7a" path="res://art/characters/player.png" id="1_y445f"]
+[ext_resource type="PackedScene" uid="uid://cecw6b2xcismr" path="res://scenes/advanced_camera.tscn" id="3_0t7ah"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2tl47"]
 atlas = ExtResource("1_y445f")
@@ -221,8 +222,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bkdk2"]
-radius = 7.0
-height = 14.0
+radius = 8.0
+height = 18.0
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -237,9 +238,6 @@ autoplay = "idle"
 position = Vector2(1, 9)
 shape = SubResource("CapsuleShape2D_bkdk2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
-limit_left = -270
-limit_top = -146
-limit_right = 655
-limit_bottom = 145
+[node name="AdvancedCamera" parent="." instance=ExtResource("3_0t7ah")]
+decay = 0.6
+amplitude = 30.0

@@ -1,9 +1,8 @@
 extends Node2D
 
-@onready var test = $Test
+@export var music: AudioStreamPlayer
 
 
-func _on_detection_area_body_entered(body):
-	print(body)
+func _on_detection_area_lake_body_entered(body):
 	if body.has_method("player"):
-		test.play()
+		BackgroundMusic.play_audio("dark_woodlands")

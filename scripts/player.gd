@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 100.0
+const SPEED = 80.0
 const IDLE_STATE = "idle"
 const WALKING_STATE = "walking"
 
@@ -34,6 +34,6 @@ func play_animation(dir):
 		elif dir.x == 1:
 			$AnimatedSprite2D.play("walk_east")
 			
-func player():
+func player(): # use collision layer instead!
 	pass
 

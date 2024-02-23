@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cecw6b2xcismr"]
+
+[ext_resource type="Script" path="res://scripts/advanced_camera.gd" id="1_8ptaq"]
+
+[node name="AdvancedCamera" type="Camera2D"]
+zoom = Vector2(2.5, 2.5)
+limit_left = -270
+limit_top = -146
+limit_right = 655
+limit_bottom = 145
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+script = ExtResource("1_8ptaq")
