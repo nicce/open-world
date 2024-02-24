@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 80.0
+@export var speed = 80.0
+
 const IDLE_STATE = "idle"
 const WALKING_STATE = "walking"
 
@@ -14,7 +15,7 @@ func _physics_process(delta):
 	elif direction.x != 0 or direction.y != 0:
 		player_state = WALKING_STATE
 	
-	velocity = direction * SPEED
+	velocity = direction * speed
 	move_and_slide()
 	
 	play_animation(direction)
@@ -34,3 +35,7 @@ func play_animation(dir):
 		elif dir.x == 1:
 			$AnimatedSprite2D.play("walk_east")
 
+
+
+func _on_hitbox_body_entered(body):
+	pass # add screen shake

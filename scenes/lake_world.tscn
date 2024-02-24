@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2wfqw3vnr1c0"]
+[gd_scene load_steps=11 format=3 uid="uid://c2wfqw3vnr1c0"]
 
 [ext_resource type="Texture2D" uid="uid://3sbphia8gbli" path="res://art/tilesets/tiny_town_packed.png" id="1_0cead"]
 [ext_resource type="Script" path="res://scripts/lake_world.gd" id="1_40p0k"]
 [ext_resource type="Texture2D" uid="uid://dbvs6e6s7p6or" path="res://art/tilesets/tiny_battle_packed.png" id="1_tey5q"]
 [ext_resource type="Texture2D" uid="uid://bhjmnpg5pe4gv" path="res://art/tilesets/tiny_dungeon_packed.png" id="2_3a3dk"]
+[ext_resource type="PackedScene" uid="uid://cuyb4dyyii1nj" path="res://scenes/snake.tscn" id="5_j07yq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4b2fp"]
 texture = ExtResource("1_tey5q")
@@ -3297,5 +3298,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAreaLake"]
 position = Vector2(6, -5)
 shape = SubResource("RectangleShape2D_uhc3h")
+
+[node name="Snake" parent="." instance=ExtResource("5_j07yq")]
+position = Vector2(329, 48)
+speed = 60.0
 
 [connection signal="body_entered" from="DetectionAreaLake" to="." method="_on_detection_area_lake_body_entered"]
