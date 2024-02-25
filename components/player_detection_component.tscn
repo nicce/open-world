@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://jah6pk3fqu55"]
+
+[ext_resource type="Script" path="res://scripts/PlayerDetectionArea.gd" id="1_bikaa"]
+
+[node name="PlayerDetectionComponent" type="Area2D"]
+script = ExtResource("1_bikaa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

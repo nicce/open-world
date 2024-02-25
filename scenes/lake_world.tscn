@@ -3301,6 +3301,5 @@ shape = SubResource("RectangleShape2D_uhc3h")
 
 [node name="Snake" parent="." instance=ExtResource("5_j07yq")]
 position = Vector2(329, 48)
-speed = 60.0
 
 [connection signal="body_entered" from="DetectionAreaLake" to="." method="_on_detection_area_lake_body_entered"]
