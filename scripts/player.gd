@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var animation_state: Variant = animation_tree.get("parameters/playback")
+@onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
 @export var speed: float = 80.0
 
