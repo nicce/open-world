@@ -1100,4 +1100,8 @@ collision_mask = 2
 position = Vector2(-16.5, 121.25)
 shape = SubResource("RectangleShape2D_nibog")
 
+[node name="WorldCamera" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+
+[connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
 [connection signal="body_entered" from="DetectionAreaHome" to="." method="_on_detection_area_home_body_entered"]

@@ -1,3 +1,4 @@
+class_name AdvancedCamera
 extends Camera2D
 
 var noise: FastNoiseLite
@@ -16,10 +17,6 @@ func _ready():
 	randomize()
 	noise.seed = randi()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	
-func _input(event): # will be replaced with a hitbox hit on player
-	if event.is_action_pressed("shake"):
-		add_trauma(0.6)
 	
 func _physics_process(delta):
 	if trauma:

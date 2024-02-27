@@ -12,6 +12,7 @@ func _ready():
 	
 func damage(attack: Attack):
 	health -= attack.damage
+	print(health) # TODO replace with health bar in UI
 	if health <= 0:
 		health_depleated.emit()
 	else:

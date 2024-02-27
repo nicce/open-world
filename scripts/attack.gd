@@ -1,3 +1,5 @@
 class_name Attack
+extends Node
 
-var damage: int
+@export var damage: int
+@export var cooldown: float

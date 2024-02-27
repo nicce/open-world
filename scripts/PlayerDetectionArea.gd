@@ -2,10 +2,9 @@
 # If the player is in the area it will begin to chase the player.
 # You need to have the animations "Idle" and "Move" available in your AnimationTree
 # in order for this component to work properly.
-# TODO is this component really the way to go?
 extends Area2D
 
-@export var speed: int
+@export var speed: int #TODO take from parent?
 @export var animation_tree: AnimationTree
 
 var animation_state: AnimationNodeStateMachinePlayback
