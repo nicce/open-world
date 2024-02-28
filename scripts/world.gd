@@ -1,6 +1,7 @@
 extends Node2D
 
 var player_scene = preload("res://scenes/player.tscn")
+var advanced_camera_scene = preload("res://scenes/advanced_camera.tscn")
 var player_dead = false
 
 func _on_detection_area_home_body_entered(body):
@@ -14,4 +15,5 @@ func _physics_process(delta):
 
 
 func _on_player_player_dead():
+	print("here")
 	player_dead = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=46 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
 [ext_resource type="Texture2D" uid="uid://cqk3km5v2jj5t" path="res://art/characters/player.png" id="2_cgwfd"]
@@ -16,8 +16,8 @@ height = 20.0
 
 [sub_resource type="Animation" id="Animation_8gwxm"]
 resource_name = "Dead"
-length = 0.5
-step = 0.2
+length = 2.0
+step = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -25,7 +25,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 24]
@@ -124,6 +124,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_qd11h"]
@@ -288,16 +300,42 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hb180"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_un1j3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vnc2e"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qek0x"]
 states/Dead/node = SubResource("AnimationNodeBlendSpace2D_g0k51")
-states/Dead/position = Vector2(539.5, 21.14)
+states/Dead/position = Vector2(478, 50.64)
+states/End/position = Vector2(1030.5, 128)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_l5jp6")
-states/Idle/position = Vector2(345.5, 100.188)
+states/Idle/position = Vector2(332, 204.688)
 states/Start/position = Vector2(110, 98.5)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_k1wrm")
-states/Walk/position = Vector2(586.5, 101.75)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0svd7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_gsfwa"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hb180")]
-graph_offset = Vector2(-8.15839e-07, -78.36)
+states/Walk/position = Vector2(603.5, 203.469)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0svd7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_gsfwa"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hb180"), "Idle", "Dead", SubResource("AnimationNodeStateMachineTransition_un1j3"), "Walk", "Dead", SubResource("AnimationNodeStateMachineTransition_vnc2e")]
+graph_offset = Vector2(-160.2, -102.165)
+
+[sub_resource type="Animation" id="Animation_u2aow"]
+resource_name = "Damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emryd"]
+_data = {
+"Damage": SubResource("Animation_u2aow")
+}
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -343,6 +381,11 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Dead/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(2.08165e-12, 2.08165e-12)
 parameters/Walk/blend_position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="AnimationDamage" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_emryd")
+}
 
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="HitboxComponent" to="HitboxComponent" method="_on_body_exited"]
