@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cuyb4dyyii1nj"]
+[gd_scene load_steps=35 format=3 uid="uid://cuyb4dyyii1nj"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_p2ss3"]
 [ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/snake.png" id="2_48vnt"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ci5076ojxrks5" path="res://components/hitbox_component.tscn" id="4_3vipc"]
 [ext_resource type="PackedScene" uid="uid://jah6pk3fqu55" path="res://components/player_detection_component.tscn" id="5_7csi2"]
 [ext_resource type="Script" path="res://scripts/attack.gd" id="6_ajp4j"]
+[ext_resource type="PackedScene" uid="uid://bwdivkaou4q6i" path="res://components/animation_damage.tscn" id="7_0texe"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_unp06"]
 radius = 6.0
@@ -262,7 +263,8 @@ shape = SubResource("CapsuleShape2D_unp06")
 max_health = 20
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_3vipc")]
-collision_mask = 2
+collision_layer = 4
+collision_mask = 9
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -293,7 +295,9 @@ parameters/Move/blend_position = Vector2(2.08165e-12, 2.08165e-12)
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("6_ajp4j")
 damage = 10
-cooldown = 1.0
+cooldown = 0.5
+
+[node name="AnimationDamage" parent="." instance=ExtResource("7_0texe")]
 
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]
 [connection signal="health_depleated" from="HealthComponent" to="." method="_on_health_component_health_depleated"]

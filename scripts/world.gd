@@ -15,5 +15,4 @@ func _physics_process(delta):
 
 
 func _on_player_player_dead():
-	print("here")
 	player_dead = true

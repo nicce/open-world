@@ -11,14 +11,20 @@ signal player_dead
 
 var health_depleated: bool = false
 
+enum player_states {MOVE, HIT, DEAD}
+var current_state = player_states.MOVE
+
 func _physics_process(delta):
-	if health_depleated:
-		die()
-	if !health_depleated:
-		move()
+	match current_state:
+		player_states.MOVE:
+			move()
+		player_states.DEAD:
+			die()
+		player_states.HIT:
+			hit()
 
 func _on_health_component_health_depleated():
-	health_depleated = true
+	current_state = player_states.DEAD
 	
 func _on_health_component_damage_taken():
 	$AnimationDamage.play("Damage")
@@ -30,16 +36,25 @@ func move():
 	if velocity != Vector2.ZERO:
 		animation_tree.set("parameters/Idle/blend_position", direction)
 		animation_tree.set("parameters/Walk/blend_position", direction)
-		animation_tree.set("parameters/Damage/blend_position", direction)
+		animation_tree.set("parameters/Fist/blend_position", direction)
 		animation_state.travel("Walk")
-	else:
+	
+	if velocity == Vector2.ZERO:
 		animation_state.travel("Idle")
+	
+	if Input.is_action_just_pressed("hit"):
+		current_state = player_states.HIT
 	
 	move_and_slide()
 	
+func hit(): # TODO how do we handle different equipped weapons?
+	animation_state.travel("Fist")
 	
 func die():
 	animation_state.travel("Dead")
 	set_process(false)
 	await get_tree().create_timer(2.0).timeout
 	get_tree().reload_current_scene()
+	
+func on_player_state_reset():
+	current_state = player_states.MOVE

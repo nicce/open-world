@@ -7,4 +7,4 @@ func _on_health_component_health_depleated():
 
 
 func _on_health_component_damage_taken():
-	pass # TODO add modulate red/white indicating dmg
+	print("dmg taken!") # TODO add modulate red/white indicating dmg
