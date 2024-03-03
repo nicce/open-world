@@ -4,7 +4,6 @@
 
 [node name="HealthBar" type="ProgressBar"]
 visible = false
-modulate = Color(0.360784, 1, 0.380392, 1)
 offset_right = 49.0
 offset_bottom = 27.0
 scale = Vector2(0.1, 0.1)
