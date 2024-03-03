@@ -12,7 +12,6 @@ func _ready():
 	
 func damage(attack: Attack):
 	health -= attack.damage
-	print(health)
 	if health <= 0:
 		health_depleated.emit()
 	else:

@@ -13,8 +13,8 @@ radius = 6.0
 height = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8txrp"]
-radius = 12.0
-height = 24.0
+radius = 14.0
+height = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ejc4"]
 radius = 60.1664
@@ -258,19 +258,22 @@ frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_unp06")
+debug_color = Color(0.266667, 0.635294, 0, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ts5fn")]
 max_health = 20
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_3vipc")]
 collision_layer = 4
-collision_mask = 9
+collision_mask = 8
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CapsuleShape2D_8txrp")
+debug_color = Color(0.937255, 0.196078, 0.411765, 0.419608)
 
 [node name="PlayerDetectionComponent" parent="." node_paths=PackedStringArray("animation_tree") instance=ExtResource("5_7csi2")]
+collision_layer = 4
 collision_mask = 2
 speed = 60
 animation_tree = NodePath("../AnimationTree")
@@ -301,3 +304,6 @@ cooldown = 0.5
 
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]
 [connection signal="health_depleated" from="HealthComponent" to="." method="_on_health_component_health_depleated"]
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]
+[connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]
+[connection signal="body_exited" from="HitboxComponent" to="HitboxComponent" method="_on_body_exited"]

@@ -29,6 +29,11 @@ func _on_body_exited(body):
 	
 func _on_cooldown_timeout():
 	cooldown = false
+	
+# is the function that gets triggered when an item enters the area aka weapon or fists
+func _on_area_entered(area):
+	var attack = area.get_parent().attack
+	take_damage(attack)
 
 func take_damage(attack: Attack):
 	if health_component:

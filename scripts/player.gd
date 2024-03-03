@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var advanced_camera: AdvancedCamera = $AdvancedCamera
 
 @export var speed: float = 80.0
+@export var attack: Attack
 
 signal player_dead
 

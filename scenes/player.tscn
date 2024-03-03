@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=60 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
 [ext_resource type="Texture2D" uid="uid://cqk3km5v2jj5t" path="res://art/characters/player.png" id="2_cgwfd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Animation" uid="uid://cv0wy2fgb5xsv" path="res://animations/FistSouth.res" id="7_ybr0o"]
 [ext_resource type="Animation" uid="uid://cdkkukewiypk3" path="res://animations/FistWest.res" id="8_t7rjk"]
 [ext_resource type="Animation" uid="uid://dddm65go72dxp" path="res://animations/FistEast.res" id="9_cm533"]
+[ext_resource type="Script" path="res://scripts/attack.gd" id="11_e62re"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bkdk2"]
 radius = 7.0
@@ -379,15 +380,16 @@ states/Start/position = Vector2(110, 98.5)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_k1wrm")
 states/Walk/position = Vector2(603.5, 203.469)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_0svd7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_gsfwa"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hb180"), "Idle", "Dead", SubResource("AnimationNodeStateMachineTransition_un1j3"), "Walk", "Dead", SubResource("AnimationNodeStateMachineTransition_vnc2e"), "Idle", "Fist", SubResource("AnimationNodeStateMachineTransition_8kbsg"), "Fist", "Idle", SubResource("AnimationNodeStateMachineTransition_cbyby"), "Fist", "Walk", SubResource("AnimationNodeStateMachineTransition_jy154"), "Walk", "Fist", SubResource("AnimationNodeStateMachineTransition_cls70")]
-graph_offset = Vector2(-306.78, 73.7849)
+graph_offset = Vector2(-223.02, 91.3799)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ninn"]
-size = Vector2(3.75, 3)
+size = Vector2(5.875, 3.5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("attack")]
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_s88sy")
+attack = NodePath("Attack")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_cgwfd")
@@ -426,7 +428,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_qek0x")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Dead/blend_position = Vector2(0, 0)
-parameters/Fist/blend_position = Vector2(0, 0)
+parameters/Fist/blend_position = Vector2(2.08165e-12, 2.08165e-12)
 parameters/Idle/blend_position = Vector2(2.08165e-12, 2.08165e-12)
 parameters/Walk/blend_position = Vector2(2.08165e-12, 2.08165e-12)
 
@@ -440,6 +442,10 @@ collision_mask = 4
 position = Vector2(-3, -7)
 shape = SubResource("RectangleShape2D_3ninn")
 disabled = true
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("11_e62re")
+damage = 10
 
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="HitboxComponent" to="HitboxComponent" method="_on_body_exited"]
