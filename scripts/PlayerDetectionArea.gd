@@ -4,7 +4,6 @@
 # in order for this component to work properly.
 extends Area2D
 
-@export var speed: int #TODO take from parent?
 @export var animation_tree: AnimationTree
 
 var animation_state: AnimationNodeStateMachinePlayback
@@ -31,7 +30,7 @@ func _on_body_exited(body):
 		
 func chase(player: Player, delta: float):
 	var direction = player.position - get_parent().position
-	get_parent().velocity = (direction * speed).normalized() / delta
+	get_parent().velocity = (direction * get_parent().speed).normalized() / delta
 	
 	animation_tree.set("parameters/Idle/blend_position", direction)
 	animation_tree.set("parameters/Move/blend_position", direction)

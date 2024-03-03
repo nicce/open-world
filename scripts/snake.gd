@@ -2,6 +2,7 @@ class_name Snake
 extends CharacterBody2D
 
 @export var attack: Attack
+@export var speed: int
 
 signal dead(respawn_position)
 

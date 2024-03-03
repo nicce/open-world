@@ -249,6 +249,7 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_p2ss3")
 attack = NodePath("Attack")
+speed = 60
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_48vnt")
@@ -275,7 +276,6 @@ debug_color = Color(0.937255, 0.196078, 0.411765, 0.419608)
 [node name="PlayerDetectionComponent" parent="." node_paths=PackedStringArray("animation_tree") instance=ExtResource("5_7csi2")]
 collision_layer = 4
 collision_mask = 2
-speed = 60
 animation_tree = NodePath("../AnimationTree")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionComponent"]
