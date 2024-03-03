@@ -5,7 +5,7 @@ extends Area2D
 var cooldown_timer: Timer
 
 var enemy_doing_damage = false
-var cooldown = false
+var cooldown = true
 var attack: Attack
 
 func _ready():
@@ -32,8 +32,9 @@ func _on_cooldown_timeout():
 	
 # is the function that gets triggered when an item enters the area aka weapon or fists
 func _on_area_entered(area):
-	var attack = area.get_parent().attack
-	take_damage(attack)
+	if area.get_parent() is Player:
+		var attack = area.get_parent().attack
+		take_damage(attack)
 
 func take_damage(attack: Attack):
 	if health_component:
