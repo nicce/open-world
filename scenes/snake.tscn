@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cuyb4dyyii1nj"]
+[gd_scene load_steps=36 format=3 uid="uid://cuyb4dyyii1nj"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_p2ss3"]
 [ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/snake.png" id="2_48vnt"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://jah6pk3fqu55" path="res://components/player_detection_component.tscn" id="5_7csi2"]
 [ext_resource type="Script" path="res://scripts/attack.gd" id="6_ajp4j"]
 [ext_resource type="PackedScene" uid="uid://bwdivkaou4q6i" path="res://components/animation_damage.tscn" id="7_0texe"]
+[ext_resource type="PackedScene" uid="uid://dkj2ngfwp080f" path="res://scenes/health_bar.tscn" id="8_dhak2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_unp06"]
 radius = 6.0
@@ -261,8 +262,9 @@ frame = 1
 shape = SubResource("CapsuleShape2D_unp06")
 debug_color = Color(0.266667, 0.635294, 0, 0.419608)
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_ts5fn")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_ts5fn")]
 max_health = 20
+health_bar = NodePath("../HealthBar")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_3vipc")]
 collision_layer = 4
@@ -301,6 +303,12 @@ damage = 10
 cooldown = 0.5
 
 [node name="AnimationDamage" parent="." instance=ExtResource("7_0texe")]
+
+[node name="HealthBar" parent="." instance=ExtResource("8_dhak2")]
+offset_left = -6.0
+offset_top = 9.0
+offset_right = 114.0
+offset_bottom = 36.0
 
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]
 [connection signal="health_depleated" from="HealthComponent" to="." method="_on_health_component_health_depleated"]

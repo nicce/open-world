@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=61 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
 [ext_resource type="Texture2D" uid="uid://cqk3km5v2jj5t" path="res://art/characters/player.png" id="2_cgwfd"]
@@ -11,6 +11,7 @@
 [ext_resource type="Animation" uid="uid://cdkkukewiypk3" path="res://animations/FistWest.res" id="8_t7rjk"]
 [ext_resource type="Animation" uid="uid://dddm65go72dxp" path="res://animations/FistEast.res" id="9_cm533"]
 [ext_resource type="Script" path="res://scripts/attack.gd" id="11_e62re"]
+[ext_resource type="PackedScene" uid="uid://dkj2ngfwp080f" path="res://scenes/health_bar.tscn" id="12_hwcny"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bkdk2"]
 radius = 7.0
@@ -414,8 +415,9 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CapsuleShape2D_34yxb")
 debug_color = Color(0.921569, 0.262745, 0.239216, 0.419608)
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_rd4w3")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("5_rd4w3")]
 max_health = 50
+health_bar = NodePath("../HealthBar")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -447,6 +449,12 @@ disabled = true
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("11_e62re")
 damage = 10
+
+[node name="HealthBar" parent="." instance=ExtResource("12_hwcny")]
+offset_left = -5.0
+offset_top = 8.0
+offset_right = 95.0
+offset_bottom = 35.0
 
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="HitboxComponent" to="HitboxComponent" method="_on_body_exited"]

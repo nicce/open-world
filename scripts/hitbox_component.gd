@@ -5,7 +5,7 @@ extends Area2D
 var cooldown_timer: Timer
 
 var enemy_doing_damage = false
-var cooldown = true
+var cooldown = false
 var attack: Attack
 
 func _ready():
