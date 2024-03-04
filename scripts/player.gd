@@ -1,14 +1,15 @@
-class_name Player
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 @onready var advanced_camera: AdvancedCamera = $AdvancedCamera
+@onready var health_component: HealthComponent = $HealthComponent
 
 @export var speed: float = 80.0
 @export var attack: Attack
 
 signal player_dead
+signal health_changed(new_value: int)
 
 var health_depleated: bool = false
 
@@ -59,3 +60,7 @@ func die():
 	
 func on_player_state_reset():
 	current_state = player_states.MOVE
+	
+func increase_health(value: int):
+	health_component.increase(value)
+	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c03acp2tj1oro"
-path="res://.godot/imported/key_spritesheet.png-54f256df381d0b31764dc0519f301dde.ctex"
+uid="uid://46x056us305m"
+path="res://.godot/imported/Medipack.png-1df08a465fc8d64728c120792f8ee8df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/key_spritesheet.png"
-dest_files=["res://.godot/imported/key_spritesheet.png-54f256df381d0b31764dc0519f301dde.ctex"]
+source_file="res://art/potions/Medipack.png"
+dest_files=["res://.godot/imported/Medipack.png-1df08a465fc8d64728c120792f8ee8df.ctex"]
 
 [params]
 

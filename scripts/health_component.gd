@@ -25,3 +25,10 @@ func damage(attack: Attack):
 	else:
 		damage_taken.emit()
 		
+func increase(value: int):
+	health += value
+	if health > max_health:
+		health = max_health
+		
+	health_bar.update(health)
+		
