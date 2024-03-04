@@ -2,22 +2,20 @@ extends StaticBody2D
 
 @export var value: int = 50
 
-var player: Player
-var player_within_reach: bool = false
+var interacter: Node2D
+var interactable: bool = false
 
-signal health_pickup(value: int)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("interact") && player_within_reach:
-		player.increase_health(value)
+	if Input.is_action_just_pressed("interact") && interactable:
+		interacter.increase_health(value)
 		queue_free()
 
 func _on_interact_area_body_entered(body):
-	player_within_reach = true
-	player = body
+	if body.has_method("increase_health"):
+		interactable = true
+		interacter = body
 
 
 func _on_interact_area_body_exited(body):
-	player_within_reach = false
+	interactable = false
 	
