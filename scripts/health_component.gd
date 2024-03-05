@@ -2,7 +2,7 @@ class_name HealthComponent
 extends Node2D
 
 @export var max_health: int
-@export var health_bar: HealthBar
+@export var health_bar: HealthBar # TODO replace with signals
 var health: int
 
 signal health_depleated

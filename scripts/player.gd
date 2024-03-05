@@ -8,7 +8,6 @@ class_name Player extends CharacterBody2D
 @export var speed: float = 80.0
 @export var attack: Attack
 
-signal player_dead
 signal health_changed(new_value: int)
 
 var health_depleated: bool = false

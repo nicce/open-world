@@ -3300,7 +3300,8 @@ position = Vector2(6, -5)
 shape = SubResource("RectangleShape2D_uhc3h")
 
 [node name="Medicpack" parent="." instance=ExtResource("5_y320c")]
-position = Vector2(258, -122)
+position = Vector2(511, -119)
+value = null
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="body_entered" from="DetectionAreaLake" to="." method="_on_detection_area_lake_body_entered"]
