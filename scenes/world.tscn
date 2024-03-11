@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://gavcqugynhaw"]
+[gd_scene load_steps=18 format=3 uid="uid://gavcqugynhaw"]
 
 [ext_resource type="PackedScene" uid="uid://c8xkbjmxthcvl" path="res://scenes/player.tscn" id="1_fur2i"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_wenw1"]
 [ext_resource type="PackedScene" uid="uid://c2wfqw3vnr1c0" path="res://scenes/lake_world.tscn" id="4_gp53r"]
+[ext_resource type="PackedScene" uid="uid://brpn2xtxpklu4" path="res://scenes/abandoned_village.tscn" id="5_r7vx7"]
 [ext_resource type="Texture2D" uid="uid://3sbphia8gbli" path="res://art/tilesets/tiny_town_packed.png" id="7_mugiq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mp0pd"]
@@ -1030,6 +1031,7 @@ position = Vector2(0, 2)
 script = ExtResource("1_wenw1")
 
 [node name="Player" parent="." instance=ExtResource("1_fur2i")]
+position = Vector2(-2, 0)
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -1087,9 +1089,6 @@ shape = SubResource("CapsuleShape2D_kn8wa")
 position = Vector2(160, 78)
 shape = SubResource("CapsuleShape2D_aq16g")
 
-[node name="OuterBorder" type="CollisionPolygon2D" parent="Collision"]
-polygon = PackedVector2Array(236, 139, 236, 15, 228, 15, 229, 129, 41, 129, -260, 129, -261, -133, -4, -133, -5, -146, 35, -146, 36, -132, 225, -133, 224, -53, 210, -49, 209, -34, 237, -33, 238, -144, 481, -145, 481, -97, 439, -96, 435, -65, 436, -12, 443, -5, 479, -5, 482, -2, 481, 47, 469, 53, 468, 86, 475, 90, 500, 90, 506, 87, 508, 79, 508, 54, 504, 49, 494, 47, 495, -1, 498, -5, 554, -7, 556, -27, 556, -90, 548, -97, 495, -97, 495, -146, 513, -145, 512, -133, 522, -128, 528, -128, 527, -120, 534, -114, 608, -113, 609, -104, 607, -91, 609, -84, 606, -79, 598, -83, 592, -81, 592, -38, 605, -30, 607, -20, 593, -16, 593, 61, 610, 63, 612, 79, 611, 96, 547, 94, 542, 104, 537, 110, 512, 112, 496, 112, 480, 111, 468, 110, 429, 114, 399, 111, 395, 95, 388, 95, 384, 115, 383, 141, 229, 139, 297, 168, 656, 179, 717, 109, 711, -34, 712, -166, 600, -211, -29, -215, -304, -206, -328, -55, -328, 177, 9, 184, 222, 177)
-
 [node name="LakeWorld" parent="." instance=ExtResource("4_gp53r")]
 
 [node name="DetectionAreaHome" type="Area2D" parent="."]
@@ -1097,10 +1096,12 @@ position = Vector2(15, -123)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAreaHome"]
-position = Vector2(-16.5, 121.25)
+position = Vector2(-19, 124)
 shape = SubResource("RectangleShape2D_nibog")
 
 [node name="WorldCamera" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
+
+[node name="AbandonedVillage" parent="." instance=ExtResource("5_r7vx7")]
 
 [connection signal="body_entered" from="DetectionAreaHome" to="." method="_on_detection_area_home_body_entered"]

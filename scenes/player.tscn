@@ -402,6 +402,11 @@ frame = 1
 shape = SubResource("CapsuleShape2D_bkdk2")
 
 [node name="AdvancedCamera" parent="." instance=ExtResource("3_0t7ah")]
+zoom = Vector2(3, 3)
+limit_left = -300
+limit_top = -300
+limit_right = 700
+limit_bottom = 600
 decay = 0.6
 amplitude = 30.0
 
