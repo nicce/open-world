@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3sbphia8gbli"
-path="res://.godot/imported/tiny_town_packed.png-6061ab0a2a2c1a20b4e97b54b5e7c615.ctex"
+uid="uid://b4dpt01v1sib4"
+path="res://.godot/imported/TilesetHouse.png-af4bf8ef16714072a99a989c75edfa94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tilesets/tiny_town_packed.png"
-dest_files=["res://.godot/imported/tiny_town_packed.png-6061ab0a2a2c1a20b4e97b54b5e7c615.ctex"]
+source_file="res://art/tilesets/TilesetHouse.png"
+dest_files=["res://.godot/imported/TilesetHouse.png-af4bf8ef16714072a99a989c75edfa94.ctex"]
 
 [params]
 

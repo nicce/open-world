@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvfb8ftt8pskw"
-path="res://.godot/imported/Snake.png-abd3d8a033407501007fff74952e9291.ctex"
+uid="uid://cf3g2e3nxamkp"
+path="res://.godot/imported/TilesetWater.png-f34a304b805a5a47f306df04ae1b513f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Snake.png"
-dest_files=["res://.godot/imported/Snake.png-abd3d8a033407501007fff74952e9291.ctex"]
+source_file="res://art/tilesets/TilesetWater.png"
+dest_files=["res://.godot/imported/TilesetWater.png-f34a304b805a5a47f306df04ae1b513f.ctex"]
 
 [params]
 

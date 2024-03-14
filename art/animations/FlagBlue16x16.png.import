@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhjmnpg5pe4gv"
-path="res://.godot/imported/tiny_dungeon_packed.png-455b2d144ee3d99441cca26b6d2263e7.ctex"
+uid="uid://b07k3lfi0jjsf"
+path="res://.godot/imported/FlagBlue16x16.png-882ef92cb883e90064c0e898842ca9f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tilesets/tiny_dungeon_packed.png"
-dest_files=["res://.godot/imported/tiny_dungeon_packed.png-455b2d144ee3d99441cca26b6d2263e7.ctex"]
+source_file="res://art/animations/FlagBlue16x16.png"
+dest_files=["res://.godot/imported/FlagBlue16x16.png-882ef92cb883e90064c0e898842ca9f5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbvs6e6s7p6or"
-path="res://.godot/imported/tiny_battle_packed.png-d1f35da7ef86c150ff2094f77881041a.ctex"
+uid="uid://bbfmacxc3s2ca"
+path="res://.godot/imported/WaterfallBottom16x16.png-c4a70f2a45cdfb019dc81efc899cdd10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tilesets/tiny_battle_packed.png"
-dest_files=["res://.godot/imported/tiny_battle_packed.png-d1f35da7ef86c150ff2094f77881041a.ctex"]
+source_file="res://art/animations/WaterfallBottom16x16.png"
+dest_files=["res://.godot/imported/WaterfallBottom16x16.png-c4a70f2a45cdfb019dc81efc899cdd10.ctex"]
 
 [params]
 

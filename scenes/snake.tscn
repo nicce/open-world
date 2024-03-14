@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://cuyb4dyyii1nj"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_p2ss3"]
-[ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/snake.png" id="2_48vnt"]
+[ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/Snake.png" id="2_48vnt"]
 [ext_resource type="PackedScene" uid="uid://c7finkmabur1a" path="res://components/health_component.tscn" id="3_ts5fn"]
 [ext_resource type="PackedScene" uid="uid://ci5076ojxrks5" path="res://components/hitbox_component.tscn" id="4_3vipc"]
 [ext_resource type="PackedScene" uid="uid://jah6pk3fqu55" path="res://components/player_detection_component.tscn" id="5_7csi2"]
@@ -305,6 +305,7 @@ cooldown = 0.5
 [node name="AnimationDamage" parent="." instance=ExtResource("7_0texe")]
 
 [node name="HealthBar" parent="." instance=ExtResource("8_dhak2")]
+visible = true
 offset_left = -6.0
 offset_top = 9.0
 offset_right = 114.0

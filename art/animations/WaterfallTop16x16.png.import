@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvfb8ftt8pskw"
-path="res://.godot/imported/Snake.png-abd3d8a033407501007fff74952e9291.ctex"
+uid="uid://s5yhnsfrla04"
+path="res://.godot/imported/WaterfallTop16x16.png-c377136c7ec951e266dfe22e58cd0009.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Snake.png"
-dest_files=["res://.godot/imported/Snake.png-abd3d8a033407501007fff74952e9291.ctex"]
+source_file="res://art/animations/WaterfallTop16x16.png"
+dest_files=["res://.godot/imported/WaterfallTop16x16.png-c377136c7ec951e266dfe22e58cd0009.ctex"]
 
 [params]
 

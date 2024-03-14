@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvfb8ftt8pskw"
-path="res://.godot/imported/Snake.png-abd3d8a033407501007fff74952e9291.ctex"
+uid="uid://cx834k251w4hb"
+path="res://.godot/imported/Water16x16.png-c621d70d72c1d56c20ad870396e476b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Snake.png"
-dest_files=["res://.godot/imported/Snake.png-abd3d8a033407501007fff74952e9291.ctex"]
+source_file="res://art/animations/Water16x16.png"
+dest_files=["res://.godot/imported/Water16x16.png-c621d70d72c1d56c20ad870396e476b2.ctex"]
 
 [params]
 
