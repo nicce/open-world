@@ -1,13 +1,18 @@
-[gd_scene load_steps=36 format=3 uid="uid://cuyb4dyyii1nj"]
+[gd_scene load_steps=38 format=3 uid="uid://cuyb4dyyii1nj"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_p2ss3"]
-[ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/Snake.png" id="2_48vnt"]
+[ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/snake.png" id="2_48vnt"]
+[ext_resource type="Texture2D" uid="uid://cwmlm2wuagbwe" path="res://art/characters/snake_n.png" id="3_0rsyi"]
 [ext_resource type="PackedScene" uid="uid://c7finkmabur1a" path="res://components/health_component.tscn" id="3_ts5fn"]
 [ext_resource type="PackedScene" uid="uid://ci5076ojxrks5" path="res://components/hitbox_component.tscn" id="4_3vipc"]
 [ext_resource type="PackedScene" uid="uid://jah6pk3fqu55" path="res://components/player_detection_component.tscn" id="5_7csi2"]
 [ext_resource type="Script" path="res://scripts/attack.gd" id="6_ajp4j"]
 [ext_resource type="PackedScene" uid="uid://bwdivkaou4q6i" path="res://components/animation_damage.tscn" id="7_0texe"]
 [ext_resource type="PackedScene" uid="uid://dkj2ngfwp080f" path="res://scenes/health_bar.tscn" id="8_dhak2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_40tag"]
+diffuse_texture = ExtResource("2_48vnt")
+normal_texture = ExtResource("3_0rsyi")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_unp06"]
 radius = 6.0
@@ -253,7 +258,7 @@ attack = NodePath("Attack")
 speed = 60
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_48vnt")
+texture = SubResource("CanvasTexture_40tag")
 hframes = 4
 vframes = 4
 frame = 1

@@ -23,3 +23,7 @@ func spawn_snake():
 	snake.position = snake_start_position
 	
 	add_child(snake)
+
+
+func _on_detection_area_body_entered(body):
+	BackgroundMusic.play_audio("dark_woodlands")

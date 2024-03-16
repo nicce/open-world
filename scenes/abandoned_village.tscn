@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://brpn2xtxpklu4"]
+[gd_scene load_steps=18 format=3 uid="uid://brpn2xtxpklu4"]
 
 [ext_resource type="Texture2D" uid="uid://dk57n07rg3rdd" path="res://art/tilesets/TilesetNature.png" id="1_flnnv"]
 [ext_resource type="Script" path="res://scenes/abandoned_village.gd" id="1_qjyaq"]
@@ -8322,6 +8322,9 @@ size = Vector2(13, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omnrr"]
 size = Vector2(20, 22)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cr4y1"]
+size = Vector2(57, 34)
+
 [node name="AbandonedVillage" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_qjyaq")
@@ -8357,3 +8360,13 @@ shape = SubResource("RectangleShape2D_omnrr")
 
 [node name="Medicpack" parent="." instance=ExtResource("7_pq0h5")]
 position = Vector2(585, 234)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2(334, 166)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(5.5, 10)
+shape = SubResource("RectangleShape2D_cr4y1")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

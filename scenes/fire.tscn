@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmse3hl4q1ipx"]
+
+[ext_resource type="Texture2D" uid="uid://iinbra1363p1" path="res://art/animations/Fire.png" id="1_n8t70"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0m8if"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_pwqpv"]
+_data = [Vector2(0, 0.998137), 0.0, 0.0, 0, 0, Vector2(0.998291, 0.00128996), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kqtgd"]
+curve = SubResource("Curve_pwqpv")
+
+[sub_resource type="Curve" id="Curve_6ce0l"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.994872, 0.495987), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f0xpn"]
+curve = SubResource("Curve_6ce0l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fg77i"]
+gravity = Vector3(2.08165e-12, -50, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_f0xpn")
+emission_curve = SubResource("CurveTexture_kqtgd")
+anim_speed_min = 0.5
+anim_speed_max = 2.0
+turbulence_noise_strength = 16.8
+turbulence_noise_scale = 0.45
+
+[node name="Fire" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_0m8if")
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_fg77i")
+texture = ExtResource("1_n8t70")
+lifetime = 1.5
+preprocess = 2.0
+explosiveness = 0.2
