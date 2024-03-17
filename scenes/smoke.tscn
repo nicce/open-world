@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://0p6efnb5ipkm"]
+
+[ext_resource type="Texture2D" uid="uid://cff4mux2q0rj5" path="res://art/animations/Smoke.png" id="1_0omsu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d00v8"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_clxh3"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+gravity = Vector3(2.08165e-12, -100, 2.08165e-12)
+scale_min = 0.5
+scale_max = 0.5
+anim_speed_min = 0.5
+anim_speed_max = 2.0
+turbulence_enabled = true
+turbulence_noise_strength = 1.6
+turbulence_noise_scale = 4.0
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_d00v8")
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_clxh3")
+texture = ExtResource("1_0omsu")
+lifetime = 1.5
+explosiveness = 0.2
+randomness = 0.2

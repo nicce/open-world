@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn1w3mwnjedoa"]
+
+[ext_resource type="Texture2D" uid="uid://brb2fkp70lwdo" path="res://art/InventoryRect.png" id="1_k83b4"]
+
+[node name="InventoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_k83b4")

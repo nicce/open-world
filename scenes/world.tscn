@@ -12646,5 +12646,7 @@ occluder = SubResource("OccluderPolygon2D_br6jr")
 
 [node name="Campfire" parent="." instance=ExtResource("14_h3777")]
 position = Vector2(-95, 16)
+max_inventory = 10
+wood_burn_time_in_seconds = 10
 
 [connection signal="body_entered" from="DetectionAreaHome" to="." method="_on_detection_area_home_body_entered"]

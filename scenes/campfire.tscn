@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dasiachko0ipr"]
+[gd_scene load_steps=11 format=3 uid="uid://dasiachko0ipr"]
 
 [ext_resource type="Texture2D" uid="uid://duihd0cvybcs6" path="res://art/tilesets/TilesetFloorDetail.png" id="1_fbwxh"]
 [ext_resource type="Script" path="res://scripts/campfire.gd" id="1_sew6g"]
 [ext_resource type="PackedScene" uid="uid://dmse3hl4q1ipx" path="res://scenes/fire.tscn" id="2_xmmty"]
 [ext_resource type="Texture2D" uid="uid://cyng3qabfkadu" path="res://art/natural_light.webp" id="3_rg3rl"]
+[ext_resource type="PackedScene" uid="uid://0p6efnb5ipkm" path="res://scenes/smoke.tscn" id="5_00t25"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2toea"]
 radius = 7.0
@@ -47,6 +48,9 @@ _data = {
 "light_flicker": SubResource("Animation_71mcd")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qeokv"]
+radius = 11.1803
+
 [node name="Campfire" type="StaticBody2D"]
 script = ExtResource("1_sew6g")
 
@@ -60,6 +64,7 @@ hframes = 16
 vframes = 5
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 color = Color(1, 0.396078, 0.25098, 1)
 energy = 0.18
 shadow_enabled = true
@@ -67,8 +72,21 @@ texture = ExtResource("3_rg3rl")
 texture_scale = 0.6
 
 [node name="Fire" parent="." instance=ExtResource("2_xmmty")]
+visible = false
+
+[node name="Smoke" parent="." instance=ExtResource("5_00t25")]
+amount_ratio = 0.5
 
 [node name="Flicker" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_uj2cs")
 }
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_qeokv")
+
+[connection signal="body_entered" from="InteractArea" to="." method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="InteractArea" to="." method="_on_interact_area_body_exited"]
