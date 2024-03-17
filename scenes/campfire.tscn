@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://dasiachko0ipr"]
+
+[ext_resource type="Texture2D" uid="uid://duihd0cvybcs6" path="res://art/tilesets/TilesetFloorDetail.png" id="1_fbwxh"]
+[ext_resource type="Script" path="res://scripts/campfire.gd" id="1_sew6g"]
+[ext_resource type="PackedScene" uid="uid://dmse3hl4q1ipx" path="res://scenes/fire.tscn" id="2_xmmty"]
+[ext_resource type="Texture2D" uid="uid://cyng3qabfkadu" path="res://art/natural_light.webp" id="3_rg3rl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2toea"]
+radius = 7.0
+
+[sub_resource type="Animation" id="Animation_71mcd"]
+resource_name = "light_flicker"
+length = 1.5
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.7, 0.5, 0.6, 0.4, 0.7]
+}
+
+[sub_resource type="Animation" id="Animation_mth35"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.18]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uj2cs"]
+_data = {
+"RESET": SubResource("Animation_mth35"),
+"light_flicker": SubResource("Animation_71mcd")
+}
+
+[node name="Campfire" type="StaticBody2D"]
+script = ExtResource("1_sew6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_2toea")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fbwxh")
+hframes = 16
+vframes = 5
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.396078, 0.25098, 1)
+energy = 0.18
+shadow_enabled = true
+texture = ExtResource("3_rg3rl")
+texture_scale = 0.6
+
+[node name="Fire" parent="." instance=ExtResource("2_xmmty")]
+
+[node name="Flicker" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uj2cs")
+}
