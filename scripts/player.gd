@@ -62,4 +62,3 @@ func on_player_state_reset():
 	
 func increase_health(value: int):
 	health_component.increase(value)
-	
