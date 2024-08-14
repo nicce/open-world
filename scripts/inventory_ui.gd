@@ -13,3 +13,7 @@ func toggle() -> void:
 	visible = !is_open
 	is_open = !is_open
 	
+
+
+func _on_player_item_collected(item):
+	pass # Replace with function body.

@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm1wt57lf6tdq"]
+
+[ext_resource type="Texture2D" uid="uid://3k5tpwem71w2" path="res://art/items/axe.png" id="1_i8l0s"]
+[ext_resource type="PackedScene" uid="uid://bndgs0j0ag2k4" path="res://scenes/collectable.tscn" id="1_mmckk"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_item.gd" id="2_8xa26"]
+[ext_resource type="Script" path="res://scripts/axe.gd" id="2_wmpue"]
+
+[sub_resource type="Resource" id="Resource_b6gnj"]
+script = ExtResource("2_8xa26")
+damage = 2.0
+name = "Axe"
+texture = ExtResource("1_i8l0s")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ysro"]
+resource_local_to_scene = true
+
+[node name="Axe" instance=ExtResource("1_mmckk")]
+script = ExtResource("2_wmpue")
+weapon_item = SubResource("Resource_b6gnj")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_8ysro")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("1_i8l0s")

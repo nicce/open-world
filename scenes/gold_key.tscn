@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwgyq83ivfu6b"]
+
+[ext_resource type="PackedScene" uid="uid://bndgs0j0ag2k4" path="res://scenes/collectable.tscn" id="1_08mas"]
+[ext_resource type="Texture2D" uid="uid://cr7slj52y23lg" path="res://art/items/GoldKey.png" id="2_1rfao"]
+[ext_resource type="Script" path="res://scripts/resources/item.gd" id="2_xhixt"]
+
+[sub_resource type="Resource" id="Resource_s3k5j"]
+script = ExtResource("2_xhixt")
+name = "GoldKey"
+texture = ExtResource("2_1rfao")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lt0mt"]
+resource_local_to_scene = true
+
+[node name="GoldKey" instance=ExtResource("1_08mas")]
+item = SubResource("Resource_s3k5j")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_lt0mt")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_1rfao")

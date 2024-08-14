@@ -5,9 +5,8 @@ extends StaticBody2D
 @onready var smoke_scene = $Smoke
 @onready var fire_light = $PointLight2D
 
-@export var max_inventory: int = 5
-@export var wood_burn_time_in_seconds: int = 2
-
+var max_inventory: int = 10
+var wood_burn_time_in_seconds: int = 60
 var is_fire: bool = false
 var interactable: bool = false
 var inventory: int = 0

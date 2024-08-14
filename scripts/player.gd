@@ -7,11 +7,11 @@ class_name Player extends CharacterBody2D
 
 @export var speed: float = 80.0
 @export var attack: Attack
+@export var inventory: Inventory
 
 signal health_changed(new_value: int)
 
 var health_depleated: bool = false
-
 enum player_states {MOVE, HIT, DEAD}
 var current_state = player_states.MOVE
 
@@ -62,3 +62,7 @@ func on_player_state_reset():
 	
 func increase_health(value: int):
 	health_component.increase(value)
+	
+func collect(item) -> bool:
+	return inventory.insert(item)
+	
