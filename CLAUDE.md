@@ -25,8 +25,8 @@ art/          # Sprites, tilesets, animation sheets
   items/      # Weapon and key sprites
   tilesets/   # Grass, field, water, nature, house, village, floor tilesets
   animations/ # Animation frame sheets
-music/        # Audio tracks (home.wav, dark_woodlands.wav)
-animations/   # Animation resource (.tres) files
+music/        # Audio tracks (home.wav, dark_woodslands.wav)
+animations/   # Animation resource (.res/.tres) files
 ```
 
 ## Architecture Patterns
@@ -41,7 +41,7 @@ Reusable functionality lives in standalone sub-scenes under `components/`:
 Attach these as children of any scene that needs the behaviour.
 
 ### Signals
-Systems communicate via signals rather than direct node references. Example: `health_component` emits `died` and `health_changed`; listeners respond without tight coupling.
+Systems communicate via signals rather than direct node references. Example: `health_component` emits `health_depleated` and `damage_taken`; listeners respond without tight coupling.
 
 ### State machines
 Player uses an explicit enum state machine (`MOVE`, `HIT`, `DEAD`) in `scripts/player.gd`.
@@ -51,7 +51,7 @@ Player uses an explicit enum state machine (`MOVE`, `HIT`, `DEAD`) in `scripts/p
 
 ## Code Conventions (GDScript)
 
-- **Class names:** `PascalCase` via `class_name` declaration at top of file.
+- **Class names:** Prefer `PascalCase` via `class_name` at the top of the file for reusable/core scripts and resources; simple scene-attached scripts may omit `class_name`.
 - **Variables / methods:** `snake_case`.
 - **Exported variables:** `@export` annotation; configure values in the Inspector.
 - **Node references:** `@onready var foo = $NodePath` pattern.
@@ -75,16 +75,16 @@ Player uses an explicit enum state machine (`MOVE`, `HIT`, `DEAD`) in `scripts/p
 
 ## Input Mappings (defined in project.godot)
 
-| Action | Keys |
-|---|---|
-| Move left | A / Left Arrow |
-| Move right | D / Right Arrow |
-| Move up | W / Up Arrow |
-| Move down | S / Down Arrow |
-| Attack | X / Left Mouse Button |
-| Interact | E |
-| Inventory | Tab / I |
-| Jump | Space |
+| Action ID | Description | Default Keys |
+|---|---|---|
+| `left` | Move left | A / Left Arrow |
+| `right` | Move right | D / Right Arrow |
+| `up` | Move up | W / Up Arrow |
+| `down` | Move down | S / Down Arrow |
+| `hit` | Attack | X / Left Mouse Button |
+| `interact` | Interact | E |
+| `inventory` | Inventory | Tab / I |
+| `jump` | Jump | Space |
 
 ## Physics Layers
 
