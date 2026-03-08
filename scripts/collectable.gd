@@ -5,9 +5,11 @@ class_name Collectable extends Area2D
 var is_collectable: bool = false
 var collector: Player
 
-func _process(delta):
+
+func _process(_delta):
 	if is_collectable and Input.is_action_just_pressed("interact"):
 		collect()
+
 
 func _on_body_entered(body):
 	if body is Player:
@@ -15,9 +17,10 @@ func _on_body_entered(body):
 		collector = body
 
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	is_collectable = false
-	
+
+
 func collect():
 	assert(collector.has_method("collect"), "Player script should have a collect method.")
 	var success = collector.collect(item)

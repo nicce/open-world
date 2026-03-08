@@ -95,12 +95,48 @@ Player uses an explicit enum state machine (`MOVE`, `HIT`, `DEAD`) in `scripts/p
 | 4 | weapons |
 | 5 | no_affect |
 
-## Testing
+## Testing & Linting
 
-There is no automated test suite. Test changes by running the game in the Godot editor (F5) and exercising the affected systems manually.
+Tests use the **GUT** framework. Lint and formatting use **gdtoolkit**.
+
+Install dependencies once:
+```bash
+pip install "gdtoolkit==4.*"
+make install-gut
+```
+
+Common commands:
+```bash
+make lint          # run gdlint on all GDScript files
+make format-check  # check formatting without modifying files
+make test          # run all GUT unit tests headlessly
+```
+
+### Definition of done
+
+A task is not complete until all of the following are true:
+
+1. `make lint` passes with no errors.
+2. `make test` passes with no failures.
+3. New pure-logic functions have corresponding unit tests added under `tests/unit/`.
+
+## Workflow
+
+### Planning first
+
+Before implementing any task:
+
+1. Read the relevant documents in `/docs` — especially `vision.md`, `architecture.md`, and `TODO.md`.
+2. Propose a plan and check it with the user before writing any code.
+3. Only proceed once the plan is approved.
+
+### Keeping docs up to date
+
+If an implementation changes or extends the architecture, update the affected documents in `/docs` as part of the same task. Code and docs must stay in sync.
 
 ## Git Workflow
 
 - Work on feature branches with the prefix `claude/`.
 - Commit messages should be short and descriptive (see existing history for style).
 - The `.godot/` directory is git-ignored; never commit it.
+- The `addons/gut/` directory is git-ignored; install locally via `make install-gut`.

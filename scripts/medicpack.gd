@@ -5,10 +5,12 @@ extends StaticBody2D
 var interacter: Node2D
 var interactable: bool = false
 
+
 func _process(_delta):
 	if Input.is_action_just_pressed("interact") && interactable:
 		interacter.increase_health(value)
 		queue_free()
+
 
 func _on_interact_area_body_entered(body):
 	if body.has_method("increase_health"):
@@ -16,6 +18,5 @@ func _on_interact_area_body_entered(body):
 		interacter = body
 
 
-func _on_interact_area_body_exited(body):
+func _on_interact_area_body_exited(_body):
 	interactable = false
-	

@@ -1,2 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
+
+# GUT test framework — installed locally via `make install-gut`
+addons/gut/
+
+# Test output
+test_results.xml
