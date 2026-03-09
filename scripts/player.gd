@@ -12,7 +12,8 @@ var health_depleated: bool = false
 var current_state = PlayerStates.MOVE
 
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready
+var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 @onready var advanced_camera: AdvancedCamera = $AdvancedCamera
 @onready var health_component: HealthComponent = $HealthComponent
 
