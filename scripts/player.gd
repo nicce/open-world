@@ -75,4 +75,4 @@ func increase_health(value: int):
 
 
 func collect(item) -> bool:
-	return inventory.insert(item)
+	return inventory.insert(item) == 0

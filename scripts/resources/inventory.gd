@@ -1,12 +1,73 @@
 class_name Inventory extends Resource
 
-@export var items: Array[Item] = []
+@export var slots: Array[InventorySlot] = []
+@export var max_weight: float = 100.0
 
 
-func insert(item: Item) -> bool:
-	for i in range(items.size()):
-		if !items[i]:
-			items[i] = item
-			return true
+func current_weight() -> float:
+	var total := 0.0
+	for slot in slots:
+		total += slot.total_weight()
+	return total
 
-	return false
+
+func remaining_weight() -> float:
+	return max_weight - current_weight()
+
+
+func insert(item: Item, amount: int = 1) -> int:
+	if amount <= 0:
+		return 0
+
+	var remaining = amount
+
+	# Try stacking into existing slots first
+	for slot in slots:
+		if remaining <= 0:
+			break
+		if slot.can_stack(item):
+			var weight_budget = int(remaining_weight() / item.weight)
+			var to_add = mini(remaining, weight_budget)
+			if to_add <= 0:
+				break
+			var leftover = slot.add(to_add)
+			remaining -= (to_add - leftover)
+
+	# Then try empty slots
+	for slot in slots:
+		if remaining <= 0:
+			break
+		if slot.is_empty():
+			var weight_budget = int(remaining_weight() / item.weight)
+			var to_add = mini(remaining, weight_budget)
+			if to_add <= 0:
+				break
+			slot.item = item
+			var leftover = slot.add(to_add)
+			remaining -= (to_add - leftover)
+
+	return remaining
+
+
+func remove(item: Item, amount: int = 1) -> int:
+	var remaining = amount
+
+	for slot in slots:
+		if remaining <= 0:
+			break
+		if not slot.is_empty() and slot.item.name == item.name:
+			remaining -= slot.remove(remaining)
+
+	return amount - remaining
+
+
+func get_item_count(item: Item) -> int:
+	var total := 0
+	for slot in slots:
+		if not slot.is_empty() and slot.item.name == item.name:
+			total += slot.quantity
+	return total
+
+
+func has_item(item: Item, amount: int = 1) -> bool:
+	return get_item_count(item) >= amount
