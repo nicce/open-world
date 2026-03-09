@@ -3,7 +3,8 @@ extends GutTest
 # Tests for the pure inventory logic in campfire.gd.
 # The scene children (fire, smoke, light) are not tested here.
 
-var _campfire
+const CampfireScript = preload("res://scripts/campfire.gd")
+var _campfire: CampfireScript
 
 
 func before_each() -> void:

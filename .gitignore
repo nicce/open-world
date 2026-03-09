@@ -6,3 +6,7 @@ addons/gut/
 
 # Test output
 test_results.xml
+
+.claude/
+memory/
+bin/

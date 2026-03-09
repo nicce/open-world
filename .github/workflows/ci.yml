@@ -11,13 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install gdtoolkit
-        run: pip install "gdtoolkit==4.*"
-
       - name: Run gdlint
         run: make lint
 
@@ -29,15 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Godot
-        uses: chickensoft-games/setup-godot@v2
-        with:
-          version: 4.2.2
-          use-dotnet: false
-
-      - name: Install GUT
-        run: make install-gut
 
       - name: Run tests
         run: make test
