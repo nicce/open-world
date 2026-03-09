@@ -82,6 +82,7 @@ install-gut:
 	fi
 
 test: install-gut $(GODOT_BIN)
+	$(GODOT_BIN) --headless --import || true
 	$(GODOT_BIN) --headless \
 		-s addons/gut/gut_cmdln.gd \
 		-gdir=res://tests \
