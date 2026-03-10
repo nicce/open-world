@@ -19,6 +19,7 @@ var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("par
 
 
 func _ready() -> void:
+	inventory = inventory.clone()
 	animation_tree.animation_finished.connect(_on_animation_finished)
 
 

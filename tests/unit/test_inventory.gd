@@ -210,15 +210,17 @@ func test_duplicate_true_isolates_slots() -> void:
 	original.insert(wood, 5)
 	assert_eq(original.slots[0].quantity, 5, "precondition: slot 0 has 5 wood")
 
-	# Act: deep-copy then mutate the copy.
-	var copy := original.duplicate(true) as Inventory
+	# Act: deep-copy via clone() then mutate the copy.
+	# Note: Godot 4 native duplicate(true) does not deep-copy typed Array[InventorySlot]
+	# elements, so Inventory.clone() is used instead.
+	var copy := original.clone()
 	copy.insert(wood, 3)
 
 	# Assert: original must be unchanged.
 	assert_eq(
 		original.slots[0].quantity,
 		5,
-		"Mutating the duplicate must not affect the original inventory slot quantity"
+		"Mutating the clone must not affect the original inventory slot quantity"
 	)
 
 
@@ -229,12 +231,12 @@ func test_duplicate_slots_are_different_references() -> void:
 	var wood := _make_item("Wood")
 	original.insert(wood, 1)
 
-	var copy := original.duplicate(true) as Inventory
+	var copy := original.clone()
 
 	assert_ne(
 		original.slots[0],
 		copy.slots[0],
-		"duplicate(true) must produce independent InventorySlot instances"
+		"clone() must produce independent InventorySlot instances"
 	)
 
 
