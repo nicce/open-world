@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-combat-fix-data-foundation 01-01-PLAN.md
-last_updated: "2026-03-10T18:28:53.582Z"
+stopped_at: "Completed 01-combat-fix-data-foundation 01-02-PLAN.md (awaiting checkpoint:human-verify Task 3)"
+last_updated: "2026-03-10T18:34:21.811Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
   percent: 33
 ---
 
@@ -51,6 +51,7 @@ Progress: [███░░░░░░░] 33%
 
 *Updated after each plan completion*
 | Phase 01-combat-fix-data-foundation P01 | 181s | 2 tasks | 4 files |
+| Phase 01-combat-fix-data-foundation P02 | 480 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - [Phase 2]: Equipment slot panel reserved as placeholder in Phase 2 to avoid structural rework later
 - [Phase 01-combat-fix-data-foundation]: GUT inner-class stub pattern used to test CharacterBody2D subclasses without scene tree in headless mode
 - [Phase 01-combat-fix-data-foundation]: DATA-03 weight-boundary test passes on current code (float luck with 1.0/1.0); retained as regression guard for floori() contract
+- [Phase 01-combat-fix-data-foundation]: on_attack_animation_finished() used as handler name to match test contract from Plan 01
+- [Phase 01-combat-fix-data-foundation]: Knockback pattern: apply_knockback(from_position) + move_toward decay in _physics_process established for future enemies
 
 ### Pending Todos
 
@@ -76,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T18:28:53.579Z
-Stopped at: Completed 01-combat-fix-data-foundation 01-01-PLAN.md
+Last session: 2026-03-10T18:34:21.808Z
+Stopped at: Completed 01-combat-fix-data-foundation 01-02-PLAN.md (awaiting checkpoint:human-verify Task 3)
 Resume file: None
