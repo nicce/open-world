@@ -30,7 +30,7 @@ func can_stack(other: Item) -> bool:
 		return false
 	if is_full():
 		return false
-	return item.name == other.name
+	return item.id == other.id
 
 
 func add(amount: int = 1) -> int:

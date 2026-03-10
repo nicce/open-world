@@ -55,7 +55,7 @@ func remove(item: Item, amount: int = 1) -> int:
 	for slot in slots:
 		if remaining <= 0:
 			break
-		if not slot.is_empty() and slot.item.name == item.name:
+		if not slot.is_empty() and slot.item.id == item.id:
 			remaining -= slot.remove(remaining)
 
 	return amount - remaining
@@ -64,7 +64,7 @@ func remove(item: Item, amount: int = 1) -> int:
 func get_item_count(item: Item) -> int:
 	var total := 0
 	for slot in slots:
-		if not slot.is_empty() and slot.item.name == item.name:
+		if not slot.is_empty() and slot.item.id == item.id:
 			total += slot.quantity
 	return total
 

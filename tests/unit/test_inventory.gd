@@ -16,10 +16,9 @@ func _make_inventory(slot_count: int = 5, weight: float = 100.0) -> Inventory:
 # raise "Invalid set index 'id'" — tests that use ids remain RED.
 func _make_item(item_name: String, item_weight: float = 1.0, item_id: StringName = &"") -> Item:
 	var item = Item.new()
+	item.id = item_id if item_id != &"" else StringName(item_name.to_lower().replace(" ", "_"))
 	item.name = item_name
 	item.weight = item_weight
-	if item_id != &"":
-		item.id = item_id  # Will error until DATA-01 adds the id field.
 	return item
 
 
