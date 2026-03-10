@@ -18,6 +18,10 @@ var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("par
 @onready var health_component: HealthComponent = $HealthComponent
 
 
+func _ready() -> void:
+	animation_tree.animation_finished.connect(_on_animation_finished)
+
+
 func _physics_process(_delta):
 	match current_state:
 		PlayerStates.MOVE:
@@ -25,7 +29,16 @@ func _physics_process(_delta):
 		PlayerStates.DEAD:
 			die()
 		PlayerStates.HIT:
-			hit()
+			pass
+
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name in [&"FistNorth", &"FistSouth", &"FistEast", &"FistWest"]:
+		on_attack_animation_finished()
+
+
+func on_attack_animation_finished() -> void:
+	on_player_state_reset()
 
 
 func _on_health_component_health_depleated():
@@ -51,12 +64,13 @@ func move():
 
 	if Input.is_action_just_pressed("hit"):
 		current_state = PlayerStates.HIT
+		animation_state.travel("Fist")
 
 	move_and_slide()
 
 
 func hit():  # TODO how do we handle different equipped weapons?
-	animation_state.travel("Fist")
+	pass
 
 
 func die():
