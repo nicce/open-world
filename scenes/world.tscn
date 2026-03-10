@@ -1960,8 +1960,4 @@ offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="body_entered" from="TileMap/GoldKey" to="TileMap/GoldKey" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/GoldKey" to="TileMap/GoldKey" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMap/Axe" to="TileMap/Axe" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/Axe" to="TileMap/Axe" method="_on_body_exited"]
 [connection signal="body_entered" from="DetectionAreaHome" to="." method="_on_detection_area_home_body_entered"]

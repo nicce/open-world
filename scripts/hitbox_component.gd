@@ -1,6 +1,8 @@
 class_name HitboxComponent
 extends Area2D
 
+signal knocked_back(from_position: Vector2)
+
 @export var health_component: HealthComponent  # TODO replace with signal?
 
 var cooldown_timer: Timer
@@ -42,6 +44,7 @@ func _on_area_entered(area):
 	if "attack" in area.get_parent():
 		var attack = area.get_parent().attack
 		take_damage(attack)
+		knocked_back.emit(area.get_parent().global_position)
 
 
 func take_damage(attack: Attack):

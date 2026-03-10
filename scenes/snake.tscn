@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://cuyb4dyyii1nj"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_p2ss3"]
-[ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/snake.png" id="2_48vnt"]
+[ext_resource type="Texture2D" uid="uid://dvfb8ftt8pskw" path="res://art/characters/Snake.png" id="2_48vnt"]
 [ext_resource type="Texture2D" uid="uid://cwmlm2wuagbwe" path="res://art/characters/snake_n.png" id="3_0rsyi"]
 [ext_resource type="PackedScene" uid="uid://c7finkmabur1a" path="res://components/health_component.tscn" id="3_ts5fn"]
 [ext_resource type="PackedScene" uid="uid://ci5076ojxrks5" path="res://components/hitbox_component.tscn" id="4_3vipc"]
@@ -294,9 +294,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_7mh7d")
-}
 tree_root = SubResource("AnimationNodeStateMachine_1afnm")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(2.08165e-12, 2.08165e-12)
