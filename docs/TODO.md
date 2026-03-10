@@ -140,6 +140,7 @@ Goal: World feels inhabited with varied enemy types.
 - [ ] Add a `SpawnPoint` scene that periodically spawns enemies at night
 - [ ] Implement enemy aggro range and de-aggro when player is far away
 - [ ] Add enemy health bars visible when damaged
+- [ ] All enemy scenes must expose `@export var speed`, `@export var knockback_force`, and max health as Inspector-tunable properties — no hard-coded combat stats
 
 ---
 
