@@ -7,10 +7,15 @@ func before_each() -> void:
 	_slot = InventorySlot.new()
 
 
-func _make_item(item_name: String, item_weight: float = 1.0) -> Item:
+# Forward-compatible helper: assigns id once the field exists (DATA-01).
+# Until Plan 03 adds `id: StringName` to Item, passing a non-empty id will
+# raise "Invalid set index 'id'" — keeping these tests RED.
+func _make_item(item_name: String, item_weight: float = 1.0, item_id: StringName = &"") -> Item:
 	var item = Item.new()
 	item.name = item_name
 	item.weight = item_weight
+	if item_id != &"":
+		item.id = item_id  # Will error until DATA-01 adds the id field.
 	return item
 
 
@@ -115,3 +120,43 @@ func test_remove_caps_at_available_quantity() -> void:
 	var removed = _slot.remove(10)
 	assert_eq(removed, 3)
 	assert_true(_slot.is_empty())
+
+
+# ---------------------------------------------------------------------------
+# DATA-01: Item identity must be based on id (StringName), not name (String).
+#
+# Bug: can_stack() compares item.name — two items with the same display name
+# but different ids (e.g. "Wood Log" vs "Wood Plank") incorrectly stack.
+#
+# These tests are RED until Plan 03 adds `id: StringName` to Item AND
+# Plan 02 fixes can_stack() to use id comparison.
+# ---------------------------------------------------------------------------
+
+
+func test_cannot_stack_same_name_different_id() -> void:
+	# Two items share the display name "Wood" but have different ids.
+	# They must NOT be treated as the same item for stacking purposes.
+	var wood_log = _make_item("Wood", 1.0, &"wood_log")
+	_slot.item = wood_log
+	_slot.quantity = 3
+
+	var wood_plank = _make_item("Wood", 1.0, &"wood_plank")
+
+	assert_false(
+		_slot.can_stack(wood_plank),
+		"Items with different ids must not stack even if name is identical"
+	)
+
+
+func test_can_stack_same_id() -> void:
+	# Two items with the same id are the same logical item and MUST stack.
+	var wood_log_a = _make_item("Wood", 1.0, &"wood_log")
+	_slot.item = wood_log_a
+	_slot.quantity = 3
+
+	var wood_log_b = _make_item("Wood", 1.0, &"wood_log")
+
+	assert_true(
+		_slot.can_stack(wood_log_b),
+		"Items with identical ids must be stackable"
+	)

@@ -11,10 +11,15 @@ func _make_inventory(slot_count: int = 5, weight: float = 100.0) -> Inventory:
 	return inv
 
 
-func _make_item(item_name: String, item_weight: float = 1.0) -> Item:
+# Forward-compatible helper: assigns id once the field exists (DATA-01).
+# Until Plan 03 adds `id: StringName` to Item, passing a non-empty id will
+# raise "Invalid set index 'id'" — tests that use ids remain RED.
+func _make_item(item_name: String, item_weight: float = 1.0, item_id: StringName = &"") -> Item:
 	var item = Item.new()
 	item.name = item_name
 	item.weight = item_weight
+	if item_id != &"":
+		item.id = item_id  # Will error until DATA-01 adds the id field.
 	return item
 
 
@@ -183,3 +188,90 @@ func test_has_item_false() -> void:
 func test_has_item_not_in_inventory() -> void:
 	var wood = _make_item("Wood")
 	assert_false(_inventory.has_item(wood))
+
+
+# ---------------------------------------------------------------------------
+# DATA-02: Inventory.duplicate(true) must produce a fully independent copy.
+#
+# Bug: Godot's default Resource.duplicate(true) does not deep-copy typed
+# Array[InventorySlot] — the slots array entries still share references with
+# the original, so mutating the copy mutates the original.
+#
+# The fix (Plan 02) must override duplicate() or implement a clone() method
+# that manually copies each slot.
+#
+# These tests are RED until Plan 02 implements true deep-copy isolation.
+# ---------------------------------------------------------------------------
+
+
+func test_duplicate_true_isolates_slots() -> void:
+	# Arrange: original inventory with 5 wood in slot 0.
+	var original := _make_inventory(3, 100.0)
+	var wood := _make_item("Wood")
+	original.insert(wood, 5)
+	assert_eq(original.slots[0].quantity, 5, "precondition: slot 0 has 5 wood")
+
+	# Act: deep-copy then mutate the copy.
+	var copy := original.duplicate(true) as Inventory
+	copy.insert(wood, 3)
+
+	# Assert: original must be unchanged.
+	assert_eq(
+		original.slots[0].quantity,
+		5,
+		"Mutating the duplicate must not affect the original inventory slot quantity"
+	)
+
+
+func test_duplicate_slots_are_different_references() -> void:
+	# The slot objects in the copy must not be the same object instances as
+	# those in the original.
+	var original := _make_inventory(3, 100.0)
+	var wood := _make_item("Wood")
+	original.insert(wood, 1)
+
+	var copy := original.duplicate(true) as Inventory
+
+	assert_ne(
+		original.slots[0],
+		copy.slots[0],
+		"duplicate(true) must produce independent InventorySlot instances"
+	)
+
+
+# ---------------------------------------------------------------------------
+# DATA-03: Weight budget must use floori() to avoid float precision errors.
+#
+# Bug: inventory.insert() computes `int(remaining_weight() / item.weight)`.
+# Due to floating-point representation, 1.0 / 1.0 may yield 0.9999… which
+# int() truncates to 0, refusing an item that should fit exactly.
+#
+# The fix (Plan 02) must replace int() with floori() at lines 29 and 41.
+#
+# The exact-boundary test IS expected to be RED on the buggy code path.
+# ---------------------------------------------------------------------------
+
+
+func test_insert_at_exact_weight_limit_accepts_item() -> void:
+	# Arrange: 10-unit max weight, 9 units already used (9 × 1.0 kg items).
+	var inv := _make_inventory(5, 10.0)
+	var light := _make_item("Pebble", 1.0)
+	inv.insert(light, 9)
+	assert_almost_eq(inv.remaining_weight(), 1.0, 0.001, "precondition: exactly 1.0 weight left")
+
+	# Act: insert one more item with weight == remaining_weight exactly.
+	var last := _make_item("Pebble", 1.0)
+	var leftover := inv.insert(last, 1)
+
+	# Assert: item must be accepted — 0 leftover.
+	assert_eq(
+		leftover,
+		0,
+		"An item whose weight exactly equals remaining_weight must be accepted"
+	)
+	assert_almost_eq(
+		inv.remaining_weight(),
+		0.0,
+		0.001,
+		"Inventory must be exactly full after inserting at the boundary"
+	)
