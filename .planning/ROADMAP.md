@@ -12,7 +12,7 @@ Three phases deliver a playable, inventory-complete game loop. Phase 1 fixes the
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Combat Fix + Data Foundation** - Fix HIT state lockout, add item identity, harden inventory data model
+- [x] **Phase 1: Combat Fix + Data Foundation** - Fix HIT state lockout, add item identity, harden inventory data model (completed 2026-03-10)
 - [ ] **Phase 2: Grid Inventory UI** - Replace debug panel with fixed-slot grid showing icons, quantities, and weight
 - [ ] **Phase 3: Item Management** - Consumable use, item drop to world, pickup notification
 
@@ -63,6 +63,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Combat Fix + Data Foundation | 2/3 | In Progress|  |
+| 1. Combat Fix + Data Foundation | 2/3 | Complete    | 2026-03-10 |
 | 2. Grid Inventory UI | 0/TBD | Not started | - |
 | 3. Item Management | 0/TBD | Not started | - |
