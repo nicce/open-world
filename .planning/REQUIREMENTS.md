@@ -7,8 +7,8 @@
 
 ### Combat
 
-- [ ] **CMBT-01**: Player can attack and return to MOVE state (HIT state exit no longer locks player)
-- [ ] **CMBT-02**: Enemies are knocked back when struck by the player
+- [x] **CMBT-01**: Player can attack and return to MOVE state (HIT state exit no longer locks player)
+- [x] **CMBT-02**: Enemies are knocked back when struck by the player
 
 ### Inventory UI
 
@@ -24,9 +24,9 @@
 
 ### Data Model
 
-- [ ] **DATA-01**: Each item has a stable `id: StringName` field used for identity checks (stacking, removal, queries), distinct from display name
-- [ ] **DATA-02**: Player's inventory is deep-copied on scene load (`inventory.duplicate(true)`) to prevent shared Resource mutation across sessions
-- [ ] **DATA-03**: Weight capacity calculation uses `floori()` instead of `int()` to avoid float truncation off-by-one errors
+- [x] **DATA-01**: Each item has a stable `id: StringName` field used for identity checks (stacking, removal, queries), distinct from display name
+- [x] **DATA-02**: Player's inventory is deep-copied on scene load (`inventory.duplicate(true)`) to prevent shared Resource mutation across sessions
+- [x] **DATA-03**: Weight capacity calculation uses `floori()` instead of `int()` to avoid float truncation off-by-one errors
 
 ## v2 Requirements
 
@@ -68,11 +68,11 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CMBT-01 | Phase 1 | Pending |
-| CMBT-02 | Phase 1 | Pending |
-| DATA-01 | Phase 1 | Pending |
-| DATA-02 | Phase 1 | Pending |
-| DATA-03 | Phase 1 | Pending |
+| CMBT-01 | Phase 1 | Complete |
+| CMBT-02 | Phase 1 | Complete |
+| DATA-01 | Phase 1 | Complete |
+| DATA-02 | Phase 1 | Complete |
+| DATA-03 | Phase 1 | Complete |
 | INV-01 | Phase 2 | Pending |
 | INV-02 | Phase 2 | Pending |
 | INV-03 | Phase 2 | Pending |
