@@ -28,7 +28,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Each item has a stable `id` field distinct from its display name; stacking and removal use `id` for comparison
   4. Loading a scene does not bleed inventory state from a previous session — inventory is deep-copied on load
   5. Adding items at the exact weight limit accepts the item without off-by-one rejection
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Write failing test scaffolds for all 5 requirements (Wave 0 RED tests)
+- [ ] 01-02-PLAN.md — Fix CMBT-01 (player state lockout) and CMBT-02 (enemy knockback)
+- [ ] 01-03-PLAN.md — Fix DATA-01 (item id field), DATA-02 (deep copy), DATA-03 (floori weight)
 
 ### Phase 2: Grid Inventory UI
 **Goal**: Player can open the inventory and see a proper fixed-slot grid with item icons, quantities, and weight feedback
@@ -58,6 +63,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Combat Fix + Data Foundation | 0/TBD | Not started | - |
+| 1. Combat Fix + Data Foundation | 0/3 | Not started | - |
 | 2. Grid Inventory UI | 0/TBD | Not started | - |
 | 3. Item Management | 0/TBD | Not started | - |
