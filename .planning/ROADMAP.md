@@ -44,7 +44,12 @@ Plans:
   2. The inventory panel displays current weight and max capacity (e.g., "12.5 / 20 kg")
   3. Attempting to pick up an item when over weight limit shows a visible rejection message
   4. Stackable items share a single slot and increment their quantity counter rather than filling a new slot
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Add inventory signals and write failing tests (TDD RED/GREEN)
+- [ ] 02-02-PLAN.md — Build slot scene with icon/label nodes and rewrite InventoryUI grid
+- [ ] 02-03-PLAN.md — Wire world.gd inventory reference, add HUD rejection label, human verify
 
 ### Phase 3: Item Management
 **Goal**: Player can consume health items from inventory, drop items back into the world, and see feedback on pickups
