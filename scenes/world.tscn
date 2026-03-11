@@ -1960,4 +1960,19 @@ offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="RejectionLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.2
+grow_horizontal = 2
+grow_vertical = 2
+modulate = Color(1, 1, 1, 0)
+text = "Too heavy!"
+horizontal_alignment = 1
+
+[node name="FadeTimer" type="Timer" parent="CanvasLayer/RejectionLabel"]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="body_entered" from="DetectionAreaHome" to="." method="_on_detection_area_home_body_entered"]
