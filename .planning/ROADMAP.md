@@ -59,7 +59,13 @@ Plans:
   1. Selecting a health item in inventory and pressing use restores the player's HP and removes one unit of the item
   2. Dropping an item from inventory spawns a collectable at the player's position that can be picked up again
   3. A brief on-screen notification appears when the player successfully picks up an item
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Write RED test stubs for all ITEM-01/02/03 behaviors (Wave 0)
+- [ ] 03-02-PLAN.md — Slot selection UI + E-key use item (ITEM-01) + item_collected signal (feeds ITEM-03)
+- [ ] 03-03-PLAN.md — Q-key drop item (ITEM-02) + PickupLabel HUD wiring (ITEM-03)
+- [ ] 03-04-PLAN.md — Final automated gate + human smoke test verification
 
 ## Progress
 
@@ -70,4 +76,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Combat Fix + Data Foundation | 2/3 | Complete    | 2026-03-10 |
 | 2. Grid Inventory UI | 3/3 | Complete   | 2026-03-11 |
-| 3. Item Management | 0/TBD | Not started | - |
+| 3. Item Management | 0/4 | Not started | - |
