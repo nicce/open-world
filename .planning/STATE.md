@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-item-management 03-01-PLAN.md
-last_updated: "2026-03-11T14:00:00.000Z"
+stopped_at: Completed 03-item-management 03-03-PLAN.md
+last_updated: "2026-03-11T14:01:51.393Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
   completed_phases: 2
   total_plans: 10
-  completed_plans: 7
+  completed_plans: 9
   percent: 33
 ---
 
@@ -57,6 +57,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 02-grid-inventory-ui P03 | 25 | 5 tasks | 6 files |
 | Phase 03-item-management P01 | 5 | 2 tasks | 1 files |
 | Phase 03-item-management P02 | 145 | 2 tasks | 4 files |
+| Phase 03-item-management P03 | 313 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,8 @@ Recent decisions affecting current work:
 - [Phase 03-item-management]: Lambda form used for slot_clicked connection to avoid signal arg count mismatch with .bind()
 - [Phase 03-item-management]: StyleBoxFlat draw_center=false keeps slot highlight transparent-background with border only
 - [Phase 03-item-management]: ITEM-01 tests use data-layer Inventory.remove() assertions instead of InventoryUI scene instantiation (headless incompatible)
+- [Phase 03-item-management]: capture-before-remove: item_ref captured before inventory.remove() for safe reference when slot clears on last unit
+- [Phase 03-item-management]: PickupLabel positioned at bottom-center to distinguish from RejectionLabel at top-center
 
 ### Pending Todos
 
@@ -98,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T14:00:00.000Z
-Stopped at: Completed 03-item-management 03-01-PLAN.md
+Last session: 2026-03-11T14:01:51.390Z
+Stopped at: Completed 03-item-management 03-03-PLAN.md
 Resume file: None

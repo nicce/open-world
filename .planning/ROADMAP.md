@@ -76,4 +76,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Combat Fix + Data Foundation | 2/3 | Complete    | 2026-03-10 |
 | 2. Grid Inventory UI | 3/3 | Complete   | 2026-03-11 |
-| 3. Item Management | 1/4 | In Progress|  |
+| 3. Item Management | 3/4 | In Progress|  |
