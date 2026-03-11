@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-10T19:30:43.965Z"
+stopped_at: Completed 02-grid-inventory-ui-01-PLAN.md
+last_updated: "2026-03-11T07:05:00.617Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 4
   percent: 33
 ---
 
@@ -52,6 +52,7 @@ Progress: [███░░░░░░░] 33%
 *Updated after each plan completion*
 | Phase 01-combat-fix-data-foundation P01 | 181s | 2 tasks | 4 files |
 | Phase 01-combat-fix-data-foundation P02 | 480 | 2 tasks | 3 files |
+| Phase 02-grid-inventory-ui P01 | 145 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01-combat-fix-data-foundation]: DATA-03 weight-boundary test passes on current code (float luck with 1.0/1.0); retained as regression guard for floori() contract
 - [Phase 01-combat-fix-data-foundation]: on_attack_animation_finished() used as handler name to match test contract from Plan 01
 - [Phase 01-combat-fix-data-foundation]: Knockback pattern: apply_knockback(from_position) + move_toward decay in _physics_process established for future enemies
+- [Phase 02-grid-inventory-ui]: InventoryUIHelpers extends RefCounted for GDScript 4 compatibility
+- [Phase 02-grid-inventory-ui]: insert_rejected only emitted when weight_budget <= 0 (weight-blocked), not when slots are full
 
 ### Pending Todos
 
@@ -79,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T19:30:43.960Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-grid-inventory-ui/02-CONTEXT.md
+Last session: 2026-03-11T07:05:00.615Z
+Stopped at: Completed 02-grid-inventory-ui-01-PLAN.md
+Resume file: None
