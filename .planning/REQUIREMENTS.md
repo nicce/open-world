@@ -18,9 +18,9 @@
 
 ### Item Management
 
-- [ ] **ITEM-01**: Player can select a consumable (health item) in inventory and use it to restore HP
+- [x] **ITEM-01**: Player can select a consumable (health item) in inventory and use it to restore HP
 - [ ] **ITEM-02**: Player can drop an item from inventory and it reappears as a collectable in the world at the player's position
-- [ ] **ITEM-03**: Player sees a brief notification when an item is successfully picked up
+- [x] **ITEM-03**: Player sees a brief notification when an item is successfully picked up
 
 ### Data Model
 
@@ -76,9 +76,9 @@
 | INV-01 | Phase 2 | Complete |
 | INV-02 | Phase 2 | Complete |
 | INV-03 | Phase 2 | Complete |
-| ITEM-01 | Phase 3 | Pending |
+| ITEM-01 | Phase 3 | Complete |
 | ITEM-02 | Phase 3 | Pending |
-| ITEM-03 | Phase 3 | Pending |
+| ITEM-03 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 11 total

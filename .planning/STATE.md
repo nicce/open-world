@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-11T08:29:36.058Z"
+stopped_at: Completed 03-item-management 03-02-PLAN.md
+last_updated: "2026-03-11T13:47:23.543Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 10
+  completed_plans: 7
   percent: 33
 ---
 
@@ -55,6 +55,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 02-grid-inventory-ui P01 | 145 | 2 tasks | 4 files |
 | Phase 02-grid-inventory-ui P02 | 88 | 2 tasks | 4 files |
 | Phase 02-grid-inventory-ui P03 | 25 | 5 tasks | 6 files |
+| Phase 03-item-management P02 | 145 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,9 @@ Recent decisions affecting current work:
 - [Phase 02-grid-inventory-ui]: Rejection HUD placed on CanvasLayer as sibling of InventoryUI so it appears whether inventory panel is open or closed
 - [Phase 02-grid-inventory-ui]: Item id must be set explicitly on each .tscn sub-resource — default StringName is empty, making all items share slot identity
 - [Phase 02-grid-inventory-ui]: Collectable subclass overrides must capture and check collector.collect() return value before queue_free()
+- [Phase 03-item-management]: Lambda form used for slot_clicked connection to avoid signal arg count mismatch with .bind()
+- [Phase 03-item-management]: StyleBoxFlat draw_center=false keeps slot highlight transparent-background with border only
+- [Phase 03-item-management]: ITEM-01 tests use data-layer Inventory.remove() assertions instead of InventoryUI scene instantiation (headless incompatible)
 
 ### Pending Todos
 
@@ -90,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T08:29:36.040Z
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-item-management/03-CONTEXT.md
+Last session: 2026-03-11T13:47:23.540Z
+Stopped at: Completed 03-item-management 03-02-PLAN.md
+Resume file: None
