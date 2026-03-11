@@ -112,10 +112,10 @@ func _drop_selected() -> void:
 		return
 	var node: Collectable = COLLECTABLE_SCENE.instantiate()
 	node.item = item_ref
+	get_tree().current_scene.add_child(node)
 	var angle := randf() * TAU
 	var dist := randf_range(16.0, 32.0)
 	node.global_position = _player.global_position + Vector2(cos(angle), sin(angle)) * dist
-	get_tree().current_scene.add_child(node)
 	if slot.is_empty():
 		_deselect()
 
