@@ -61,7 +61,7 @@ func insert(item: Item, amount: int = 1) -> int:
 
 
 func remove(item: Item, amount: int = 1) -> int:
-	var remaining = amount
+	var remaining: int = amount
 
 	for slot in slots:
 		if remaining <= 0:
@@ -69,7 +69,10 @@ func remove(item: Item, amount: int = 1) -> int:
 		if not slot.is_empty() and slot.item.id == item.id:
 			remaining -= slot.remove(remaining)
 
-	return amount - remaining
+	var removed: int = amount - remaining
+	if removed > 0:
+		inventory_changed.emit()
+	return removed
 
 
 func get_item_count(item: Item) -> int:
