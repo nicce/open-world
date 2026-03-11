@@ -26,3 +26,5 @@ func collect():
 	var success = collector.collect(item)
 	if success:
 		queue_free()
+	# If not success: inventory.insert() already emitted insert_rejected signal.
+	# The HUD label is handled by world.gd listening to that signal.
