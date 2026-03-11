@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-grid-inventory-ui-01-PLAN.md
-last_updated: "2026-03-11T07:05:00.617Z"
+stopped_at: Completed 02-grid-inventory-ui-02-PLAN.md
+last_updated: "2026-03-11T07:08:31.617Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
   percent: 33
 ---
 
@@ -53,6 +53,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 01-combat-fix-data-foundation P01 | 181s | 2 tasks | 4 files |
 | Phase 01-combat-fix-data-foundation P02 | 480 | 2 tasks | 3 files |
 | Phase 02-grid-inventory-ui P01 | 145 | 2 tasks | 4 files |
+| Phase 02-grid-inventory-ui P02 | 88 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 01-combat-fix-data-foundation]: Knockback pattern: apply_knockback(from_position) + move_toward decay in _physics_process established for future enemies
 - [Phase 02-grid-inventory-ui]: InventoryUIHelpers extends RefCounted for GDScript 4 compatibility
 - [Phase 02-grid-inventory-ui]: insert_rejected only emitted when weight_budget <= 0 (weight-blocked), not when slots are full
+- [Phase 02-grid-inventory-ui]: Hardcoded slot instances removed from inventory_ui.tscn; runtime instantiation via SLOT_SCENE in _ready() is single source of truth for slot count
+- [Phase 02-grid-inventory-ui]: Empty slots beyond inventory size use InventorySlot.new() in _refresh_slots() to avoid null guards
 
 ### Pending Todos
 
@@ -82,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T07:05:00.615Z
-Stopped at: Completed 02-grid-inventory-ui-01-PLAN.md
+Last session: 2026-03-11T07:08:31.614Z
+Stopped at: Completed 02-grid-inventory-ui-02-PLAN.md
 Resume file: None

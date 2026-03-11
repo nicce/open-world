@@ -14,7 +14,7 @@
 
 - [x] **INV-01**: Player can open inventory and see a fixed grid of item slots with icons and quantities
 - [x] **INV-02**: Inventory panel shows current weight vs max capacity; player sees a rejection message when inventory is full or overweight
-- [ ] **INV-03**: Stackable resource items stack up to their max_stack limit instead of occupying multiple slots
+- [x] **INV-03**: Stackable resource items stack up to their max_stack limit instead of occupying multiple slots
 
 ### Item Management
 
@@ -75,7 +75,7 @@
 | DATA-03 | Phase 1 | Complete |
 | INV-01 | Phase 2 | Complete |
 | INV-02 | Phase 2 | Complete |
-| INV-03 | Phase 2 | Pending |
+| INV-03 | Phase 2 | Complete |
 | ITEM-01 | Phase 3 | Pending |
 | ITEM-02 | Phase 3 | Pending |
 | ITEM-03 | Phase 3 | Pending |
