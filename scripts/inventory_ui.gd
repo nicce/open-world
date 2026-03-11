@@ -2,6 +2,7 @@ extends Control
 
 const SLOT_COUNT: int = 15
 const SLOT_SCENE: PackedScene = preload("res://scenes/inventory_slot_ui.tscn")
+const COLLECTABLE_SCENE: PackedScene = preload("res://scenes/collectable.tscn")
 
 var _inventory: Inventory = null
 var _player: Player = null
@@ -32,6 +33,10 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("interact"):
 		_use_selected()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("drop"):
+		_drop_selected()
 		get_viewport().set_input_as_handled()
 
 
@@ -92,6 +97,26 @@ func _refresh_slots() -> void:
 		else:
 			# Create an empty InventorySlot for display if inventory has fewer slots
 			slot_nodes[i].update(InventorySlot.new())
+
+
+func _drop_selected() -> void:
+	if _selected_index < 0 or _inventory == null or _player == null:
+		return
+	var slot := _inventory.slots[_selected_index]
+	if slot.is_empty():
+		return
+	var item_ref: Item = slot.item
+	var removed := _inventory.remove(item_ref, 1)
+	if removed == 0:
+		return
+	var node: Collectable = COLLECTABLE_SCENE.instantiate()
+	node.item = item_ref
+	var angle := randf() * TAU
+	var dist := randf_range(16.0, 32.0)
+	node.global_position = _player.global_position + Vector2(cos(angle), sin(angle)) * dist
+	get_tree().current_scene.add_child(node)
+	if slot.is_empty():
+		_deselect()
 
 
 func _refresh_weight_label() -> void:
