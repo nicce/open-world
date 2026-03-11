@@ -10,6 +10,12 @@ var _selected_style: StyleBoxFlat = null
 
 
 func _ready() -> void:
+	# Panel self_modulate is 0 in scene (hides default background).
+	# Restore to 1 so StyleBox border renders; use transparent default style.
+	self_modulate.a = 1.0
+	var default_style := StyleBoxEmpty.new()
+	add_theme_stylebox_override("panel", default_style)
+
 	_selected_style = StyleBoxFlat.new()
 	_selected_style.border_width_left = 2
 	_selected_style.border_width_right = 2
@@ -30,7 +36,7 @@ func set_selected(selected: bool) -> void:
 	if selected:
 		add_theme_stylebox_override("panel", _selected_style)
 	else:
-		remove_theme_stylebox_override("panel")
+		add_theme_stylebox_override("panel", StyleBoxEmpty.new())
 
 
 func update(slot: InventorySlot) -> void:
