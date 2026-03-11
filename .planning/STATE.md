@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: "Checkpoint: human-verify task 3 of 02-03"
-last_updated: "2026-03-11T07:11:34.848Z"
+stopped_at: Completed 02-grid-inventory-ui/02-03-PLAN.md
+last_updated: "2026-03-11T07:31:42.073Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
@@ -54,6 +54,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 01-combat-fix-data-foundation P02 | 480 | 2 tasks | 3 files |
 | Phase 02-grid-inventory-ui P01 | 145 | 2 tasks | 4 files |
 | Phase 02-grid-inventory-ui P02 | 88 | 2 tasks | 4 files |
+| Phase 02-grid-inventory-ui P03 | 25 | 5 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -76,6 +77,8 @@ Recent decisions affecting current work:
 - [Phase 02-grid-inventory-ui]: Empty slots beyond inventory size use InventorySlot.new() in _refresh_slots() to avoid null guards
 - [Phase 02-grid-inventory-ui]: RejectionLabel visibility controlled by modulate.a only (not visible flag) to support smooth fade
 - [Phase 02-grid-inventory-ui]: Rejection HUD placed on CanvasLayer as sibling of InventoryUI so it appears whether inventory panel is open or closed
+- [Phase 02-grid-inventory-ui]: Item id must be set explicitly on each .tscn sub-resource — default StringName is empty, making all items share slot identity
+- [Phase 02-grid-inventory-ui]: Collectable subclass overrides must capture and check collector.collect() return value before queue_free()
 
 ### Pending Todos
 
@@ -87,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T07:11:26.850Z
-Stopped at: Checkpoint: human-verify task 3 of 02-03
+Last session: 2026-03-11T07:31:42.070Z
+Stopped at: Completed 02-grid-inventory-ui/02-03-PLAN.md
 Resume file: None
