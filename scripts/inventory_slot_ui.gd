@@ -1,8 +1,36 @@
 extends Panel
 
+signal slot_clicked(slot_node: Panel)
+
+var _selected_style: StyleBoxFlat = null
+
 @onready var icon_rect: TextureRect = $IconRect
 @onready var abbrev_label: Label = $AbbrevLabel
 @onready var quantity_label: Label = $QuantityLabel
+
+
+func _ready() -> void:
+	_selected_style = StyleBoxFlat.new()
+	_selected_style.border_width_left = 2
+	_selected_style.border_width_right = 2
+	_selected_style.border_width_top = 2
+	_selected_style.border_width_bottom = 2
+	_selected_style.border_color = Color(1.0, 0.85, 0.0)
+	_selected_style.bg_color = Color(0, 0, 0, 0)
+	_selected_style.draw_center = false
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		slot_clicked.emit(self)
+		get_viewport().set_input_as_handled()
+
+
+func set_selected(selected: bool) -> void:
+	if selected:
+		add_theme_stylebox_override("panel", _selected_style)
+	else:
+		remove_theme_stylebox_override("panel")
 
 
 func update(slot: InventorySlot) -> void:
