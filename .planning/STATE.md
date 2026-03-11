@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-item-management 03-02-PLAN.md
-last_updated: "2026-03-11T13:47:23.543Z"
+stopped_at: Completed 03-item-management 03-01-PLAN.md
+last_updated: "2026-03-11T14:00:00.000Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
   total_phases: 3
@@ -55,6 +55,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 02-grid-inventory-ui P01 | 145 | 2 tasks | 4 files |
 | Phase 02-grid-inventory-ui P02 | 88 | 2 tasks | 4 files |
 | Phase 02-grid-inventory-ui P03 | 25 | 5 tasks | 6 files |
+| Phase 03-item-management P01 | 5 | 2 tasks | 1 files |
 | Phase 03-item-management P02 | 145 | 2 tasks | 4 files |
 
 ## Accumulated Context
@@ -80,6 +81,9 @@ Recent decisions affecting current work:
 - [Phase 02-grid-inventory-ui]: Rejection HUD placed on CanvasLayer as sibling of InventoryUI so it appears whether inventory panel is open or closed
 - [Phase 02-grid-inventory-ui]: Item id must be set explicitly on each .tscn sub-resource — default StringName is empty, making all items share slot identity
 - [Phase 02-grid-inventory-ui]: Collectable subclass overrides must capture and check collector.collect() return value before queue_free()
+- [Phase 03-item-management P01]: FakePlayer inner class (extends RefCounted) used for ITEM-03 signal tests — avoids CharacterBody2D scene tree requirement
+- [Phase 03-item-management P01]: Data-layer test pattern used — tests call Inventory.remove()/get_item_count() directly rather than instantiating InventoryUI headlessly
+- [Phase 03-item-management P01]: FakePlayer.collect(item, inventory) takes inventory as a parameter for test isolation (no self.inventory reference needed)
 - [Phase 03-item-management]: Lambda form used for slot_clicked connection to avoid signal arg count mismatch with .bind()
 - [Phase 03-item-management]: StyleBoxFlat draw_center=false keeps slot highlight transparent-background with border only
 - [Phase 03-item-management]: ITEM-01 tests use data-layer Inventory.remove() assertions instead of InventoryUI scene instantiation (headless incompatible)
@@ -94,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T13:47:23.540Z
-Stopped at: Completed 03-item-management 03-02-PLAN.md
+Last session: 2026-03-11T14:00:00.000Z
+Stopped at: Completed 03-item-management 03-01-PLAN.md
 Resume file: None

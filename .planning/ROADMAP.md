@@ -62,7 +62,7 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Write RED test stubs for all ITEM-01/02/03 behaviors (Wave 0)
+- [x] 03-01-PLAN.md — Write RED test stubs for all ITEM-01/02/03 behaviors (Wave 0)
 - [ ] 03-02-PLAN.md — Slot selection UI + E-key use item (ITEM-01) + item_collected signal (feeds ITEM-03)
 - [ ] 03-03-PLAN.md — Q-key drop item (ITEM-02) + PickupLabel HUD wiring (ITEM-03)
 - [ ] 03-04-PLAN.md — Final automated gate + human smoke test verification
