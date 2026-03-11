@@ -19,7 +19,7 @@ func _ready() -> void:
 	for i in range(SLOT_COUNT):
 		var slot := SLOT_SCENE.instantiate()
 		grid.add_child(slot)
-		slot.slot_clicked.connect(func(_n): _on_slot_clicked(i))
+		slot.slot_clicked.connect(_on_slot_clicked)
 	visible = false
 
 
@@ -52,10 +52,11 @@ func set_player(p: Player) -> void:
 	_player = p
 
 
-func _on_slot_clicked(index: int) -> void:
+func _on_slot_clicked(slot_node: Panel) -> void:
 	if _inventory == null:
 		return
-	if index >= _inventory.slots.size() or _inventory.slots[index].is_empty():
+	var index := grid.get_children().find(slot_node)
+	if index < 0 or index >= _inventory.slots.size() or _inventory.slots[index].is_empty():
 		return
 	if _selected_index == index:
 		_deselect()
