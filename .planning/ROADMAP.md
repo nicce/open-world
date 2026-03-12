@@ -14,7 +14,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Combat Fix + Data Foundation** - Fix HIT state lockout, add item identity, harden inventory data model (completed 2026-03-10)
 - [x] **Phase 2: Grid Inventory UI** - Replace debug panel with fixed-slot grid showing icons, quantities, and weight (completed 2026-03-11)
-- [ ] **Phase 3: Item Management** - Consumable use, item drop to world, pickup notification
+- [x] **Phase 3: Item Management** - Consumable use, item drop to world, pickup notification (completed 2026-03-12)
+- [ ] **Phase 4: Inventory Slot-Full Rejection** - Fix INV-02 gap: emit rejection signal when all slots occupied
 
 ## Phase Details
 
@@ -67,13 +68,27 @@ Plans:
 - [ ] 03-03-PLAN.md — Q-key drop item (ITEM-02) + PickupLabel HUD wiring (ITEM-03)
 - [ ] 03-04-PLAN.md — Final automated gate + human smoke test verification
 
+### Phase 4: Inventory Slot-Full Rejection
+**Goal**: INV-02 fully satisfied — player sees rejection message when inventory is full (all slots occupied), not only when over weight limit
+**Depends on**: Phase 3
+**Requirements**: INV-02
+**Gap Closure**: Closes gap from v1.0 milestone audit — `insert_rejected` signal not emitted when insert fails due to all 15 slots occupied (weight budget still available)
+**Success Criteria** (what must be TRUE):
+  1. Attempting to pick up an item when all 15 inventory slots are occupied (but weight allows) shows the "Too heavy!" / "Inventory full!" HUD rejection message
+  2. Weight-overflow rejection continues to work as before (no regression)
+**Plans**: 1 plan
+
+Plans:
+- [ ] 04-01-PLAN.md — Write failing test for slot-full rejection, add emission branch to inventory.gd:insert()
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
+Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Combat Fix + Data Foundation | 2/3 | Complete    | 2026-03-10 |
-| 2. Grid Inventory UI | 3/3 | Complete   | 2026-03-11 |
-| 3. Item Management | 3/4 | In Progress|  |
+| 1. Combat Fix + Data Foundation | 3/3 | Complete | 2026-03-10 |
+| 2. Grid Inventory UI | 3/3 | Complete | 2026-03-11 |
+| 3. Item Management | 4/4 | Complete | 2026-03-12 |
+| 4. Inventory Slot-Full Rejection | 0/1 | Pending | |

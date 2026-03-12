@@ -13,7 +13,7 @@
 ### Inventory UI
 
 - [x] **INV-01**: Player can open inventory and see a fixed grid of item slots with icons and quantities
-- [x] **INV-02**: Inventory panel shows current weight vs max capacity; player sees a rejection message when inventory is full or overweight
+- [ ] **INV-02**: Inventory panel shows current weight vs max capacity; player sees a rejection message when inventory is full or overweight
 - [x] **INV-03**: Stackable resource items stack up to their max_stack limit instead of occupying multiple slots
 
 ### Item Management
@@ -74,7 +74,7 @@
 | DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Complete |
 | INV-01 | Phase 2 | Complete |
-| INV-02 | Phase 2 | Complete |
+| INV-02 | Phase 4 (gap closure) | Pending |
 | INV-03 | Phase 2 | Complete |
 | ITEM-01 | Phase 3 | Complete |
 | ITEM-02 | Phase 3 | Complete |
@@ -84,7 +84,8 @@
 - v1 requirements: 11 total
 - Mapped to phases: 11
 - Unmapped: 0 ✓
+- Pending (gap closure): 1 (INV-02 → Phase 4)
 
 ---
 *Requirements defined: 2026-03-10*
-*Last updated: 2026-03-10 after roadmap creation — traceability confirmed*
+*Last updated: 2026-03-12 after v1.0 milestone audit — INV-02 moved to Phase 4 (gap closure)*
