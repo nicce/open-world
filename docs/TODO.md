@@ -109,12 +109,12 @@ Goal: Player must eat to maintain stamina; stamina gates sprinting and tool use.
 
 Goal: Inventory supports stacking, equipment slots, and item use.
 
-- [ ] Implement item stacking (same item type merges up to a max stack size)
+- [x] Implement item stacking (same item type merges up to a max stack size)
 - [ ] Add equipment slots (weapon, armour, tool) separate from the bag grid
 - [ ] Equip weapon/tool by dragging from bag to equipment slot
 - [ ] Show equipped weapon sprite on the player
-- [ ] Allow consuming food/health items directly from inventory
-- [ ] Add a drop item action (removes from inventory, spawns in world)
+- [x] Allow consuming food/health items directly from inventory
+- [x] Add a drop item action (removes from inventory, spawns in world)
 
 ---
 
@@ -126,7 +126,7 @@ Goal: Combat supports multiple weapon types with distinct behaviour.
 - [ ] Create `Sword` scene and resource with attack range and damage values
 - [ ] Create `Bow` scene with projectile spawning
 - [ ] Add weapon attack animations (per weapon type) to the player `AnimationTree`
-- [ ] Add knockback on hit for both player and enemies
+- [x] Add knockback on hit for both player and enemies
 - [ ] Implement enemy loot drops (items spawned on death)
 
 ---
@@ -190,7 +190,7 @@ Goal: Clean, readable HUD with essential information.
 - [ ] Display hunger and stamina bars in the HUD
 - [ ] Display currently equipped tool/weapon icon
 - [ ] Add a hotbar (quick-access row from inventory)
-- [ ] Add a notification/toast system for item pickups ("+ 3 Wood")
+- [x] Add a notification/toast system for item pickups ("+ 3 Wood")
 - [ ] Pause menu with Resume, Settings, Save, and Quit options
 
 ---
