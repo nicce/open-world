@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 03-item-management 03-03-PLAN.md
-last_updated: "2026-03-12T07:16:23.976Z"
+stopped_at: Completed 04-inventory-slot-full-rejection 04-01-PLAN.md
+last_updated: "2026-03-13T07:24:50.858Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
-  total_phases: 3
-  completed_phases: 3
-  total_plans: 10
-  completed_plans: 10
+  total_phases: 4
+  completed_phases: 4
+  total_plans: 11
+  completed_plans: 11
   percent: 33
 ---
 
@@ -58,6 +58,7 @@ Progress: [███░░░░░░░] 33%
 | Phase 03-item-management P01 | 5 | 2 tasks | 1 files |
 | Phase 03-item-management P02 | 145 | 2 tasks | 4 files |
 | Phase 03-item-management P03 | 313 | 2 tasks | 4 files |
+| Phase 04-inventory-slot-full-rejection P01 | 73 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -90,6 +91,7 @@ Recent decisions affecting current work:
 - [Phase 03-item-management]: ITEM-01 tests use data-layer Inventory.remove() assertions instead of InventoryUI scene instantiation (headless incompatible)
 - [Phase 03-item-management]: capture-before-remove: item_ref captured before inventory.remove() for safe reference when slot clears on last unit
 - [Phase 03-item-management]: PickupLabel positioned at bottom-center to distinguish from RejectionLabel at top-center
+- [Phase 04-inventory-slot-full-rejection]: Remove weight_budget guard from elif branch in insert() — any complete failure emits insert_rejected unconditionally, covering slot-full and weight-blocked paths
 
 ### Pending Todos
 
@@ -101,6 +103,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T14:01:51.390Z
-Stopped at: Completed 03-item-management 03-03-PLAN.md
+Last session: 2026-03-13T07:24:50.855Z
+Stopped at: Completed 04-inventory-slot-full-rejection 04-01-PLAN.md
 Resume file: None
