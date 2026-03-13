@@ -1,10 +1,11 @@
 ---
 phase: 1
 slug: combat-fix-data-foundation
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: complete
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-10
+validated: 2026-03-13
 ---
 
 # Phase 1 — Validation Strategy
@@ -36,13 +37,13 @@ created: 2026-03-10
 
 ## Per-Task Verification Map
 
-| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 1-01-01 | 01 | 0 | CMBT-01 | unit | `make test` | ❌ W0 | ⬜ pending |
-| 1-01-02 | 01 | 0 | CMBT-02 | unit | `make test` | ❌ W0 | ⬜ pending |
-| 1-02-01 | 02 | 0 | DATA-01 | unit | `make test` | ⚠️ partial | ⬜ pending |
-| 1-02-02 | 02 | 0 | DATA-02 | unit | `make test` | ⚠️ partial | ⬜ pending |
-| 1-02-03 | 02 | 0 | DATA-03 | unit | `make test` | ⚠️ partial | ⬜ pending |
+| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File | Status |
+|---------|------|------|-------------|-----------|-------------------|------|--------|
+| 1-01-01 | 01 | 0 | CMBT-01 | unit | `make test` | `tests/unit/test_player_state.gd` (3 tests) | ✅ green |
+| 1-01-02 | 01 | 0 | CMBT-02 | unit | `make test` | `tests/unit/test_snake.gd` (3 tests) | ✅ green |
+| 1-02-01 | 03 | 1 | DATA-01 | unit | `make test` | `tests/unit/test_inventory_slot.gd` (2 tests) | ✅ green |
+| 1-02-02 | 03 | 1 | DATA-02 | unit | `make test` | `tests/unit/test_inventory.gd` (2 tests) | ✅ green |
+| 1-02-03 | 03 | 1 | DATA-03 | unit | `make test` | `tests/unit/test_inventory.gd` (1 test) | ✅ green |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -50,10 +51,10 @@ created: 2026-03-10
 
 ## Wave 0 Requirements
 
-- [ ] `tests/unit/test_player_state.gd` — covers CMBT-01 (state machine reset logic)
-- [ ] `tests/unit/test_snake.gd` — covers CMBT-02 (knockback velocity application)
-- [ ] New test cases in `tests/unit/test_inventory_slot.gd` — DATA-01 id-based stacking (two items with same name but different id must not stack)
-- [ ] New test cases in `tests/unit/test_inventory.gd` — DATA-02 deep copy isolation, DATA-03 exact weight limit acceptance
+- [x] `tests/unit/test_player_state.gd` — covers CMBT-01 (state machine reset logic) — 3 tests, 3/3 green
+- [x] `tests/unit/test_snake.gd` — covers CMBT-02 (knockback velocity application) — 3 tests, 3/3 green
+- [x] New test cases in `tests/unit/test_inventory_slot.gd` — DATA-01 id-based stacking — 2 tests, 2/2 green
+- [x] New test cases in `tests/unit/test_inventory.gd` — DATA-02 deep copy isolation, DATA-03 exact weight limit — 3 tests, 3/3 green
 
 ---
 
@@ -68,11 +69,23 @@ created: 2026-03-10
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 30s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 30s (suite runs ~1s)
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** 2026-03-13 — all 5 requirements have automated test coverage; 2 manual-only behaviors documented above
+
+---
+
+## Validation Audit 2026-03-13
+
+| Metric | Count |
+|--------|-------|
+| Gaps found | 0 |
+| Resolved | 0 |
+| Escalated to manual-only | 0 |
+| Tests reviewed | 11 (3 CMBT-01 + 3 CMBT-02 + 2 DATA-01 + 2 DATA-02 + 1 DATA-03) |
+| Suite result | 88/88 passed |
