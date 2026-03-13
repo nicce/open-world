@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal health_changed(new_value: int)
+signal item_collected(item_name: String)
 
 enum PlayerStates { MOVE, HIT, DEAD }
 
@@ -90,4 +91,7 @@ func increase_health(value: int):
 
 
 func collect(item) -> bool:
-	return inventory.insert(item) == 0
+	var success := inventory.insert(item) == 0
+	if success:
+		item_collected.emit(item.name)
+	return success

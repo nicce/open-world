@@ -276,3 +276,67 @@ func test_insert_at_exact_weight_limit_accepts_item() -> void:
 		0.001,
 		"Inventory must be exactly full after inserting at the boundary"
 	)
+
+
+# ---------------------------------------------------------------------------
+# Signal tests: inventory_changed and insert_rejected
+# ---------------------------------------------------------------------------
+
+
+func test_inventory_changed_emitted_on_successful_insert() -> void:
+	var inv := _make_inventory(5, 100.0)
+	var wood := _make_item("Wood")
+	watch_signals(inv)
+	inv.insert(wood, 1)
+	assert_signal_emitted(inv, "inventory_changed")
+	assert_signal_emit_count(inv, "inventory_changed", 1)
+
+
+func test_inventory_changed_not_emitted_when_nothing_inserted() -> void:
+	# Fill inventory completely then try to insert one more item.
+	var inv := _make_inventory(2, 10.0)
+	var heavy := _make_item("Boulder", 5.0)
+	inv.insert(heavy, 1)
+	inv.insert(heavy, 1)
+	# Inventory is now full (10/10 kg, both slots used).
+	watch_signals(inv)
+	inv.insert(heavy, 1)
+	assert_signal_not_emitted(inv, "inventory_changed")
+
+
+func test_insert_rejected_emitted_when_weight_blocks_all() -> void:
+	# Item weighs 10 kg, inventory max weight is 5 kg — nothing can fit.
+	var inv := _make_inventory(5, 5.0)
+	var too_heavy := _make_item("Boulder", 10.0)
+	watch_signals(inv)
+	inv.insert(too_heavy, 1)
+	assert_signal_emitted(inv, "insert_rejected")
+	assert_signal_emit_count(inv, "insert_rejected", 1)
+
+
+func test_insert_rejected_not_emitted_on_successful_insert() -> void:
+	var inv := _make_inventory(5, 100.0)
+	var wood := _make_item("Wood")
+	watch_signals(inv)
+	inv.insert(wood, 1)
+	assert_signal_not_emitted(inv, "insert_rejected")
+
+
+# ---------------------------------------------------------------------------
+# INV-02 gap closure: insert_rejected must fire when slots are full even
+# when weight budget is available.
+# ---------------------------------------------------------------------------
+
+
+func test_insert_rejected_emitted_when_slots_full_but_weight_allows() -> void:
+	# 2 slots, 100 kg max — fill both slots, then try a third distinct item.
+	var inv := _make_inventory(2, 100.0)
+	var wood := _make_item("Wood")
+	inv.insert(wood, 10)  # fills slot 0 to max_stack (10)
+	inv.insert(wood, 10)  # fills slot 1 to max_stack (10)
+	# Weight used: 20 kg of 100 kg — plenty of budget remains.
+	var stone := _make_item("Stone")
+	watch_signals(inv)
+	inv.insert(stone, 1)
+	assert_signal_emitted(inv, "insert_rejected")
+	assert_signal_emit_count(inv, "insert_rejected", 1)

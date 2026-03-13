@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Phase 2 context gathered
-last_updated: "2026-03-10T19:30:43.965Z"
+stopped_at: Completed 04-inventory-slot-full-rejection 04-01-PLAN.md
+last_updated: "2026-03-13T12:27:27.005Z"
 last_activity: 2026-03-10 — Roadmap created
 progress:
-  total_phases: 3
-  completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_phases: 4
+  completed_phases: 4
+  total_plans: 11
+  completed_plans: 11
   percent: 33
 ---
 
@@ -52,6 +52,13 @@ Progress: [███░░░░░░░] 33%
 *Updated after each plan completion*
 | Phase 01-combat-fix-data-foundation P01 | 181s | 2 tasks | 4 files |
 | Phase 01-combat-fix-data-foundation P02 | 480 | 2 tasks | 3 files |
+| Phase 02-grid-inventory-ui P01 | 145 | 2 tasks | 4 files |
+| Phase 02-grid-inventory-ui P02 | 88 | 2 tasks | 4 files |
+| Phase 02-grid-inventory-ui P03 | 25 | 5 tasks | 6 files |
+| Phase 03-item-management P01 | 5 | 2 tasks | 1 files |
+| Phase 03-item-management P02 | 145 | 2 tasks | 4 files |
+| Phase 03-item-management P03 | 313 | 2 tasks | 4 files |
+| Phase 04-inventory-slot-full-rejection P01 | 73 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -68,6 +75,23 @@ Recent decisions affecting current work:
 - [Phase 01-combat-fix-data-foundation]: DATA-03 weight-boundary test passes on current code (float luck with 1.0/1.0); retained as regression guard for floori() contract
 - [Phase 01-combat-fix-data-foundation]: on_attack_animation_finished() used as handler name to match test contract from Plan 01
 - [Phase 01-combat-fix-data-foundation]: Knockback pattern: apply_knockback(from_position) + move_toward decay in _physics_process established for future enemies
+- [Phase 02-grid-inventory-ui]: InventoryUIHelpers extends RefCounted for GDScript 4 compatibility
+- [Phase 02-grid-inventory-ui]: insert_rejected only emitted when weight_budget <= 0 (weight-blocked), not when slots are full
+- [Phase 02-grid-inventory-ui]: Hardcoded slot instances removed from inventory_ui.tscn; runtime instantiation via SLOT_SCENE in _ready() is single source of truth for slot count
+- [Phase 02-grid-inventory-ui]: Empty slots beyond inventory size use InventorySlot.new() in _refresh_slots() to avoid null guards
+- [Phase 02-grid-inventory-ui]: RejectionLabel visibility controlled by modulate.a only (not visible flag) to support smooth fade
+- [Phase 02-grid-inventory-ui]: Rejection HUD placed on CanvasLayer as sibling of InventoryUI so it appears whether inventory panel is open or closed
+- [Phase 02-grid-inventory-ui]: Item id must be set explicitly on each .tscn sub-resource — default StringName is empty, making all items share slot identity
+- [Phase 02-grid-inventory-ui]: Collectable subclass overrides must capture and check collector.collect() return value before queue_free()
+- [Phase 03-item-management P01]: FakePlayer inner class (extends RefCounted) used for ITEM-03 signal tests — avoids CharacterBody2D scene tree requirement
+- [Phase 03-item-management P01]: Data-layer test pattern used — tests call Inventory.remove()/get_item_count() directly rather than instantiating InventoryUI headlessly
+- [Phase 03-item-management P01]: FakePlayer.collect(item, inventory) takes inventory as a parameter for test isolation (no self.inventory reference needed)
+- [Phase 03-item-management]: Lambda form used for slot_clicked connection to avoid signal arg count mismatch with .bind()
+- [Phase 03-item-management]: StyleBoxFlat draw_center=false keeps slot highlight transparent-background with border only
+- [Phase 03-item-management]: ITEM-01 tests use data-layer Inventory.remove() assertions instead of InventoryUI scene instantiation (headless incompatible)
+- [Phase 03-item-management]: capture-before-remove: item_ref captured before inventory.remove() for safe reference when slot clears on last unit
+- [Phase 03-item-management]: PickupLabel positioned at bottom-center to distinguish from RejectionLabel at top-center
+- [Phase 04-inventory-slot-full-rejection]: Remove weight_budget guard from elif branch in insert() — any complete failure emits insert_rejected unconditionally, covering slot-full and weight-blocked paths
 
 ### Pending Todos
 
@@ -79,6 +103,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T19:30:43.960Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-grid-inventory-ui/02-CONTEXT.md
+Last session: 2026-03-13T07:24:50.855Z
+Stopped at: Completed 04-inventory-slot-full-rejection 04-01-PLAN.md
+Resume file: None
