@@ -1,10 +1,11 @@
 ---
 phase: 3
 slug: item-management
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: complete
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-11
+validated: 2026-03-13
 ---
 
 # Phase 3 — Validation Strategy
@@ -36,15 +37,15 @@ created: 2026-03-11
 
 ## Per-Task Verification Map
 
-| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 3-W0-01 | Wave 0 | 0 | ITEM-01, ITEM-02, ITEM-03 | unit stub | `make test` | ❌ W0 | ⬜ pending |
-| 3-01-01 | 01 | 1 | ITEM-01 | unit | `make test` | ✅ W0 | ⬜ pending |
-| 3-01-02 | 01 | 1 | ITEM-01 | unit | `make test` | ✅ W0 | ⬜ pending |
-| 3-02-01 | 02 | 1 | ITEM-02 | unit | `make test` | ✅ W0 | ⬜ pending |
-| 3-02-02 | 02 | 1 | ITEM-02 | unit | `make test` | ✅ W0 | ⬜ pending |
-| 3-03-01 | 03 | 2 | ITEM-03 | unit | `make test` | ✅ W0 | ⬜ pending |
-| 3-03-02 | 03 | 2 | ITEM-03 | manual | see Manual-Only below | — | ⬜ pending |
+| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File | Status |
+|---------|------|------|-------------|-----------|-------------------|------|--------|
+| 3-W0-01 | Wave 0 | 0 | ITEM-01, ITEM-02, ITEM-03 | unit | `make test` | `tests/unit/test_item_management.gd` (8 tests) | ✅ green |
+| 3-01-01 | 01 | 1 | ITEM-01 | unit | `make test` | `test_use_consumable_removes_one_from_inventory` | ✅ green |
+| 3-01-02 | 01 | 1 | ITEM-01 | unit | `make test` | `test_use_nonconsumable_is_noop`, `test_use_with_no_selection_is_noop` | ✅ green |
+| 3-02-01 | 02 | 1 | ITEM-02 | unit | `make test` | `test_drop_removes_one_unit`, `test_drop_last_unit_empties_slot` | ✅ green |
+| 3-02-02 | 02 | 1 | ITEM-02 | unit | `make test` | `test_drop_with_no_selection_is_noop` | ✅ green |
+| 3-03-01 | 03 | 2 | ITEM-03 | unit | `make test` | `test_collect_emits_item_collected_on_success`, `test_collect_does_not_emit_on_failed_insert` | ✅ green |
+| 3-03-02 | 03 | 2 | ITEM-03 | manual | see Manual-Only below | — | ✅ documented |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -52,7 +53,7 @@ created: 2026-03-11
 
 ## Wave 0 Requirements
 
-- [ ] `tests/unit/test_item_management.gd` — stubs for ITEM-01 (use consumable), ITEM-01 (non-consumable no-op), ITEM-01 (no selection no-op), ITEM-02 (drop removes 1), ITEM-02 (drop last deselects), ITEM-02 (no selection no-op), ITEM-03 (collect emits signal), ITEM-03 (failed insert no signal)
+- [x] `tests/unit/test_item_management.gd` — 8 tests: ITEM-01 ×3, ITEM-02 ×3, ITEM-03 ×2 — 8/8 green
 
 *Existing infrastructure (`test_inventory.gd`, `test_inventory_slot.gd`, `test_inventory_ui_helpers.gd`) covers the data layer. No framework config changes needed.*
 
@@ -71,11 +72,23 @@ created: 2026-03-11
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 10s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 10s (suite runs ~1s)
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** 2026-03-13 — all 3 requirements have automated test coverage; 4 manual-only behaviors documented above
+
+---
+
+## Validation Audit 2026-03-13
+
+| Metric | Count |
+|--------|-------|
+| Gaps found | 0 |
+| Resolved | 0 |
+| Escalated to manual-only | 0 |
+| Tests reviewed | 8 (test_item_management.gd ×8) |
+| Suite result | 88/88 passed |
