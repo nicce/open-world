@@ -53,9 +53,7 @@ func insert(item: Item, amount: int = 1) -> int:
 	if inserted > 0:
 		inventory_changed.emit()
 	elif remaining > 0:
-		var weight_budget = floori(remaining_weight() / item.weight)
-		if weight_budget <= 0:
-			insert_rejected.emit()
+		insert_rejected.emit()
 
 	return remaining
 
