@@ -320,3 +320,23 @@ func test_insert_rejected_not_emitted_on_successful_insert() -> void:
 	watch_signals(inv)
 	inv.insert(wood, 1)
 	assert_signal_not_emitted(inv, "insert_rejected")
+
+
+# ---------------------------------------------------------------------------
+# INV-02 gap closure: insert_rejected must fire when slots are full even
+# when weight budget is available.
+# ---------------------------------------------------------------------------
+
+
+func test_insert_rejected_emitted_when_slots_full_but_weight_allows() -> void:
+	# 2 slots, 100 kg max — fill both slots, then try a third distinct item.
+	var inv := _make_inventory(2, 100.0)
+	var wood := _make_item("Wood")
+	inv.insert(wood, 10)  # fills slot 0 to max_stack (10)
+	inv.insert(wood, 10)  # fills slot 1 to max_stack (10)
+	# Weight used: 20 kg of 100 kg — plenty of budget remains.
+	var stone := _make_item("Stone")
+	watch_signals(inv)
+	inv.insert(stone, 1)
+	assert_signal_emitted(inv, "insert_rejected")
+	assert_signal_emit_count(inv, "insert_rejected", 1)
