@@ -1,10 +1,11 @@
 ---
 phase: 4
 slug: inventory-slot-full-rejection
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: complete
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-12
+validated: 2026-03-13
 ---
 
 # Phase 4 — Validation Strategy
@@ -36,10 +37,10 @@ created: 2026-03-12
 
 ## Per-Task Verification Map
 
-| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 04-01-01 | 01 | 1 | INV-02 (slot-full) | unit | `make test` | ❌ W0 — add to `tests/unit/test_inventory.gd` | ⬜ pending |
-| 04-01-02 | 01 | 1 | INV-02 (regression) | unit | `make test` | ✅ already in `test_inventory.gd:307` | ⬜ pending |
+| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File | Status |
+|---------|------|------|-------------|-----------|-------------------|------|--------|
+| 04-01-01 | 01 | 1 | INV-02 (slot-full) | unit | `make test` | `test_inventory.gd:331` — `test_insert_rejected_emitted_when_slots_full_but_weight_allows` | ✅ green |
+| 04-01-02 | 01 | 1 | INV-02 (regression) | unit | `make test` | `test_inventory.gd:307` — `test_insert_rejected_emitted_when_weight_blocks_all` | ✅ green |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -47,7 +48,7 @@ created: 2026-03-12
 
 ## Wave 0 Requirements
 
-- [ ] `tests/unit/test_inventory.gd` — add `test_insert_rejected_emitted_when_slots_full_but_weight_allows()` for INV-02 slot-full path
+- [x] `tests/unit/test_inventory.gd` — `test_insert_rejected_emitted_when_slots_full_but_weight_allows()` at line 331 — 1/1 green
 
 *All other test infrastructure (GUT, Makefile, existing signal tests) is already in place.*
 
@@ -63,11 +64,23 @@ created: 2026-03-12
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s (suite runs ~1s)
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** 2026-03-13 — INV-02 slot-full path has automated test; regression guard in place; 1 manual-only behavior documented
+
+---
+
+## Validation Audit 2026-03-13
+
+| Metric | Count |
+|--------|-------|
+| Gaps found | 0 |
+| Resolved | 0 |
+| Escalated to manual-only | 0 |
+| Tests reviewed | 2 (slot-full signal + weight regression) |
+| Suite result | 88/88 passed |
