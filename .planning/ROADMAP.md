@@ -1,94 +1,29 @@
-# Roadmap: Open World — Inventory & Combat v1
+# Roadmap: Open World
 
-## Overview
+## Milestones
 
-Three phases deliver a playable, inventory-complete game loop. Phase 1 fixes the combat blocker and hardens the data model so nothing downstream is corrupted. Phase 2 builds the visible grid inventory on that foundation. Phase 3 adds item use, item drop, and pickup feedback — closing the full item lifecycle from world to inventory and back.
+- ✅ **v1.0 Inventory & Combat** — Phases 1–4 (shipped 2026-03-13)
+- 📋 **v1.1** — Planned (run `/gsd:new-milestone` to define)
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+<details>
+<summary>✅ v1.0 Inventory & Combat (Phases 1–4) — SHIPPED 2026-03-13</summary>
 
-Decimal phases appear between their surrounding integers in numeric order.
+- [x] Phase 1: Combat Fix + Data Foundation (3/3 plans) — completed 2026-03-10
+- [x] Phase 2: Grid Inventory UI (3/3 plans) — completed 2026-03-11
+- [x] Phase 3: Item Management (4/4 plans) — completed 2026-03-12
+- [x] Phase 4: Inventory Slot-Full Rejection (1/1 plan) — completed 2026-03-13
 
-- [x] **Phase 1: Combat Fix + Data Foundation** - Fix HIT state lockout, add item identity, harden inventory data model (completed 2026-03-10)
-- [x] **Phase 2: Grid Inventory UI** - Replace debug panel with fixed-slot grid showing icons, quantities, and weight (completed 2026-03-11)
-- [x] **Phase 3: Item Management** - Consumable use, item drop to world, pickup notification (completed 2026-03-12)
-- [x] **Phase 4: Inventory Slot-Full Rejection** - Fix INV-02 gap: emit rejection signal when all slots occupied (completed 2026-03-13)
+Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
-## Phase Details
-
-### Phase 1: Combat Fix + Data Foundation
-**Goal**: Player can fight without locking up and the inventory data model is correct for all downstream work
-**Depends on**: Nothing (first phase)
-**Requirements**: CMBT-01, CMBT-02, DATA-01, DATA-02, DATA-03
-**Success Criteria** (what must be TRUE):
-  1. Player can attack and immediately move again — no state lockout after the HIT animation
-  2. Enemies visibly recoil when the player lands a hit
-  3. Each item has a stable `id` field distinct from its display name; stacking and removal use `id` for comparison
-  4. Loading a scene does not bleed inventory state from a previous session — inventory is deep-copied on load
-  5. Adding items at the exact weight limit accepts the item without off-by-one rejection
-**Plans**: 3 plans
-
-Plans:
-- [ ] 01-01-PLAN.md — Write failing test scaffolds for all 5 requirements (Wave 0 RED tests)
-- [ ] 01-02-PLAN.md — Fix CMBT-01 (player state lockout) and CMBT-02 (enemy knockback)
-- [ ] 01-03-PLAN.md — Fix DATA-01 (item id field), DATA-02 (deep copy), DATA-03 (floori weight)
-
-### Phase 2: Grid Inventory UI
-**Goal**: Player can open the inventory and see a proper fixed-slot grid with item icons, quantities, and weight feedback
-**Depends on**: Phase 1
-**Requirements**: INV-01, INV-02, INV-03
-**Success Criteria** (what must be TRUE):
-  1. Opening the inventory shows a fixed grid of slots with item icons and quantity labels
-  2. The inventory panel displays current weight and max capacity (e.g., "12.5 / 20 kg")
-  3. Attempting to pick up an item when over weight limit shows a visible rejection message
-  4. Stackable items share a single slot and increment their quantity counter rather than filling a new slot
-**Plans**: 3 plans
-
-Plans:
-- [ ] 02-01-PLAN.md — Add inventory signals and write failing tests (TDD RED/GREEN)
-- [ ] 02-02-PLAN.md — Build slot scene with icon/label nodes and rewrite InventoryUI grid
-- [ ] 02-03-PLAN.md — Wire world.gd inventory reference, add HUD rejection label, human verify
-
-### Phase 3: Item Management
-**Goal**: Player can consume health items from inventory, drop items back into the world, and see feedback on pickups
-**Depends on**: Phase 2
-**Requirements**: ITEM-01, ITEM-02, ITEM-03
-**Success Criteria** (what must be TRUE):
-  1. Selecting a health item in inventory and pressing use restores the player's HP and removes one unit of the item
-  2. Dropping an item from inventory spawns a collectable at the player's position that can be picked up again
-  3. A brief on-screen notification appears when the player successfully picks up an item
-**Plans**: 4 plans
-
-Plans:
-- [x] 03-01-PLAN.md — Write RED test stubs for all ITEM-01/02/03 behaviors (Wave 0)
-- [ ] 03-02-PLAN.md — Slot selection UI + E-key use item (ITEM-01) + item_collected signal (feeds ITEM-03)
-- [ ] 03-03-PLAN.md — Q-key drop item (ITEM-02) + PickupLabel HUD wiring (ITEM-03)
-- [ ] 03-04-PLAN.md — Final automated gate + human smoke test verification
-
-### Phase 4: Inventory Slot-Full Rejection
-**Goal**: INV-02 fully satisfied — player sees rejection message when inventory is full (all slots occupied), not only when over weight limit
-**Depends on**: Phase 3
-**Requirements**: INV-02
-**Gap Closure**: Closes gap from v1.0 milestone audit — `insert_rejected` signal not emitted when insert fails due to all 15 slots occupied (weight budget still available)
-**Success Criteria** (what must be TRUE):
-  1. Attempting to pick up an item when all 15 inventory slots are occupied (but weight allows) shows the "Too heavy!" / "Inventory full!" HUD rejection message
-  2. Weight-overflow rejection continues to work as before (no regression)
-**Plans**: 1 plan
-
-Plans:
-- [ ] 04-01-PLAN.md — Write failing test for slot-full rejection, add emission branch to inventory.gd:insert()
+</details>
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
-
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Combat Fix + Data Foundation | 3/3 | Complete | 2026-03-10 |
-| 2. Grid Inventory UI | 3/3 | Complete | 2026-03-11 |
-| 3. Item Management | 4/4 | Complete | 2026-03-12 |
-| 4. Inventory Slot-Full Rejection | 0/1 | Complete    | 2026-03-13 |
+| Phase | Milestone | Plans | Status | Completed |
+|-------|-----------|-------|--------|-----------|
+| 1. Combat Fix + Data Foundation | v1.0 | 3/3 | Complete | 2026-03-10 |
+| 2. Grid Inventory UI | v1.0 | 3/3 | Complete | 2026-03-11 |
+| 3. Item Management | v1.0 | 4/4 | Complete | 2026-03-12 |
+| 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
