@@ -39,13 +39,32 @@ A satisfying item and inventory system that makes picking things up, using consu
 
 ### Out of Scope
 
-- Real art assets (sprites, tilesets, character art) — deferred to future milestone
-- Crafting / recipe system — future milestone
-- Farming / crop system — future milestone
-- Building / structure placement — future milestone
-- Additional enemy types / boss fights — future milestone
-- NPC interactions / quests / dialogue — future milestone
 - Multiplayer — never (single-player only)
+- Real art assets — do not block on; placeholder sprites are acceptable throughout all milestones
+
+## Future Features
+
+Feature groups available for upcoming milestones, roughly in suggested build order. Each group becomes a milestone or part of one — scope at planning time via `/gsd:new-milestone`.
+
+**Near-term (foundational mechanics):**
+- **Expanded Combat** — weapon equip logic in player.gd, Sword/Bow scenes, weapon animations, enemy loot drops
+- **Equipment Slots** — weapon/armour/tool slots separate from bag grid, equip by slot-click, show equipped weapon on player
+- **More Enemies** — Slime, Bandit, SpawnPoint with night spawning, aggro/de-aggro range, enemy health bars, Inspector-tunable stats
+- **UI & HUD Polish** — HUD health bar, hotbar (quick-access row), equipped weapon icon, pause menu (Resume/Save/Quit)
+- **Save & Load** — JSON save in `user://`, serialise player stats + inventory + world state, load on start, autosave on sleep/transition
+
+**Mid-term (survival loop):**
+- **Hunger & Stamina** — hunger/stamina stats, drain over time, bars in HUD, FoodItem resource, sprint (hold Shift) drains stamina
+- **Day/Night Cycle** — TimeManager autoload, CanvasModulate darkness, day_started/night_started signals, increased enemy aggression at night
+- **Sleep Mechanic** — Bed interactable, skip-to-morning dialog, restore stats, block if enemies nearby, autosave on sleep
+- **Resource Harvesting** — Tree/Rock scenes, HarvestableComponent, tool-type detection (axe/pickaxe), item drops on depletion, respawn timer
+
+**Long-term (world depth):**
+- **Crafting System** — Recipe resource, recipe registry autoload, crafting UI, filter by inventory, consume ingredients
+- **Building Placement** — BuildManager autoload, ghost preview, grid snap, validate placement, demolish mode, build menu
+- **NPC & Dialogue** — base NPC scene, DialogueManager autoload, dialogue data files, trader NPC, time-based schedules
+- **Farming / Crop System** — plant, grow, harvest loop (scope TBD)
+- **World Expansion** — forest biome, cave/dungeon, merchant town, connected areas, mini-map
 
 ## Context
 
@@ -63,6 +82,8 @@ Technical debt from v1.0 (non-blocking):
 - `func hit(): pass` stub in player.gd — weapon equip system not yet designed
 - `drop` action missing from CLAUDE.md Input Mappings table
 - Partial-insert (amount > 1) suppresses insert_rejected — latent INV-02 edge case
+- `scripts/lake_world.gd` exists but may be orphaned — audit before building world expansion
+- `scenes/abandoned_village.gd` is misplaced (should be under `scripts/`) — audit and relocate
 
 ## Constraints
 
@@ -83,4 +104,4 @@ Technical debt from v1.0 (non-blocking):
 | insert_rejected on any complete failure | Slot-full was silently dropped; elif remaining > 0 covers both cases | ✓ Good — Phase 4 gap closure |
 
 ---
-*Last updated: 2026-03-13 after v1.0 milestone*
+*Last updated: 2026-03-13 after v1.0 milestone — consolidated TODO.md into Future Features*
