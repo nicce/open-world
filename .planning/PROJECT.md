@@ -35,7 +35,13 @@ A satisfying item and inventory system that makes picking things up, using consu
 
 ### Active
 
-*(Define next milestone requirements via `/gsd:new-milestone`)*
+<!-- v1.1 Equipment Slots -->
+- [ ] Always-visible HUD strip with weapon and tool equipment slots
+- [ ] Right-click context menu on inventory items (Equip / Consume / Drop by type)
+- [ ] Equipping moves item from bag to equipment slot; unequipping returns it to bag
+- [ ] Equipped weapon drives player hit() attack; fist as fallback
+- [ ] Tool slot exists in UI (gameplay wired in future milestone)
+- [ ] Placeholder visual indicator on player when weapon is equipped
 
 ### Out of Scope
 
@@ -104,4 +110,17 @@ Technical debt from v1.0 (non-blocking):
 | insert_rejected on any complete failure | Slot-full was silently dropped; elif remaining > 0 covers both cases | ✓ Good — Phase 4 gap closure |
 
 ---
-*Last updated: 2026-03-13 after v1.0 milestone — consolidated TODO.md into Future Features*
+## Current Milestone: v1.1 Equipment Slots
+
+**Goal:** Add weapon and tool equipment slots with right-click context menu, gameplay wiring for the equipped weapon, and a placeholder visual indicator on the player.
+
+**Target features:**
+- Always-visible HUD strip with weapon (W) and tool (T) slots
+- Right-click context menu on bag items and equipment slots
+- Equip/unequip flow moves items between bag and slot
+- Equipped weapon drives hit() attack (fist fallback)
+- Tool slot UI only — harvesting logic deferred
+- Placeholder indicator on player when weapon equipped
+
+---
+*Last updated: 2026-03-13 after v1.0 milestone — consolidated TODO.md into Future Features; v1.1 started*
