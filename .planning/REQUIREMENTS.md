@@ -1,0 +1,91 @@
+# Requirements: Open World
+
+**Defined:** 2026-03-13
+**Core Value:** A satisfying item and inventory system that makes picking things up, using consumables, and managing weight feel meaningful
+
+## v1.1 Requirements
+
+Requirements for v1.1 Equipment Slots milestone.
+
+### Equipment Data
+
+- [ ] **EQUIP-01**: Player can equip a weapon item from the bag to a dedicated weapon slot
+- [ ] **EQUIP-02**: Equipping a weapon when the slot is already occupied swaps the old weapon back to the bag
+- [ ] **EQUIP-03**: Player can unequip a weapon; it returns to the bag (rejected with existing rejection message if bag is full)
+- [ ] **EQUIP-04**: Player can equip a tool item to a dedicated tool slot (UI only — no gameplay wiring)
+- [ ] **EQUIP-05**: An item cannot exist simultaneously in the bag and an equipment slot
+
+### Context Menu
+
+- [ ] **CTXMENU-01**: Right-clicking a bag slot shows a context menu
+- [ ] **CTXMENU-02**: Context menu for weapon/tool items shows "Equip" and "Drop"; for consumables shows "Consume" and "Drop"
+- [ ] **CTXMENU-03**: Right-clicking an equipment slot shows "Unequip" and "Drop"
+- [ ] **CTXMENU-04**: Context menu dismisses when the inventory panel is closed
+
+### HUD Strip
+
+- [ ] **HUD-01**: Weapon and tool slots are visible on screen at all times, independent of inventory open/closed state
+- [ ] **HUD-02**: Equipment slots display the equipped item's icon when occupied
+
+### Combat
+
+- [ ] **CMBT-03**: Player's `hit()` attack uses the equipped weapon's damage value
+- [ ] **CMBT-04**: Player falls back to fist attack when no weapon is equipped
+- [ ] **CMBT-05**: A placeholder visual indicator appears on the player when a weapon is equipped
+
+## v2 Requirements
+
+Deferred to future milestones.
+
+### Equipment Enhancements
+
+- **EQUIP-06**: Armour slot with damage reduction
+- **EQUIP-07**: Item tooltip on hover showing name, stats, weight
+- **EQUIP-08**: Weapon damage stat badge displayed on HUD slot
+- **EQUIP-09**: Left-click on HUD slot as one-click unequip shortcut
+- **EQUIP-10**: Save/load of equipped state (requires persistence layer)
+
+### Tool Slot Gameplay
+
+- **TOOL-01**: Equipped tool drives resource harvesting (requires HarvestableComponent)
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Drag-and-drop equip | Large edge-case surface area; right-click covers the use case cleanly |
+| Armour/helmet/boot slots | Separate milestone; weapon slot proves the pattern first |
+| Item durability | No durability system exists |
+| Weapon-specific animations | Out of scope; placeholder indicator only |
+| Hotbar | Separate follow-on milestone |
+| Tool slot gameplay wiring | HarvestableComponent does not exist yet |
+
+## Traceability
+
+Which phases cover which requirements. Updated during roadmap creation.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| EQUIP-01 | — | Pending |
+| EQUIP-02 | — | Pending |
+| EQUIP-03 | — | Pending |
+| EQUIP-04 | — | Pending |
+| EQUIP-05 | — | Pending |
+| CTXMENU-01 | — | Pending |
+| CTXMENU-02 | — | Pending |
+| CTXMENU-03 | — | Pending |
+| CTXMENU-04 | — | Pending |
+| HUD-01 | — | Pending |
+| HUD-02 | — | Pending |
+| CMBT-03 | — | Pending |
+| CMBT-04 | — | Pending |
+| CMBT-05 | — | Pending |
+
+**Coverage:**
+- v1.1 requirements: 14 total
+- Mapped to phases: 0
+- Unmapped: 14 ⚠️
+
+---
+*Requirements defined: 2026-03-13*
+*Last updated: 2026-03-13 after initial definition*
