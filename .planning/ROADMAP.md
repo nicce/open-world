@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Combat Fix + Data Foundation** - Fix HIT state lockout, add item identity, harden inventory data model (completed 2026-03-10)
 - [x] **Phase 2: Grid Inventory UI** - Replace debug panel with fixed-slot grid showing icons, quantities, and weight (completed 2026-03-11)
 - [x] **Phase 3: Item Management** - Consumable use, item drop to world, pickup notification (completed 2026-03-12)
-- [ ] **Phase 4: Inventory Slot-Full Rejection** - Fix INV-02 gap: emit rejection signal when all slots occupied
+- [x] **Phase 4: Inventory Slot-Full Rejection** - Fix INV-02 gap: emit rejection signal when all slots occupied (completed 2026-03-13)
 
 ## Phase Details
 
@@ -91,4 +91,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Combat Fix + Data Foundation | 3/3 | Complete | 2026-03-10 |
 | 2. Grid Inventory UI | 3/3 | Complete | 2026-03-11 |
 | 3. Item Management | 4/4 | Complete | 2026-03-12 |
-| 4. Inventory Slot-Full Rejection | 0/1 | Pending | |
+| 4. Inventory Slot-Full Rejection | 0/1 | Complete    | 2026-03-13 |
