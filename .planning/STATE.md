@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: planning
-stopped_at: "Completed 05-02 tasks 1-2; checkpoint:human-verify (Task 3) pending"
-last_updated: "2026-03-18T12:30:56.145Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-03-18T12:43:26.170Z"
 last_activity: 2026-03-13 — Roadmap v1.1 created; 14 requirements mapped across Phases 5–8
 progress:
   total_phases: 4
@@ -51,6 +51,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 05-data-foundation P01 | 2 | 2 tasks | 2 files |
+| Phase 05-data-foundation P02 | 45 | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -67,6 +68,8 @@ Recent decisions affecting current work:
 - [Phase 05-data-foundation]: EquipmentData: mutate field first then emit equipment_changed; return displaced item from equip methods for atomic Phase 6 swaps
 - [Phase 05-data-foundation]: Use named const IDs with id_pressed (not index_pressed) in PopupMenu to avoid positional shift when items are conditionally added
 - [Phase 05-data-foundation]: MENU_EQUIP handler is a pass stub in Phase 5 — Phase 6 wires the equip flow; Drop and Consume are functional immediately
+- [Phase 05-data-foundation]: PopupMenu uses named const IDs with id_pressed (not index_pressed) to avoid positional shift when items are conditionally added
+- [Phase 05-data-foundation]: MENU_EQUIP handler is a pass stub in Phase 5 — Phase 6 wires the equip flow; Drop and Consume are functional immediately
 
 ### Pending Todos
 
@@ -79,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T12:30:51.220Z
-Stopped at: Completed 05-02 tasks 1-2; checkpoint:human-verify (Task 3) pending
+Last session: 2026-03-18T12:43:26.167Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None

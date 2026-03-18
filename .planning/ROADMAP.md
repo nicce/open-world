@@ -23,7 +23,7 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 **Milestone Goal:** Add weapon and tool equipment slots with right-click context menu, gameplay wiring for the equipped weapon, and a placeholder visual indicator on the player.
 
-- [ ] **Phase 5: Data Foundation** — EquipmentData Resource, right-click signal on slot UI, context menu architecture
+- [x] **Phase 5: Data Foundation** — EquipmentData Resource, right-click signal on slot UI, context menu architecture (completed 2026-03-18)
 - [ ] **Phase 6: Equip/Unequip Flow** — Atomic equip/unequip logic, swap on re-equip, full-bag rejection
 - [ ] **Phase 7: Combat Wiring + HUD Strip** — hit() weapon dispatch, always-visible HUD strip, player visual indicator
 - [ ] **Phase 8: Integration Polish** — Popup positioning, popup lifecycle, context menu for HUD slots
@@ -97,7 +97,7 @@ Plans:
 | 2. Grid Inventory UI | v1.0 | 3/3 | Complete | 2026-03-11 |
 | 3. Item Management | v1.0 | 4/4 | Complete | 2026-03-12 |
 | 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
-| 5. Data Foundation | 1/2 | In Progress|  | - |
+| 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
 | 6. Equip/Unequip Flow | v1.1 | 0/? | Not started | - |
 | 7. Combat Wiring + HUD Strip | v1.1 | 0/? | Not started | - |
 | 8. Integration Polish | v1.1 | 0/? | Not started | - |
