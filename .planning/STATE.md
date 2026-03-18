@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: planning
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-18T10:19:52.774Z"
+stopped_at: Completed 05-data-foundation-01-PLAN.md
+last_updated: "2026-03-18T12:26:25.460Z"
 last_activity: 2026-03-13 — Roadmap v1.1 created; 14 requirements mapped across Phases 5–8
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 2
+  completed_plans: 1
   percent: 0
 ---
 
@@ -50,6 +50,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 05-data-foundation P01 | 2 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,7 @@ Recent decisions affecting current work:
 - [Roadmap v1.1]: PopupMenu uses named const IDs with id_pressed signal (not index_pressed) to avoid positional shift when items are conditionally added
 - [Roadmap v1.1]: HUD strip placed as sibling of InventoryUI in CanvasLayer — not a child — so it remains visible when inventory panel is closed
 - [Phase 04-inventory-slot-full-rejection]: Remove weight_budget guard from elif branch in insert() — any complete failure emits insert_rejected unconditionally
+- [Phase 05-data-foundation]: EquipmentData: mutate field first then emit equipment_changed; return displaced item from equip methods for atomic Phase 6 swaps
 
 ### Pending Todos
 
@@ -75,6 +77,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T10:19:52.765Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-data-foundation/05-CONTEXT.md
+Last session: 2026-03-18T12:26:25.457Z
+Stopped at: Completed 05-data-foundation-01-PLAN.md
+Resume file: None

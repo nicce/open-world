@@ -97,7 +97,7 @@ Plans:
 | 2. Grid Inventory UI | v1.0 | 3/3 | Complete | 2026-03-11 |
 | 3. Item Management | v1.0 | 4/4 | Complete | 2026-03-12 |
 | 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
-| 5. Data Foundation | v1.1 | 0/? | Not started | - |
+| 5. Data Foundation | 1/2 | In Progress|  | - |
 | 6. Equip/Unequip Flow | v1.1 | 0/? | Not started | - |
 | 7. Combat Wiring + HUD Strip | v1.1 | 0/? | Not started | - |
 | 8. Integration Polish | v1.1 | 0/? | Not started | - |
