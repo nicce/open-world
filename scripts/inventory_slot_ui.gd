@@ -1,6 +1,7 @@
 extends Panel
 
 signal slot_clicked(slot_node: Panel)
+signal right_clicked(slot_node: Panel)
 
 var _selected_style: StyleBoxFlat = null
 
@@ -27,8 +28,13 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if not (event is InputEventMouseButton and event.pressed):
+		return
+	if event.button_index == MOUSE_BUTTON_LEFT:
 		slot_clicked.emit(self)
+		get_viewport().set_input_as_handled()
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		right_clicked.emit(self)
 		get_viewport().set_input_as_handled()
 
 
