@@ -9,6 +9,7 @@ const MENU_CONSUME = 1
 const MENU_DROP = 2
 
 var _inventory: Inventory = null
+var _equipment_data: EquipmentData = null
 var _player: Player = null
 var _selected_index: int = -1
 var _pending_context_index: int = -1
@@ -55,6 +56,10 @@ func set_inventory(inv: Inventory) -> void:
 	inv.inventory_changed.connect(_refresh_weight_label)
 	_refresh_slots()
 	_refresh_weight_label()
+
+
+func set_equipment_data(ed: EquipmentData) -> void:
+	_equipment_data = ed
 
 
 func set_player(p: Player) -> void:
@@ -140,6 +145,8 @@ func _on_slot_right_clicked(slot_node: Panel) -> void:
 	_popup_menu.clear()
 	if item is WeaponItem:
 		_popup_menu.add_item("Equip", MENU_EQUIP)
+	elif item.category == Item.Category.TOOL:
+		_popup_menu.add_item("Equip", MENU_EQUIP)
 	elif item is HealthItem:
 		_popup_menu.add_item("Consume", MENU_CONSUME)
 	_popup_menu.add_item("Drop", MENU_DROP)
@@ -149,7 +156,13 @@ func _on_slot_right_clicked(slot_node: Panel) -> void:
 func _on_context_menu_id_pressed(id: int) -> void:
 	match id:
 		MENU_EQUIP:
-			pass  # Phase 6 wires equip flow
+			if _equipment_data == null or _pending_context_index < 0:
+				return
+			var item := _inventory.slots[_pending_context_index].item
+			if item is WeaponItem:
+				_do_equip_weapon(item as WeaponItem)
+			elif item.category == Item.Category.TOOL:
+				_do_equip_tool(item)
 		MENU_CONSUME:
 			_selected_index = _pending_context_index
 			_use_selected()
@@ -157,6 +170,44 @@ func _on_context_menu_id_pressed(id: int) -> void:
 			_selected_index = _pending_context_index
 			_drop_selected()
 	_pending_context_index = -1
+
+
+func _do_equip_weapon(item: WeaponItem) -> void:
+	var removed := _inventory.remove(item, 1)
+	if removed == 0:
+		return
+	var displaced: WeaponItem = _equipment_data.equip_weapon(item)
+	if displaced != null:
+		_inventory.insert(displaced, 1)
+
+
+func _do_equip_tool(item: Item) -> void:
+	var removed := _inventory.remove(item, 1)
+	if removed == 0:
+		return
+	var displaced: Item = _equipment_data.equip_tool(item)
+	if displaced != null:
+		_inventory.insert(displaced, 1)
+
+
+func _do_unequip_weapon() -> void:
+	if _equipment_data == null or _equipment_data.weapon == null:
+		return
+	var weapon := _equipment_data.weapon
+	var remaining := _inventory.insert(weapon, 1)
+	if remaining > 0:
+		return  # bag full — weapon stays equipped; insert_rejected already emitted
+	_equipment_data.unequip_weapon()
+
+
+func _do_unequip_tool() -> void:
+	if _equipment_data == null or _equipment_data.tool == null:
+		return
+	var tool_item := _equipment_data.tool
+	var remaining := _inventory.insert(tool_item, 1)
+	if remaining > 0:
+		return
+	_equipment_data.unequip_tool()
 
 
 func _refresh_weight_label() -> void:
