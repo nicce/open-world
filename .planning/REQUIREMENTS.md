@@ -66,26 +66,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EQUIP-01 | — | Pending |
-| EQUIP-02 | — | Pending |
-| EQUIP-03 | — | Pending |
-| EQUIP-04 | — | Pending |
-| EQUIP-05 | — | Pending |
-| CTXMENU-01 | — | Pending |
-| CTXMENU-02 | — | Pending |
-| CTXMENU-03 | — | Pending |
-| CTXMENU-04 | — | Pending |
-| HUD-01 | — | Pending |
-| HUD-02 | — | Pending |
-| CMBT-03 | — | Pending |
-| CMBT-04 | — | Pending |
-| CMBT-05 | — | Pending |
+| EQUIP-01 | Phase 6 | Pending |
+| EQUIP-02 | Phase 6 | Pending |
+| EQUIP-03 | Phase 6 | Pending |
+| EQUIP-04 | Phase 6 | Pending |
+| EQUIP-05 | Phase 5 | Pending |
+| CTXMENU-01 | Phase 5 | Pending |
+| CTXMENU-02 | Phase 5 | Pending |
+| CTXMENU-03 | Phase 8 | Pending |
+| CTXMENU-04 | Phase 5 | Pending |
+| HUD-01 | Phase 7 | Pending |
+| HUD-02 | Phase 7 | Pending |
+| CMBT-03 | Phase 7 | Pending |
+| CMBT-04 | Phase 7 | Pending |
+| CMBT-05 | Phase 7 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 14 total
-- Mapped to phases: 0
-- Unmapped: 14 ⚠️
+- Mapped to phases: 14
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-13*
-*Last updated: 2026-03-13 after initial definition*
+*Last updated: 2026-03-13 after roadmap creation*
