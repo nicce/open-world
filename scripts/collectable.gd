@@ -10,6 +10,9 @@ func _ready() -> void:
 	add_to_group("collectables")
 	if item and item.texture:
 		$Sprite2D.texture = item.texture
+	elif item:
+		$Label.text = item.name
+		$Label.visible = true
 
 
 func _process(_delta):
