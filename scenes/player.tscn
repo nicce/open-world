@@ -1,6 +1,7 @@
-[gd_scene load_steps=64 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=65 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
+[ext_resource type="Resource" uid="uid://c3equipdata01" path="res://scripts/resources/player_equipment_data.tres" id="equip_data"]
 [ext_resource type="Texture2D" uid="uid://cqk3km5v2jj5t" path="res://art/characters/player.png" id="2_cgwfd"]
 [ext_resource type="PackedScene" uid="uid://cecw6b2xcismr" path="res://scenes/advanced_camera.tscn" id="3_0t7ah"]
 [ext_resource type="Texture2D" uid="uid://cicdf808ohb8b" path="res://art/characters/player_n_test.png" id="3_86m0i"]
@@ -399,6 +400,7 @@ y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_s88sy")
 attack = NodePath("Attack")
+equipment_data = ExtResource("equip_data")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bkdk2")
