@@ -9,10 +9,10 @@ Requirements for v1.1 Equipment Slots milestone.
 
 ### Equipment Data
 
-- [ ] **EQUIP-01**: Player can equip a weapon item from the bag to a dedicated weapon slot
-- [ ] **EQUIP-02**: Equipping a weapon when the slot is already occupied swaps the old weapon back to the bag
-- [ ] **EQUIP-03**: Player can unequip a weapon; it returns to the bag (rejected with existing rejection message if bag is full)
-- [ ] **EQUIP-04**: Player can equip a tool item to a dedicated tool slot (UI only — no gameplay wiring)
+- [x] **EQUIP-01**: Player can equip a weapon item from the bag to a dedicated weapon slot
+- [x] **EQUIP-02**: Equipping a weapon when the slot is already occupied swaps the old weapon back to the bag
+- [x] **EQUIP-03**: Player can unequip a weapon; it returns to the bag (rejected with existing rejection message if bag is full)
+- [x] **EQUIP-04**: Player can equip a tool item to a dedicated tool slot (UI only — no gameplay wiring)
 - [x] **EQUIP-05**: An item cannot exist simultaneously in the bag and an equipment slot
 
 ### Context Menu
@@ -66,10 +66,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EQUIP-01 | Phase 6 | Pending |
-| EQUIP-02 | Phase 6 | Pending |
-| EQUIP-03 | Phase 6 | Pending |
-| EQUIP-04 | Phase 6 | Pending |
+| EQUIP-01 | Phase 6 | Complete |
+| EQUIP-02 | Phase 6 | Complete |
+| EQUIP-03 | Phase 6 | Complete |
+| EQUIP-04 | Phase 6 | Complete |
 | EQUIP-05 | Phase 5 | Complete |
 | CTXMENU-01 | Phase 5 | Complete |
 | CTXMENU-02 | Phase 5 | Complete |
