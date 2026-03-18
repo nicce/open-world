@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: planning
-stopped_at: Completed 05-data-foundation-01-PLAN.md
-last_updated: "2026-03-18T12:26:25.460Z"
+stopped_at: "Completed 05-02 tasks 1-2; checkpoint:human-verify (Task 3) pending"
+last_updated: "2026-03-18T12:30:56.145Z"
 last_activity: 2026-03-13 — Roadmap v1.1 created; 14 requirements mapped across Phases 5–8
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 ---
 
@@ -65,6 +65,8 @@ Recent decisions affecting current work:
 - [Roadmap v1.1]: HUD strip placed as sibling of InventoryUI in CanvasLayer — not a child — so it remains visible when inventory panel is closed
 - [Phase 04-inventory-slot-full-rejection]: Remove weight_budget guard from elif branch in insert() — any complete failure emits insert_rejected unconditionally
 - [Phase 05-data-foundation]: EquipmentData: mutate field first then emit equipment_changed; return displaced item from equip methods for atomic Phase 6 swaps
+- [Phase 05-data-foundation]: Use named const IDs with id_pressed (not index_pressed) in PopupMenu to avoid positional shift when items are conditionally added
+- [Phase 05-data-foundation]: MENU_EQUIP handler is a pass stub in Phase 5 — Phase 6 wires the equip flow; Drop and Consume are functional immediately
 
 ### Pending Todos
 
@@ -77,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T12:26:25.457Z
-Stopped at: Completed 05-data-foundation-01-PLAN.md
+Last session: 2026-03-18T12:30:51.220Z
+Stopped at: Completed 05-02 tasks 1-2; checkpoint:human-verify (Task 3) pending
 Resume file: None
