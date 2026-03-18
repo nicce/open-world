@@ -57,7 +57,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 06-01: TBD
+- [ ] 06-01-PLAN.md — player_equipment_data.tres + test scaffold + atomic equip/unequip in InventoryUI (TDD)
+- [ ] 06-02-PLAN.md — Wire set_equipment_data() in world.gd, assign Player Inspector field, human-verify equip flow
 
 ### Phase 7: Combat Wiring + HUD Strip
 **Goal**: The equipped weapon drives the player's hit() attack with a fist fallback, a HUD strip showing both equipment slots is always visible, and a placeholder indicator appears on the player when a weapon is equipped
@@ -98,6 +99,6 @@ Plans:
 | 3. Item Management | v1.0 | 4/4 | Complete | 2026-03-12 |
 | 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
 | 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
-| 6. Equip/Unequip Flow | v1.1 | 0/? | Not started | - |
+| 6. Equip/Unequip Flow | v1.1 | 0/2 | Not started | - |
 | 7. Combat Wiring + HUD Strip | v1.1 | 0/? | Not started | - |
 | 8. Integration Polish | v1.1 | 0/? | Not started | - |
