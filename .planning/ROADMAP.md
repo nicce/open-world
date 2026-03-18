@@ -39,10 +39,11 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   2. Right-clicking a bag slot that contains a weapon item shows a menu with "Equip" and "Drop" options
   3. Right-clicking a bag slot that contains a consumable item shows a menu with "Consume" and "Drop" options
   4. Closing the inventory panel dismisses any open context menu
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 05-01: TBD
+- [ ] 05-01-PLAN.md — EquipmentData Resource (TDD: equip/unequip methods, equipment_changed signal)
+- [ ] 05-02-PLAN.md — Right-click signal + PopupMenu wiring in InventoryUI; equipment_data export on Player
 
 ### Phase 6: Equip/Unequip Flow
 **Goal**: Players can move items between the bag and equipment slots atomically — equip removes from bag, unequip returns to bag, full-bag is rejected without data loss
@@ -53,7 +54,7 @@ Plans:
   2. Equipping a second weapon when the slot is occupied returns the old weapon to the bag and places the new one in the slot
   3. Player can unequip a weapon back to the bag; if the bag is full, the unequip is rejected and the weapon stays equipped
   4. Player can equip a tool item to the tool slot (item moves from bag; no gameplay effect wired yet)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 06-01: TBD
@@ -68,7 +69,7 @@ Plans:
   3. Weapon and tool equipment slots are visible on screen at all times, even when the inventory panel is closed
   4. Equipment slots display the icon of the equipped item when occupied
   5. A visible indicator appears on the player character when a weapon is equipped
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 07-01: TBD
@@ -81,7 +82,7 @@ Plans:
   1. Right-clicking an occupied equipment slot shows an "Unequip" and "Drop" context menu (not an "Equip" menu)
   2. The context menu never appears partially off-screen regardless of where the slot sits in the viewport
   3. Closing the inventory panel while a context menu is open dismisses the menu without error
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 08-01: TBD
