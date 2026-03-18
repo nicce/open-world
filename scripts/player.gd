@@ -8,6 +8,7 @@ enum PlayerStates { MOVE, HIT, DEAD }
 @export var speed: float = 80.0
 @export var attack: Attack
 @export var inventory: Inventory
+@export var equipment_data: EquipmentData
 
 var health_depleated: bool = false
 var current_state = PlayerStates.MOVE
