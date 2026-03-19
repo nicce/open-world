@@ -29,9 +29,9 @@ Requirements for v1.1 Equipment Slots milestone.
 
 ### Combat
 
-- [ ] **CMBT-03**: Player's `hit()` attack uses the equipped weapon's damage value
-- [ ] **CMBT-04**: Player falls back to fist attack when no weapon is equipped
-- [ ] **CMBT-05**: A placeholder visual indicator appears on the player when a weapon is equipped
+- [x] **CMBT-03**: Player's `hit()` attack uses the equipped weapon's damage value
+- [x] **CMBT-04**: Player falls back to fist attack when no weapon is equipped
+- [x] **CMBT-05**: A placeholder visual indicator appears on the player when a weapon is equipped
 
 ## v2 Requirements
 
@@ -77,9 +77,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CTXMENU-04 | Phase 5 | Complete |
 | HUD-01 | Phase 7 | Pending |
 | HUD-02 | Phase 7 | Pending |
-| CMBT-03 | Phase 7 | Pending |
-| CMBT-04 | Phase 7 | Pending |
-| CMBT-05 | Phase 7 | Pending |
+| CMBT-03 | Phase 7 | Complete |
+| CMBT-04 | Phase 7 | Complete |
+| CMBT-05 | Phase 7 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 14 total
