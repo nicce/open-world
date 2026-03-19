@@ -73,7 +73,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 07-01: TBD
+- [ ] 07-01-PLAN.md — Combat dispatch (TDD hit() with weapon damage + fist fallback) + WeaponIndicator on player
+- [ ] 07-02-PLAN.md — HUD strip scene (always-visible equipment slots) + world wiring + human verification
 
 ### Phase 8: Integration Polish
 **Goal**: Context menu and HUD interactions are coherent across all input paths — popup is viewport-safe, cleans up correctly, and right-clicking an equipment slot shows the correct unequip menu
@@ -100,5 +101,5 @@ Plans:
 | 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
 | 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
 | 6. Equip/Unequip Flow | v1.1 | Complete    | 2026-03-19 | - |
-| 7. Combat Wiring + HUD Strip | v1.1 | 0/? | Not started | - |
+| 7. Combat Wiring + HUD Strip | v1.1 | 0/2 | Not started | - |
 | 8. Integration Polish | v1.1 | 0/? | Not started | - |
