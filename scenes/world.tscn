@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://gavcqugynhaw"]
+[gd_scene load_steps=36 format=3 uid="uid://gavcqugynhaw"]
 
 [ext_resource type="PackedScene" uid="uid://c8xkbjmxthcvl" path="res://scenes/player.tscn" id="1_fur2i"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_wenw1"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dasiachko0ipr" path="res://scenes/campfire.tscn" id="14_h3777"]
 [ext_resource type="PackedScene" uid="uid://bsword1testx" path="res://scenes/sword.tscn" id="18_sword"]
 [ext_resource type="PackedScene" uid="uid://dgo72j0hl2oy" path="res://scenes/inventory_ui.tscn" id="17_2lqk6"]
+[ext_resource type="PackedScene" uid="uid://hud_strip_scene" path="res://scenes/hud_strip.tscn" id="19_hudstrip"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ymg4"]
 texture = ExtResource("3_smtoi")
@@ -2002,6 +2003,8 @@ vertical_alignment = 1
 [node name="PickupTimer" type="Timer" parent="CanvasLayer/PickupLabel"]
 wait_time = 2.0
 one_shot = true
+
+[node name="HudStrip" parent="CanvasLayer" instance=ExtResource("19_hudstrip")]
 
 [connection signal="body_entered" from="TileMap/GoldKey" to="TileMap/GoldKey" method="_on_body_entered"]
 [connection signal="body_exited" from="TileMap/GoldKey" to="TileMap/GoldKey" method="_on_body_exited"]
