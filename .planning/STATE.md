@@ -4,7 +4,7 @@ milestone: v1.1
 milestone_name: Equipment Slots
 status: planning
 stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-03-19T07:17:36.320Z"
+last_updated: "2026-03-19T07:23:20.737Z"
 last_activity: 2026-03-13 — Roadmap v1.1 created; 14 requirements mapped across Phases 5–8
 progress:
   total_phases: 4
