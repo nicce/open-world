@@ -23,6 +23,8 @@ var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("par
 func _ready() -> void:
 	inventory = inventory.clone()
 	animation_tree.animation_finished.connect(_on_animation_finished)
+	if equipment_data:
+		$WeaponIndicator.set_equipment_data(equipment_data)
 
 
 func _physics_process(_delta):

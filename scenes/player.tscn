@@ -14,6 +14,7 @@
 [ext_resource type="Animation" uid="uid://dddm65go72dxp" path="res://animations/FistEast.res" id="9_cm533"]
 [ext_resource type="Script" path="res://scripts/attack.gd" id="11_e62re"]
 [ext_resource type="PackedScene" uid="uid://dkj2ngfwp080f" path="res://scenes/health_bar.tscn" id="12_hwcny"]
+[ext_resource type="Script" path="res://scripts/weapon_indicator.gd" id="13_windic"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bkdk2"]
 radius = 7.0
@@ -470,6 +471,21 @@ offset_left = -5.0
 offset_top = 8.0
 offset_right = 95.0
 offset_bottom = 35.0
+
+[node name="WeaponIndicator" type="Node2D" parent="."]
+position = Vector2(0, -24)
+visible = false
+script = ExtResource("13_windic")
+
+[node name="IconRect" type="TextureRect" parent="WeaponIndicator"]
+custom_minimum_size = Vector2(16, 16)
+visible = false
+expand_mode = 1
+stretch_mode = 6
+
+[node name="NameLabel" type="Label" parent="WeaponIndicator"]
+visible = false
+theme_override_font_sizes/font_size = 9
 
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="HitboxComponent" to="HitboxComponent" method="_on_body_exited"]
