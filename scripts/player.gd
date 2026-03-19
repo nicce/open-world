@@ -66,14 +66,16 @@ func move():
 		animation_state.travel("Idle")
 
 	if Input.is_action_just_pressed("hit"):
+		hit()
 		current_state = PlayerStates.HIT
 		animation_state.travel("Fist")
 
 	move_and_slide()
 
 
-func hit():  # TODO how do we handle different equipped weapons?
-	pass
+func hit() -> void:
+	if equipment_data != null and equipment_data.weapon != null:
+		attack.damage = int(equipment_data.weapon.damage)
 
 
 func die():
