@@ -24,8 +24,8 @@ Requirements for v1.1 Equipment Slots milestone.
 
 ### HUD Strip
 
-- [ ] **HUD-01**: Weapon and tool slots are visible on screen at all times, independent of inventory open/closed state
-- [ ] **HUD-02**: Equipment slots display the equipped item's icon when occupied
+- [x] **HUD-01**: Weapon and tool slots are visible on screen at all times, independent of inventory open/closed state
+- [x] **HUD-02**: Equipment slots display the equipped item's icon when occupied
 
 ### Combat
 
@@ -75,8 +75,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CTXMENU-02 | Phase 5 | Complete |
 | CTXMENU-03 | Phase 8 | Pending |
 | CTXMENU-04 | Phase 5 | Complete |
-| HUD-01 | Phase 7 | Pending |
-| HUD-02 | Phase 7 | Pending |
+| HUD-01 | Phase 7 | Complete |
+| HUD-02 | Phase 7 | Complete |
 | CMBT-03 | Phase 7 | Complete |
 | CMBT-04 | Phase 7 | Complete |
 | CMBT-05 | Phase 7 | Complete |

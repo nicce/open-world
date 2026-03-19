@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: unknown
-stopped_at: Completed 07-combat-wiring-hud-strip-01-PLAN.md
-last_updated: "2026-03-19T09:13:27.715Z"
+stopped_at: "Completed 07-combat-wiring-hud-strip-02-PLAN.md (Task 2: human-verify checkpoint)"
+last_updated: "2026-03-19T09:18:37.488Z"
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -51,6 +51,7 @@ Plan: 1 of 2
 | Phase 06-equip-unequip-flow P01 | 3 | 2 tasks | 3 files |
 | Phase 06-equip-unequip-flow P02 | 10 | 2 tasks | 2 files |
 | Phase 07-combat-wiring-hud-strip P01 | 3 | 2 tasks | 4 files |
+| Phase 07-combat-wiring-hud-strip P02 | 3 | 1 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,8 @@ Recent decisions affecting current work:
 - [Phase 07-combat-wiring-hud-strip]: Read attack.damage at hit() call time — no caching via equipment_changed subscription (locked Phase 7 decision)
 - [Phase 07-combat-wiring-hud-strip]: int() cast mandatory in hit(): WeaponItem.damage is float, Attack.damage is int — truncation is specified behaviour
 - [Phase 07-combat-wiring-hud-strip]: set_equipment_data() calls _on_equipment_changed() immediately after signal connect to paint initial state
+- [Phase 07-combat-wiring-hud-strip]: HudStrip placed as sibling of InventoryUI in CanvasLayer — stays visible when inventory is closed
+- [Phase 07-combat-wiring-hud-strip]: set_equipment_data() calls _on_equipment_changed() immediately after connect to paint initial state
 
 ### Pending Todos
 
@@ -87,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T09:13:27.711Z
-Stopped at: Completed 07-combat-wiring-hud-strip-01-PLAN.md
+Last session: 2026-03-19T09:18:37.484Z
+Stopped at: Completed 07-combat-wiring-hud-strip-02-PLAN.md (Task 2: human-verify checkpoint)
 Resume file: None

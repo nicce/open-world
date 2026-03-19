@@ -25,7 +25,7 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 - [x] **Phase 5: Data Foundation** — EquipmentData Resource, right-click signal on slot UI, context menu architecture (completed 2026-03-18)
 - [x] **Phase 6: Equip/Unequip Flow** — Atomic equip/unequip logic, swap on re-equip, full-bag rejection (completed 2026-03-19)
-- [ ] **Phase 7: Combat Wiring + HUD Strip** — hit() weapon dispatch, always-visible HUD strip, player visual indicator
+- [x] **Phase 7: Combat Wiring + HUD Strip** — hit() weapon dispatch, always-visible HUD strip, player visual indicator (completed 2026-03-19)
 - [ ] **Phase 8: Integration Polish** — Popup positioning, popup lifecycle, context menu for HUD slots
 
 ## Phase Details
@@ -101,5 +101,5 @@ Plans:
 | 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
 | 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
 | 6. Equip/Unequip Flow | v1.1 | Complete    | 2026-03-19 | - |
-| 7. Combat Wiring + HUD Strip | 1/2 | In Progress|  | - |
+| 7. Combat Wiring + HUD Strip | 2/2 | Complete   | 2026-03-19 | - |
 | 8. Integration Polish | v1.1 | 0/? | Not started | - |
