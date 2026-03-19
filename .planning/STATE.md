@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: planning
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-03-18T14:06:12.766Z"
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-03-19T07:17:36.320Z"
 last_activity: 2026-03-13 — Roadmap v1.1 created; 14 requirements mapped across Phases 5–8
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
   percent: 0
 ---
 
@@ -53,6 +53,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 05-data-foundation P01 | 2 | 2 tasks | 2 files |
 | Phase 05-data-foundation P02 | 45 | 3 tasks | 6 files |
 | Phase 06-equip-unequip-flow P01 | 3 | 2 tasks | 3 files |
+| Phase 06-equip-unequip-flow P02 | 10 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,7 @@ Recent decisions affecting current work:
 - [Phase 05-data-foundation]: MENU_EQUIP handler is a pass stub in Phase 5 — Phase 6 wires the equip flow; Drop and Consume are functional immediately
 - [Phase 06-equip-unequip-flow]: Remove-before-equip ordering: inventory.remove() always precedes equip_weapon() to prevent item existing in both bag and slot simultaneously
 - [Phase 06-equip-unequip-flow]: Unequip-with-full-bag is a safe no-op: insert() first; if remaining > 0 weapon stays equipped without mutation
+- [Phase 06-equip-unequip-flow]: world.gd is the single wiring point — all scene-graph wiring lives in _ready() alongside set_inventory() and set_player()
 
 ### Pending Todos
 
@@ -85,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T14:06:12.763Z
-Stopped at: Completed 06-01-PLAN.md
+Last session: 2026-03-19T07:17:36.318Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None
