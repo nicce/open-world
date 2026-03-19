@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://gavcqugynhaw"]
+[gd_scene load_steps=36 format=3 uid="uid://gavcqugynhaw"]
 
 [ext_resource type="PackedScene" uid="uid://c8xkbjmxthcvl" path="res://scenes/player.tscn" id="1_fur2i"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_wenw1"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cwgyq83ivfu6b" path="res://scenes/gold_key.tscn" id="11_ka57q"]
 [ext_resource type="Texture2D" uid="uid://bbfmacxc3s2ca" path="res://art/animations/WaterfallBottom16x16.png" id="12_s1jju"]
 [ext_resource type="PackedScene" uid="uid://dasiachko0ipr" path="res://scenes/campfire.tscn" id="14_h3777"]
+[ext_resource type="PackedScene" uid="uid://bsword1testx" path="res://scenes/sword.tscn" id="18_sword"]
 [ext_resource type="PackedScene" uid="uid://dgo72j0hl2oy" path="res://scenes/inventory_ui.tscn" id="17_2lqk6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ymg4"]
@@ -1935,6 +1936,9 @@ zoom = Vector2(2.5, 2.5)
 
 [node name="GoldKey2" parent="." instance=ExtResource("11_ka57q")]
 position = Vector2(16, 33)
+
+[node name="Sword" parent="." instance=ExtResource("18_sword")]
+position = Vector2(200, 40)
 
 [node name="AbandonedVillage" parent="." instance=ExtResource("5_r7vx7")]
 

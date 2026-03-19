@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsword1testx"]
+
+[ext_resource type="Texture2D" uid="uid://3k5tpwem71w2" path="res://art/items/axe.png" id="1_i8l0s"]
+[ext_resource type="PackedScene" uid="uid://bndgs0j0ag2k4" path="res://scenes/collectable.tscn" id="1_mmckk"]
+[ext_resource type="Script" path="res://scripts/resources/weapon_item.gd" id="2_8xa26"]
+[ext_resource type="Script" path="res://scripts/sword.gd" id="2_sword"]
+
+[sub_resource type="Resource" id="Resource_sword"]
+script = ExtResource("2_8xa26")
+damage = 3.0
+id = &"sword"
+name = "Sword"
+texture = ExtResource("1_i8l0s")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sword"]
+resource_local_to_scene = true
+
+[node name="Sword" instance=ExtResource("1_mmckk")]
+script = ExtResource("2_sword")
+weapon_item = SubResource("Resource_sword")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_sword")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("1_i8l0s")
