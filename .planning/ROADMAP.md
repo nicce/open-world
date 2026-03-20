@@ -101,5 +101,5 @@ Plans:
 | 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
 | 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
 | 6. Equip/Unequip Flow | v1.1 | Complete    | 2026-03-19 | - |
-| 7. Combat Wiring + HUD Strip | 2/2 | Complete   | 2026-03-19 | - |
+| 7. Combat Wiring + HUD Strip | 2/2 | Complete   | 2026-03-20 | - |
 | 8. Integration Polish | v1.1 | 0/? | Not started | - |

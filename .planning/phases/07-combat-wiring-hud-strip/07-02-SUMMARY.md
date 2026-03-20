@@ -57,8 +57,8 @@ completed: 2026-03-19
 
 - **Duration:** ~3 min
 - **Started:** 2026-03-19T09:15:04Z
-- **Completed:** 2026-03-19T09:17:32Z
-- **Tasks:** 1 of 2 (Task 2 is human-verify checkpoint)
+- **Completed:** 2026-03-20
+- **Tasks:** 2 of 2 (Task 2 human-verify checkpoint approved)
 - **Files modified:** 4
 
 ## Accomplishments
@@ -66,12 +66,14 @@ completed: 2026-03-19
 - Created scenes/hud_strip.tscn: HudStrip Control anchored bottom center with two VBoxContainers (WeaponSlotGroup, ToolSlotGroup), each containing a 48x48 Panel with StyleBoxFlat dark background, TextureRect, NameLabel, and "W"/"T" slot label
 - Wired HudStrip as sibling of InventoryUI in world.tscn CanvasLayer; added hud_strip @onready and set_equipment_data() call in world.gd _ready()
 - All 137 unit tests pass, lint clean, format-check clean
+- Human-verified in-game: CMBT-03 (weapon damage), CMBT-04 (fist fallback), CMBT-05 (weapon indicator), HUD-01 (always visible), HUD-02 (slot icon) — all confirmed working
 
 ## Task Commits
 
 Each task was committed atomically:
 
 1. **Task 1: Create HUD strip scene and script, wire in world** - `c5228f0` (feat)
+2. **Task 2: Verify combat dispatch and HUD strip in-game** - human-verify checkpoint (approved 2026-03-20)
 
 ## Files Created/Modified
 - `scripts/hud_strip.gd` - HUD strip Control script: set_equipment_data(), _on_equipment_changed(), _refresh_slot(), _set_slot_border()
@@ -109,9 +111,9 @@ None beyond the format-check auto-fix above.
 None - no external service configuration required.
 
 ## Next Phase Readiness
-- HUD strip complete and wired; awaiting human in-game verification (Task 2 checkpoint)
-- After verification approves all 5 requirements (CMBT-03, CMBT-04, CMBT-05, HUD-01, HUD-02), Phase 7 is fully complete
+- Phase 7 fully complete: all 5 requirements (CMBT-03, CMBT-04, CMBT-05, HUD-01, HUD-02) verified in-game
 - Phase 8 can wire click interaction on HUD slots for equip/unequip from HUD
+- Existing blocker to resolve before CI diverges: Godot version mismatch (Makefile uses 4.2.2, project declares 4.3)
 
 ---
 *Phase: 07-combat-wiring-hud-strip*
