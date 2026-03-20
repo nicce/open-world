@@ -464,7 +464,7 @@ disabled = true
 
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("11_e62re")
-damage = 10
+damage = 1
 
 [node name="HealthBar" parent="." instance=ExtResource("12_hwcny")]
 offset_left = -5.0
