@@ -36,12 +36,15 @@ A satisfying item and inventory system that makes picking things up, using consu
 ### Active
 
 <!-- v1.1 Equipment Slots -->
-- [ ] Always-visible HUD strip with weapon and tool equipment slots
 - [ ] Right-click context menu on inventory items (Equip / Consume / Drop by type)
 - [ ] Equipping moves item from bag to equipment slot; unequipping returns it to bag
-- [ ] Equipped weapon drives player hit() attack; fist as fallback
 - [ ] Tool slot exists in UI (gameplay wired in future milestone)
-- [ ] Placeholder visual indicator on player when weapon is equipped
+
+### Validated
+
+- ✓ Always-visible HUD strip with weapon and tool equipment slots — v1.1 (HUD-01, HUD-02)
+- ✓ Equipped weapon drives player hit() attack; fist as fallback — v1.1 (CMBT-03, CMBT-04)
+- ✓ Placeholder visual indicator on player when weapon is equipped — v1.1 (CMBT-05)
 
 ### Out of Scope
 
@@ -123,4 +126,4 @@ Technical debt from v1.0 (non-blocking):
 - Placeholder indicator on player when weapon equipped
 
 ---
-*Last updated: 2026-03-13 after v1.0 milestone — consolidated TODO.md into Future Features; v1.1 started*
+*Last updated: 2026-03-20 — Phase 7 complete: combat wiring + HUD strip; 3 requirements validated*
