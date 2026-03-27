@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: unknown
-stopped_at: Completed 08-02-PLAN.md
-last_updated: "2026-03-27T09:22:28.311Z"
+stopped_at: Completed 08-03-PLAN.md
+last_updated: "2026-03-27T09:24:29.580Z"
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 # Project State
@@ -55,6 +55,7 @@ Plan: 1 of 3
 | Phase 07-combat-wiring-hud-strip P02 | 5 | 2 tasks | 4 files |
 | Phase 08-integration-polish P01 | 3 | 2 tasks | 3 files |
 | Phase 08-integration-polish P02 | 2 | 2 tasks | 2 files |
+| Phase 08-integration-polish P03 | 1 | 1 tasks | 0 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,7 @@ Recent decisions affecting current work:
 - [Phase 08-integration-polish]: Drop from HUD strip bypasses bag entirely and spawns Collectable at player position
 - [Phase 08-integration-polish]: world.gd is the single wiring point for all scene-graph injection — both hud_strip and inventory_ui receive player and inventory refs from _ready()
 - [Phase 08-integration-polish]: Viewport-safe clamping uses get_contents_minimum_size() with Vector2(120.0, 60.0) fallback for zero-size guard before popup() call
+- [Phase 08-integration-polish]: All 7 Phase 8 acceptance checks passed in running Godot session (human verified)
 
 ### Pending Todos
 
@@ -98,6 +100,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-27T09:22:28.307Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-03-27T09:24:29.577Z
+Stopped at: Completed 08-03-PLAN.md
 Resume file: None
