@@ -14,6 +14,8 @@ func _ready() -> void:
 	inventory_ui.set_player(player)
 	inventory_ui.set_equipment_data(player.equipment_data)
 	hud_strip.set_equipment_data(player.equipment_data)
+	hud_strip.set_inventory(player.inventory)
+	hud_strip.set_player(player)
 	player.inventory.insert_rejected.connect(_on_insert_rejected)
 	player.item_collected.connect(_on_item_collected)
 	fade_timer.timeout.connect(_on_fade_timer_timeout)
