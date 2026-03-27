@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Equipment Slots
 status: unknown
-stopped_at: Phase 8 context gathered
-last_updated: "2026-03-25T13:18:16.726Z"
+stopped_at: Completed 08-01-PLAN.md
+last_updated: "2026-03-27T09:18:47.796Z"
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 9
+  completed_plans: 7
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A satisfying item and inventory system that makes picking things up, using consumables, and managing weight feel meaningful
-**Current focus:** Phase 07 — combat-wiring-hud-strip
+**Current focus:** Phase 08 — integration-polish
 
 ## Current Position
 
-Phase: 07 (combat-wiring-hud-strip) — EXECUTING
-Plan: 1 of 2
+Phase: 08 (integration-polish) — EXECUTING
+Plan: 1 of 3
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Plan: 1 of 2
 | Phase 07-combat-wiring-hud-strip P01 | 3 | 2 tasks | 4 files |
 | Phase 07-combat-wiring-hud-strip P02 | 3 | 1 tasks | 4 files |
 | Phase 07-combat-wiring-hud-strip P02 | 5 | 2 tasks | 4 files |
+| Phase 08-integration-polish P01 | 3 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,9 @@ Recent decisions affecting current work:
 - [Phase 07-combat-wiring-hud-strip]: set_equipment_data() calls _on_equipment_changed() immediately after signal connect to paint initial state
 - [Phase 07-combat-wiring-hud-strip]: HudStrip placed as sibling of InventoryUI in CanvasLayer — stays visible when inventory is closed
 - [Phase 07-combat-wiring-hud-strip]: set_equipment_data() calls _on_equipment_changed() immediately after connect to paint initial state
+- [Phase 08-integration-polish]: MENU_UNEQUIP=0 and MENU_DROP=1 as named const IDs with id_pressed for HUD strip context menu
+- [Phase 08-integration-polish]: Unequip in HUD strip: insert to bag first, only unequip if remaining==0 (no-op when full)
+- [Phase 08-integration-polish]: Drop from HUD strip bypasses bag entirely and spawns Collectable at player position
 
 ### Pending Todos
 
@@ -91,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T13:18:16.681Z
-Stopped at: Phase 8 context gathered
-Resume file: .planning/phases/08-integration-polish/08-CONTEXT.md
+Last session: 2026-03-27T09:18:47.793Z
+Stopped at: Completed 08-01-PLAN.md
+Resume file: None

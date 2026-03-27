@@ -19,7 +19,7 @@ Requirements for v1.1 Equipment Slots milestone.
 
 - [x] **CTXMENU-01**: Right-clicking a bag slot shows a context menu
 - [x] **CTXMENU-02**: Context menu for weapon/tool items shows "Equip" and "Drop"; for consumables shows "Consume" and "Drop"
-- [ ] **CTXMENU-03**: Right-clicking an equipment slot shows "Unequip" and "Drop"
+- [x] **CTXMENU-03**: Right-clicking an equipment slot shows "Unequip" and "Drop"
 - [x] **CTXMENU-04**: Context menu dismisses when the inventory panel is closed
 
 ### HUD Strip
@@ -73,7 +73,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EQUIP-05 | Phase 5 | Complete |
 | CTXMENU-01 | Phase 5 | Complete |
 | CTXMENU-02 | Phase 5 | Complete |
-| CTXMENU-03 | Phase 8 | Pending |
+| CTXMENU-03 | Phase 8 | Complete |
 | CTXMENU-04 | Phase 5 | Complete |
 | HUD-01 | Phase 7 | Complete |
 | HUD-02 | Phase 7 | Complete |
