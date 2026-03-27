@@ -84,10 +84,12 @@ Plans:
   1. Right-clicking an occupied equipment slot shows an "Unequip" and "Drop" context menu (not an "Equip" menu)
   2. The context menu never appears partially off-screen regardless of where the slot sits in the viewport
   3. Closing the inventory panel while a context menu is open dismisses the menu without error
-**Plans**: 2 plans
+**Plans**: 3 plans
 
 Plans:
-- [ ] 08-01: TBD
+- [ ] 08-01-PLAN.md — HudStrip PopupMenu: right-click handlers, Unequip + Drop actions, unit tests
+- [ ] 08-02-PLAN.md — world.gd wiring (set_player + set_inventory on HudStrip), viewport-safe clamping fix in InventoryUI
+- [ ] 08-03-PLAN.md — Human verification: all 7 runtime checks in running Godot session
 
 ## Progress
 
@@ -102,4 +104,4 @@ Plans:
 | 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
 | 6. Equip/Unequip Flow | v1.1 | Complete    | 2026-03-19 | - |
 | 7. Combat Wiring + HUD Strip | 2/2 | Complete    | 2026-03-20 | - |
-| 8. Integration Polish | v1.1 | 0/? | Not started | - |
+| 8. Integration Polish | v1.1 | 0/3 | Not started | - |
