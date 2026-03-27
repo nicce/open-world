@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_s3k5j"]
 script = ExtResource("2_xhixt")
+id = &"gold_key"
 name = "GoldKey"
 texture = ExtResource("2_1rfao")
 

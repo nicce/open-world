@@ -1,90 +1,91 @@
 # Requirements: Open World
 
-**Defined:** 2026-03-10
-**Core Value:** A satisfying item and inventory system that makes picking things up, using consumables, and managing weight feel meaningful — everything else depends on items working correctly.
+**Defined:** 2026-03-13
+**Core Value:** A satisfying item and inventory system that makes picking things up, using consumables, and managing weight feel meaningful
 
-## v1 Requirements
+## v1.1 Requirements
+
+Requirements for v1.1 Equipment Slots milestone.
+
+### Equipment Data
+
+- [x] **EQUIP-01**: Player can equip a weapon item from the bag to a dedicated weapon slot
+- [x] **EQUIP-02**: Equipping a weapon when the slot is already occupied swaps the old weapon back to the bag
+- [x] **EQUIP-03**: Player can unequip a weapon; it returns to the bag (rejected with existing rejection message if bag is full)
+- [x] **EQUIP-04**: Player can equip a tool item to a dedicated tool slot (UI only — no gameplay wiring)
+- [x] **EQUIP-05**: An item cannot exist simultaneously in the bag and an equipment slot
+
+### Context Menu
+
+- [x] **CTXMENU-01**: Right-clicking a bag slot shows a context menu
+- [x] **CTXMENU-02**: Context menu for weapon/tool items shows "Equip" and "Drop"; for consumables shows "Consume" and "Drop"
+- [x] **CTXMENU-03**: Right-clicking an equipment slot shows "Unequip" and "Drop"
+- [x] **CTXMENU-04**: Context menu dismisses when the inventory panel is closed
+
+### HUD Strip
+
+- [x] **HUD-01**: Weapon and tool slots are visible on screen at all times, independent of inventory open/closed state
+- [x] **HUD-02**: Equipment slots display the equipped item's icon when occupied
 
 ### Combat
 
-- [x] **CMBT-01**: Player can attack and return to MOVE state (HIT state exit no longer locks player)
-- [x] **CMBT-02**: Enemies are knocked back when struck by the player
-
-### Inventory UI
-
-- [ ] **INV-01**: Player can open inventory and see a fixed grid of item slots with icons and quantities
-- [ ] **INV-02**: Inventory panel shows current weight vs max capacity; player sees a rejection message when inventory is full or overweight
-- [ ] **INV-03**: Stackable resource items stack up to their max_stack limit instead of occupying multiple slots
-
-### Item Management
-
-- [ ] **ITEM-01**: Player can select a consumable (health item) in inventory and use it to restore HP
-- [ ] **ITEM-02**: Player can drop an item from inventory and it reappears as a collectable in the world at the player's position
-- [ ] **ITEM-03**: Player sees a brief notification when an item is successfully picked up
-
-### Data Model
-
-- [x] **DATA-01**: Each item has a stable `id: StringName` field used for identity checks (stacking, removal, queries), distinct from display name
-- [x] **DATA-02**: Player's inventory is deep-copied on scene load (`inventory.duplicate(true)`) to prevent shared Resource mutation across sessions
-- [x] **DATA-03**: Weight capacity calculation uses `floori()` instead of `int()` to avoid float truncation off-by-one errors
+- [x] **CMBT-03**: Player's `hit()` attack uses the equipped weapon's damage value
+- [x] **CMBT-04**: Player falls back to fist attack when no weapon is equipped
+- [x] **CMBT-05**: A placeholder visual indicator appears on the player when a weapon is equipped
 
 ## v2 Requirements
 
-### Combat
+Deferred to future milestones.
 
-- Enemy loot drops — enemies drop items when killed
-- Additional enemy types
+### Equipment Enhancements
 
-### Inventory
+- **EQUIP-06**: Armour slot with damage reduction
+- **EQUIP-07**: Item tooltip on hover showing name, stats, weight
+- **EQUIP-08**: Weapon damage stat badge displayed on HUD slot
+- **EQUIP-09**: Left-click on HUD slot as one-click unequip shortcut
+- **EQUIP-10**: Save/load of equipped state (requires persistence layer)
 
-- Equipment slots — separate weapon/tool slots above bag grid
-- Hotbar — quick-access row, always visible
-- Weapon equip changes attack stats
+### Tool Slot Gameplay
 
-### World
-
-- Resource harvesting — trees and rocks with HarvestableComponent; tool-gated
-- Day/night cycle
-- NPC interactions and quests
-
-### Systems
-
-- Save / load — persist game state across sessions (build after inventory and world are stable)
-- Crafting / recipe system (requires item registry foundation)
+- **TOOL-01**: Equipped tool drives resource harvesting (requires HarvestableComponent)
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Real art assets (sprites, tilesets) | Deferred to future milestone — placeholder art unblocks all mechanic work |
-| Farming / crop system | Requires time system and tile manipulation — large orthogonal dependency |
-| Building / structure placement | No overlap with current systems; large new surface area |
-| NPC dialogue / quests | No NPC entities, dialogue tree, or quest system exists |
-| Hunger / stamina | No food loop to refill — pure punishment without relief mechanic |
-| Item durability | Adds friction without payoff at this stage |
-| Multiplayer | Explicitly never — single-player only |
+| Drag-and-drop equip | Large edge-case surface area; right-click covers the use case cleanly |
+| Armour/helmet/boot slots | Separate milestone; weapon slot proves the pattern first |
+| Item durability | No durability system exists |
+| Weapon-specific animations | Out of scope; placeholder indicator only |
+| Hotbar | Separate follow-on milestone |
+| Tool slot gameplay wiring | HarvestableComponent does not exist yet |
 
 ## Traceability
 
+Which phases cover which requirements. Updated during roadmap creation.
+
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CMBT-01 | Phase 1 | Complete |
-| CMBT-02 | Phase 1 | Complete |
-| DATA-01 | Phase 1 | Complete |
-| DATA-02 | Phase 1 | Complete |
-| DATA-03 | Phase 1 | Complete |
-| INV-01 | Phase 2 | Pending |
-| INV-02 | Phase 2 | Pending |
-| INV-03 | Phase 2 | Pending |
-| ITEM-01 | Phase 3 | Pending |
-| ITEM-02 | Phase 3 | Pending |
-| ITEM-03 | Phase 3 | Pending |
+| EQUIP-01 | Phase 6 | Complete |
+| EQUIP-02 | Phase 6 | Complete |
+| EQUIP-03 | Phase 6 | Complete |
+| EQUIP-04 | Phase 6 | Complete |
+| EQUIP-05 | Phase 5 | Complete |
+| CTXMENU-01 | Phase 5 | Complete |
+| CTXMENU-02 | Phase 5 | Complete |
+| CTXMENU-03 | Phase 8 | Complete |
+| CTXMENU-04 | Phase 5 | Complete |
+| HUD-01 | Phase 7 | Complete |
+| HUD-02 | Phase 7 | Complete |
+| CMBT-03 | Phase 7 | Complete |
+| CMBT-04 | Phase 7 | Complete |
+| CMBT-05 | Phase 7 | Complete |
 
 **Coverage:**
-- v1 requirements: 11 total
-- Mapped to phases: 11
+- v1.1 requirements: 14 total
+- Mapped to phases: 14
 - Unmapped: 0 ✓
 
 ---
-*Requirements defined: 2026-03-10*
-*Last updated: 2026-03-10 after roadmap creation — traceability confirmed*
+*Requirements defined: 2026-03-13*
+*Last updated: 2026-03-13 after roadmap creation*

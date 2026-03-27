@@ -1,13 +1,13 @@
 ---
-phase: 1
-slug: combat-fix-data-foundation
+phase: 7
+slug: combat-wiring-hud-strip
 status: draft
 nyquist_compliant: false
 wave_0_complete: false
-created: 2026-03-10
+created: 2026-03-19
 ---
 
-# Phase 1 — Validation Strategy
+# Phase 7 — Validation Strategy
 
 > Per-phase validation contract for feedback sampling during execution.
 
@@ -30,7 +30,7 @@ created: 2026-03-10
 - **After every task commit:** Run `make lint && make format-check && make test`
 - **After every plan wave:** Run `make lint && make format-check && make test`
 - **Before `/gsd:verify-work`:** Full suite must be green
-- **Max feedback latency:** 30 seconds
+- **Max feedback latency:** ~10 seconds
 
 ---
 
@@ -38,11 +38,10 @@ created: 2026-03-10
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 1-01-01 | 01 | 0 | CMBT-01 | unit | `make test` | ❌ W0 | ⬜ pending |
-| 1-01-02 | 01 | 0 | CMBT-02 | unit | `make test` | ❌ W0 | ⬜ pending |
-| 1-02-01 | 02 | 0 | DATA-01 | unit | `make test` | ⚠️ partial | ⬜ pending |
-| 1-02-02 | 02 | 0 | DATA-02 | unit | `make test` | ⚠️ partial | ⬜ pending |
-| 1-02-03 | 02 | 0 | DATA-03 | unit | `make test` | ⚠️ partial | ⬜ pending |
+| 7-01-01 | 01 | 0 | CMBT-03, CMBT-04 | unit | `make test` | ❌ W0 | ⬜ pending |
+| 7-02-01 | 02 | 1 | CMBT-03, CMBT-04 | unit | `make test` | ✅ (after W0) | ⬜ pending |
+| 7-03-01 | 03 | 1 | CMBT-05 | manual/smoke | — | N/A | ⬜ pending |
+| 7-04-01 | 04 | 1 | HUD-01, HUD-02 | manual/smoke | — | N/A | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -50,10 +49,9 @@ created: 2026-03-10
 
 ## Wave 0 Requirements
 
-- [ ] `tests/unit/test_player_state.gd` — covers CMBT-01 (state machine reset logic)
-- [ ] `tests/unit/test_snake.gd` — covers CMBT-02 (knockback velocity application)
-- [ ] New test cases in `tests/unit/test_inventory_slot.gd` — DATA-01 id-based stacking (two items with same name but different id must not stack)
-- [ ] New test cases in `tests/unit/test_inventory.gd` — DATA-02 deep copy isolation, DATA-03 exact weight limit acceptance
+- [ ] `tests/unit/test_player_combat.gd` — stubs for CMBT-03 and CMBT-04 using `PlayerStub` pattern from `test_player_state.gd`
+
+*All other requirements (CMBT-05, HUD-01, HUD-02) are manual-verification only — no test file gaps.*
 
 ---
 
@@ -61,8 +59,9 @@ created: 2026-03-10
 
 | Behavior | Requirement | Why Manual | Test Instructions |
 |----------|-------------|------------|-------------------|
-| AnimationTree `animation_finished` fires with correct leaf name | CMBT-01 | Godot AnimationTree leaf naming requires runtime validation | Run game, attack, observe if state resets; check print output for signal name |
-| Enemy recoil visually apparent | CMBT-02 | Visual feedback requires in-editor play | Attack snake, verify visible knockback recoil in game view |
+| WeaponIndicator visible when weapon equipped, hidden when not | CMBT-05 | Requires running scene tree and visual inspection | Equip a weapon → verify indicator appears above player; unequip → verify indicator disappears |
+| HUD strip always visible regardless of inventory state | HUD-01 | CanvasLayer visibility is UI runtime behavior | Open and close inventory panel → verify HUD strip remains visible at all times |
+| HUD slot shows correct texture or label when equipment changes | HUD-02 | UI rendering requires running scene | Equip weapon with texture → verify slot shows texture; equip item without texture → verify slot shows item name |
 
 ---
 
@@ -72,7 +71,7 @@ created: 2026-03-10
 - [ ] Sampling continuity: no 3 consecutive tasks without automated verify
 - [ ] Wave 0 covers all MISSING references
 - [ ] No watch-mode flags
-- [ ] Feedback latency < 30s
+- [ ] Feedback latency < 10s
 - [ ] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending

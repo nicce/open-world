@@ -1,6 +1,7 @@
-[gd_scene load_steps=64 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=65 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
+[ext_resource type="Resource" uid="uid://c3equipdata01" path="res://scripts/resources/player_equipment_data.tres" id="equip_data"]
 [ext_resource type="Texture2D" uid="uid://cqk3km5v2jj5t" path="res://art/characters/player.png" id="2_cgwfd"]
 [ext_resource type="PackedScene" uid="uid://cecw6b2xcismr" path="res://scenes/advanced_camera.tscn" id="3_0t7ah"]
 [ext_resource type="Texture2D" uid="uid://cicdf808ohb8b" path="res://art/characters/player_n_test.png" id="3_86m0i"]
@@ -13,6 +14,7 @@
 [ext_resource type="Animation" uid="uid://dddm65go72dxp" path="res://animations/FistEast.res" id="9_cm533"]
 [ext_resource type="Script" path="res://scripts/attack.gd" id="11_e62re"]
 [ext_resource type="PackedScene" uid="uid://dkj2ngfwp080f" path="res://scenes/health_bar.tscn" id="12_hwcny"]
+[ext_resource type="Script" path="res://scripts/weapon_indicator.gd" id="13_windic"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bkdk2"]
 radius = 7.0
@@ -399,6 +401,7 @@ y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_s88sy")
 attack = NodePath("Attack")
+equipment_data = ExtResource("equip_data")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_bkdk2")
@@ -441,9 +444,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_y7reg")
-}
 tree_root = SubResource("AnimationNodeStateMachine_qek0x")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Dead/blend_position = Vector2(0, 0)
@@ -464,13 +464,28 @@ disabled = true
 
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("11_e62re")
-damage = 10
+damage = 1
 
 [node name="HealthBar" parent="." instance=ExtResource("12_hwcny")]
 offset_left = -5.0
 offset_top = 8.0
 offset_right = 95.0
 offset_bottom = 35.0
+
+[node name="WeaponIndicator" type="Node2D" parent="."]
+position = Vector2(0, -24)
+visible = false
+script = ExtResource("13_windic")
+
+[node name="IconRect" type="TextureRect" parent="WeaponIndicator"]
+custom_minimum_size = Vector2(16, 16)
+visible = false
+expand_mode = 1
+stretch_mode = 6
+
+[node name="NameLabel" type="Label" parent="WeaponIndicator"]
+visible = false
+theme_override_font_sizes/font_size = 9
 
 [connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="HitboxComponent" to="HitboxComponent" method="_on_body_exited"]

@@ -1,11 +1,24 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=18 format=3 uid="uid://bqql3b06lmrmx"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=21 format=3 uid="uid://bqql3b06lmrmx"]
 
 [ext_resource type="Script" path="res://scripts/resources/inventory.gd" id="1_yi6ic"]
 [ext_resource type="Script" path="res://scripts/resources/inventory_slot.gd" id="2_slot"]
+[ext_resource type="Script" path="res://scripts/resources/health_item.gd" id="3_health"]
+[ext_resource type="Texture2D" uid="uid://46x056us305m" path="res://art/potions/Medipack.png" id="4_medpack_tex"]
+
+[sub_resource type="Resource" id="medpack_item"]
+script = ExtResource("3_health")
+id = &"medpack"
+name = "Medpack"
+texture = ExtResource("4_medpack_tex")
+weight = 0.2
+category = 1
+consumable = true
+health = 20
 
 [sub_resource type="Resource" id="slot_0"]
 script = ExtResource("2_slot")
-quantity = 0
+item = SubResource("medpack_item")
+quantity = 3
 max_stack = 10
 
 [sub_resource type="Resource" id="slot_1"]

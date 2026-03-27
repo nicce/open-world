@@ -1,68 +1,107 @@
-# Roadmap: Open World — Inventory & Combat v1
+# Roadmap: Open World
 
-## Overview
+## Milestones
 
-Three phases deliver a playable, inventory-complete game loop. Phase 1 fixes the combat blocker and hardens the data model so nothing downstream is corrupted. Phase 2 builds the visible grid inventory on that foundation. Phase 3 adds item use, item drop, and pickup feedback — closing the full item lifecycle from world to inventory and back.
+- ✅ **v1.0 Inventory & Combat** — Phases 1–4 (shipped 2026-03-13)
+- 🚧 **v1.1 Equipment Slots** — Phases 5–8 (in progress)
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+<details>
+<summary>✅ v1.0 Inventory & Combat (Phases 1–4) — SHIPPED 2026-03-13</summary>
 
-Decimal phases appear between their surrounding integers in numeric order.
+- [x] Phase 1: Combat Fix + Data Foundation (3/3 plans) — completed 2026-03-10
+- [x] Phase 2: Grid Inventory UI (3/3 plans) — completed 2026-03-11
+- [x] Phase 3: Item Management (4/4 plans) — completed 2026-03-12
+- [x] Phase 4: Inventory Slot-Full Rejection (1/1 plan) — completed 2026-03-13
 
-- [x] **Phase 1: Combat Fix + Data Foundation** - Fix HIT state lockout, add item identity, harden inventory data model (completed 2026-03-10)
-- [ ] **Phase 2: Grid Inventory UI** - Replace debug panel with fixed-slot grid showing icons, quantities, and weight
-- [ ] **Phase 3: Item Management** - Consumable use, item drop to world, pickup notification
+Full details: `.planning/milestones/v1.0-ROADMAP.md`
+
+</details>
+
+### 🚧 v1.1 Equipment Slots (In Progress)
+
+**Milestone Goal:** Add weapon and tool equipment slots with right-click context menu, gameplay wiring for the equipped weapon, and a placeholder visual indicator on the player.
+
+- [x] **Phase 5: Data Foundation** — EquipmentData Resource, right-click signal on slot UI, context menu architecture (completed 2026-03-18)
+- [x] **Phase 6: Equip/Unequip Flow** — Atomic equip/unequip logic, swap on re-equip, full-bag rejection (completed 2026-03-19)
+- [x] **Phase 7: Combat Wiring + HUD Strip** — hit() weapon dispatch, always-visible HUD strip, player visual indicator (completed 2026-03-19)
+- [x] **Phase 8: Integration Polish** — Popup positioning, popup lifecycle, context menu for HUD slots (completed 2026-03-27)
 
 ## Phase Details
 
-### Phase 1: Combat Fix + Data Foundation
-**Goal**: Player can fight without locking up and the inventory data model is correct for all downstream work
-**Depends on**: Nothing (first phase)
-**Requirements**: CMBT-01, CMBT-02, DATA-01, DATA-02, DATA-03
+### Phase 5: Data Foundation
+**Goal**: EquipmentData Resource is established as the single source of truth for equipment state, and the slot UI emits a right-click signal with context-aware menu logic
+**Depends on**: Phase 4 (v1.0 complete)
+**Requirements**: EQUIP-05, CTXMENU-01, CTXMENU-02, CTXMENU-04
 **Success Criteria** (what must be TRUE):
-  1. Player can attack and immediately move again — no state lockout after the HIT animation
-  2. Enemies visibly recoil when the player lands a hit
-  3. Each item has a stable `id` field distinct from its display name; stacking and removal use `id` for comparison
-  4. Loading a scene does not bleed inventory state from a previous session — inventory is deep-copied on load
-  5. Adding items at the exact weight limit accepts the item without off-by-one rejection
+  1. An item equipped to a weapon or tool slot is absent from every bag slot — no item exists in both places simultaneously
+  2. Right-clicking a bag slot that contains a weapon item shows a menu with "Equip" and "Drop" options
+  3. Right-clicking a bag slot that contains a consumable item shows a menu with "Consume" and "Drop" options
+  4. Closing the inventory panel dismisses any open context menu
+**Plans**: 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — EquipmentData Resource (TDD: equip/unequip methods, equipment_changed signal)
+- [ ] 05-02-PLAN.md — Right-click signal + PopupMenu wiring in InventoryUI; equipment_data export on Player
+
+### Phase 6: Equip/Unequip Flow
+**Goal**: Players can move items between the bag and equipment slots atomically — equip removes from bag, unequip returns to bag, full-bag is rejected without data loss
+**Depends on**: Phase 5
+**Requirements**: EQUIP-01, EQUIP-02, EQUIP-03, EQUIP-04
+**Success Criteria** (what must be TRUE):
+  1. Player can equip a weapon from the bag to the weapon slot; the item disappears from the bag grid
+  2. Equipping a second weapon when the slot is occupied returns the old weapon to the bag and places the new one in the slot
+  3. Player can unequip a weapon back to the bag; if the bag is full, the unequip is rejected and the weapon stays equipped
+  4. Player can equip a tool item to the tool slot (item moves from bag; no gameplay effect wired yet)
+**Plans**: 2 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — player_equipment_data.tres + test scaffold + atomic equip/unequip in InventoryUI (TDD)
+- [ ] 06-02-PLAN.md — Wire set_equipment_data() in world.gd, assign Player Inspector field, human-verify equip flow
+
+### Phase 7: Combat Wiring + HUD Strip
+**Goal**: The equipped weapon drives the player's hit() attack with a fist fallback, a HUD strip showing both equipment slots is always visible, and a placeholder indicator appears on the player when a weapon is equipped
+**Depends on**: Phase 6
+**Requirements**: CMBT-03, CMBT-04, CMBT-05, HUD-01, HUD-02
+**Success Criteria** (what must be TRUE):
+  1. Attacking with a weapon equipped deals the weapon's damage value (not fist damage)
+  2. Attacking with no weapon equipped deals fist damage — the player can always attack
+  3. Weapon and tool equipment slots are visible on screen at all times, even when the inventory panel is closed
+  4. Equipment slots display the icon of the equipped item when occupied
+  5. A visible indicator appears on the player character when a weapon is equipped
+**Plans**: 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Combat dispatch (TDD hit() with weapon damage + fist fallback) + WeaponIndicator on player
+- [ ] 07-02-PLAN.md — HUD strip scene (always-visible equipment slots) + world wiring + human verification
+
+### Phase 8: Integration Polish
+**Goal**: Context menu and HUD interactions are coherent across all input paths — popup is viewport-safe, cleans up correctly, and right-clicking an equipment slot shows the correct unequip menu
+**Depends on**: Phase 7
+**Requirements**: CTXMENU-03
+**Success Criteria** (what must be TRUE):
+  1. Right-clicking an occupied equipment slot shows an "Unequip" and "Drop" context menu (not an "Equip" menu)
+  2. The context menu never appears partially off-screen regardless of where the slot sits in the viewport
+  3. Closing the inventory panel while a context menu is open dismisses the menu without error
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Write failing test scaffolds for all 5 requirements (Wave 0 RED tests)
-- [ ] 01-02-PLAN.md — Fix CMBT-01 (player state lockout) and CMBT-02 (enemy knockback)
-- [ ] 01-03-PLAN.md — Fix DATA-01 (item id field), DATA-02 (deep copy), DATA-03 (floori weight)
-
-### Phase 2: Grid Inventory UI
-**Goal**: Player can open the inventory and see a proper fixed-slot grid with item icons, quantities, and weight feedback
-**Depends on**: Phase 1
-**Requirements**: INV-01, INV-02, INV-03
-**Success Criteria** (what must be TRUE):
-  1. Opening the inventory shows a fixed grid of slots with item icons and quantity labels
-  2. The inventory panel displays current weight and max capacity (e.g., "12.5 / 20 kg")
-  3. Attempting to pick up an item when over weight limit shows a visible rejection message
-  4. Stackable items share a single slot and increment their quantity counter rather than filling a new slot
-**Plans**: TBD
-
-### Phase 3: Item Management
-**Goal**: Player can consume health items from inventory, drop items back into the world, and see feedback on pickups
-**Depends on**: Phase 2
-**Requirements**: ITEM-01, ITEM-02, ITEM-03
-**Success Criteria** (what must be TRUE):
-  1. Selecting a health item in inventory and pressing use restores the player's HP and removes one unit of the item
-  2. Dropping an item from inventory spawns a collectable at the player's position that can be picked up again
-  3. A brief on-screen notification appears when the player successfully picks up an item
-**Plans**: TBD
+- [ ] 08-01-PLAN.md — HudStrip PopupMenu: right-click handlers, Unequip + Drop actions, unit tests
+- [ ] 08-02-PLAN.md — world.gd wiring (set_player + set_inventory on HudStrip), viewport-safe clamping fix in InventoryUI
+- [ ] 08-03-PLAN.md — Human verification: all 7 runtime checks in running Godot session
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
+**Execution Order:** Phases execute in numeric order: 5 → 6 → 7 → 8
 
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Combat Fix + Data Foundation | 2/3 | Complete    | 2026-03-10 |
-| 2. Grid Inventory UI | 0/TBD | Not started | - |
-| 3. Item Management | 0/TBD | Not started | - |
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1. Combat Fix + Data Foundation | v1.0 | 3/3 | Complete | 2026-03-10 |
+| 2. Grid Inventory UI | v1.0 | 3/3 | Complete | 2026-03-11 |
+| 3. Item Management | v1.0 | 4/4 | Complete | 2026-03-12 |
+| 4. Inventory Slot-Full Rejection | v1.0 | 1/1 | Complete | 2026-03-13 |
+| 5. Data Foundation | 2/2 | Complete   | 2026-03-18 | - |
+| 6. Equip/Unequip Flow | v1.1 | Complete    | 2026-03-19 | - |
+| 7. Combat Wiring + HUD Strip | 2/2 | Complete    | 2026-03-20 | - |
+| 8. Integration Polish | 3/3 | Complete   | 2026-03-27 | - |

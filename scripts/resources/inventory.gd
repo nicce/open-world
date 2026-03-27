@@ -1,5 +1,8 @@
 class_name Inventory extends Resource
 
+signal inventory_changed
+signal insert_rejected
+
 @export var slots: Array[InventorySlot] = []
 @export var max_weight: float = 100.0
 
@@ -46,11 +49,17 @@ func insert(item: Item, amount: int = 1) -> int:
 			var leftover = slot.add(to_add)
 			remaining -= (to_add - leftover)
 
+	var inserted = amount - remaining
+	if inserted > 0:
+		inventory_changed.emit()
+	elif remaining > 0:
+		insert_rejected.emit()
+
 	return remaining
 
 
 func remove(item: Item, amount: int = 1) -> int:
-	var remaining = amount
+	var remaining: int = amount
 
 	for slot in slots:
 		if remaining <= 0:
@@ -58,7 +67,10 @@ func remove(item: Item, amount: int = 1) -> int:
 		if not slot.is_empty() and slot.item.id == item.id:
 			remaining -= slot.remove(remaining)
 
-	return amount - remaining
+	var removed: int = amount - remaining
+	if removed > 0:
+		inventory_changed.emit()
+	return removed
 
 
 func get_item_count(item: Item) -> int:

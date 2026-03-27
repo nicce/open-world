@@ -1,225 +1,173 @@
 # Project Research Summary
 
-**Project:** Open World — Stardew-like 2D Survival/Adventure
-**Domain:** Top-down 2D RPG / survival game in Godot 4
-**Researched:** 2026-03-10
+**Project:** Open World — v1.1 Equipment Slots
+**Domain:** Godot 4 top-down RPG — weapon/tool equipment slot system with context menu UI
+**Researched:** 2026-03-13
 **Confidence:** HIGH
 
 ## Executive Summary
 
-This is a top-down 2D survival/adventure game built on Godot 4.3 with GDScript, following established patterns from the genre (Stardew Valley, Terraria, Valheim). The project has a solid structural foundation — component-based composition, signal-driven communication, and a typed Resource hierarchy for inventory data — but critical gaps block playability: the player is permanently stuck in the HIT state after one attack, and the inventory UI is a non-functional stub. Research confirms that fixing these two blockers before any new feature work is the only viable path forward.
+The v1.1 Equipment Slots milestone extends a proven, fully-tested v1.0 inventory foundation. The codebase already supplies every data primitive needed: `WeaponItem.damage`, `Item.category` with `WEAPON`/`TOOL` variants, `Inventory.insert/remove`, a `hit()` stub on `Player`, and the `inventory_slot_ui` rendering pattern. The primary work is connecting these pieces through a new `EquipmentData` Resource and wiring a small set of new or modified scenes. The architecture follows one clear pattern throughout: Resource classes own state and emit signals; UI nodes observe those signals and refresh; `world.gd` handles all cross-scene wiring.
 
-The recommended approach is to work in strict dependency order: unblock combat first, then harden the inventory data model (item identity, signal bus, Resource duplication), then deliver a working grid UI, and only then layer in item use, item drop, and combat feel improvements. The architecture is already well-suited to this expansion — the three-layer separation (UI / Game Logic / Resource data) needs to be extended, not redesigned. No third-party addons beyond GUT are needed or permitted.
+The recommended approach is to build in strict dependency order: data model first, then equip/unequip logic, then combat wiring (`hit()`), then the HUD strip, then the right-click context menu, and finally the placeholder visual indicator. Each step is independently testable with GUT before the next begins. The single design decision with the most downstream impact is keeping `EquipmentData` strictly separate from `Inventory` — mixing them corrupts the bag's weight invariant and breaks the 15-slot grid assumption.
 
-The key risk is architectural drift: UI gaining game-logic responsibilities, item identity remaining name-string-based as the catalog grows, and equipment slot layout being bolted on after the bag grid is built. All three of these are preventable with explicit contracts decided before implementation begins — specifically: dispatch by `item.category` in Player (not in UI), `id: StringName` on Item (not `name`), and reserving a separate equipment panel layout from the start.
-
----
+The key risks are all at the boundary between data and UI: `PopupMenu` positioning at screen edges, `id_pressed` vs `index_pressed` confusion, stale item references when the inventory changes while the menu is open, and the equip transaction not being atomic. All four have explicit prevention strategies grounded in direct codebase inspection and are straightforward to unit-test. The one area requiring runtime verification (not deeper research) is whether `attack.damage` mutation in `hit()` is read correctly by `HitboxComponent` before the hitbox fires.
 
 ## Key Findings
 
 ### Recommended Stack
 
-The project runs on Godot 4.3 (confirmed via `project.godot`) with all game logic in GDScript. There is a version mismatch: the Makefile downloads Godot 4.2.2 for headless tests while the project declares 4.3. This should be corrected to avoid test/editor divergence.
-
-Inventory data is correctly modeled as typed `Resource` subclasses (`Item`, `InventorySlot`, `Inventory`) — this must be maintained. The future save system can use `ResourceSaver` directly because the data model is already Resource-based.
+The engine version is Godot 4.3 (confirmed in `project.godot` — do not use 4.2). All logic is GDScript. No new addons are needed or permitted beyond GUT (testing) and gdtoolkit (lint/format). The key new stack element is the `PopupMenu` built-in Godot node for the context menu — it handles positioning, outside-click dismissal, and viewport management natively and requires no custom implementation.
 
 **Core technologies:**
-- Godot 4.3 + GDScript: engine runtime and all logic — no alternative; engine-native, full editor integration
-- `Resource` subclasses: all item/inventory data — serializable, Inspector-configurable, type-safe
-- `GridContainer`: fixed-slot bag grid UI — standard Godot node for grid layouts, set `columns` to constant
-- GUT 9.3.0 + gdtoolkit 4.*: testing and linting — already integrated via `make test` / `make lint`
+- Godot 4.3 + GDScript: game engine and all logic — confirmed version, no downgrade permitted
+- `Resource` subclass (`EquipmentData`): equipment state container — follows the exact pattern of `Inventory`; serializable, editor-inspectable, GUT-testable without scene tree
+- `PopupMenu` (built-in Godot node): right-click context menu — no addon required; `id_pressed` signal dispatches actions cleanly; handles outside-click dismissal natively
+- `CanvasLayer` (existing, reused): HUD strip placement — already present in `world.tscn`; HUD strip must be a sibling of `InventoryUI`, not a child
+
+Note: `project.godot` declares `"4.3"` but the Makefile sets `GODOT_VERSION ?= 4.2.2`. This mismatch should be corrected to avoid test/editor divergence.
 
 ### Expected Features
 
-The genre requires a functional combat loop and a visible inventory before any other feature feels justified. The current codebase has the data model but not the UX.
-
 **Must have (table stakes):**
-- Fix HIT state exit bug — game is unplayable after first attack; confirmed blocker
-- Grid inventory UI with item icons and quantities — current UI renders nothing
-- Weight/capacity feedback (current vs max) — players need to know their limit
-- Full-inventory rejection message — silent failure breaks trust
-- Consume health item from inventory — core consumable use case
-- Item drop from inventory to world — players must be able to discard
-- Enemy loot drops on death — expected from any combat encounter
-- Item pickup toast/notification — basic feedback that interaction worked
+- Always-visible HUD strip with weapon slot and tool slot — players need to see equipped state without opening the bag
+- Right-click context menu on bag slots with actions filtered by `item.category` — genre convention; Equip for weapons, Consume for consumables, Drop always
+- Equip from bag: atomic remove + slot-set, emitting both `inventory_changed` and `equipment_changed` — broken atomicity is the most common equip-system bug
+- Unequip to bag: `inventory.insert()` with rejection handling when bag is full — silent item loss is unacceptable
+- One weapon at a time: equipping when slot is occupied swaps old weapon back to bag first
+- Right-click on HUD equipment slot shows "Unequip" — symmetry with equip flow
+- `player.gd hit()` implementation using `equipment.weapon_slot.damage` routed through the existing `Attack` node
+- Fist fallback when no weapon is equipped — player must always be able to attack
+- Placeholder visual indicator on player when weapon is equipped — world feedback, not just HUD feedback
 
-**Should have (differentiators, after table stakes):**
-- Equipment slots (weapon, tool) separate from bag grid
-- Hotbar quick-access row
-- Weapon equip modifying attack stats
-- Item tooltip on hover
-- Knockback on hit
-- Resource harvesting (trees, rocks) via HarvestableComponent
+**Should have (differentiators — defer to follow-on PR):**
+- Item tooltip on hover showing name, stats, weight
+- Weapon damage stat badge displayed on HUD slot
+- Left-click on HUD slot as a one-click unequip shortcut
+- Animated equip flash on player indicator
 
-**Defer to v2+:**
-- Crafting system — requires item registry (id-based) not yet built
-- Farming / crop system — requires TimeManager and tile manipulation
-- Day/night cycle — requires TimeManager singleton
-- NPC dialogue — no entities, dialogue tree, or quest system
-- Save / load — game state will expand significantly before this stabilizes
-- Hunger / stamina — no food loop to refill it; pure punishment without payoff
-- Multiplayer — explicitly excluded per PROJECT.md
+**Defer (explicitly out of scope for v1.1):**
+- Tool slot gameplay wiring — `HarvestableComponent` does not exist; tool slot is UI-only this milestone
+- Drag-and-drop between bag and equipment slots — large edge-case surface area
+- Armour/helmet/boot slots — separate milestone after weapon slot proves the pattern
+- Item durability — no durability system exists
+- Weapon-specific animations — out of scope; placeholder indicator only
+- Hotbar — separate follow-on milestone per PROJECT.md
+- Save/load of equipped state — no persistence layer exists yet
 
 ### Architecture Approach
 
-The existing three-layer architecture (UI / Game Logic / Resource data) is the correct foundation and must be preserved. The inventory system extends cleanly from this: `Inventory` Resource holds `InventorySlot` array and emits a `changed` signal; `InventoryUI` observes it and refreshes slot nodes in-place (never rebuilds the list); `Player` is the authority on all stat effects from item use. Equipment slots use a separate panel, not slots inside the bag grid.
+The three-layer architecture (Data/Resource, Game Logic, UI) from v1.0 is unchanged. `EquipmentData extends Resource` is the single authority on what is equipped; it emits `equipment_changed` which both `EquipmentHUD` and `Player` observe. `InventoryUI` calls `EquipmentData` methods during equip/unequip but does not own equipment state. `world.gd` wires everything together using the established `set_inventory()` / `set_player()` pattern extended with `set_equipment()`.
 
 **Major components:**
-1. `Inventory` (Resource) — slot array, weight tracking, `changed` signal; single source of truth
-2. `InventorySlotUI` (Control, preloaded) — dumb display node; instantiated once at `_ready()`, updated in-place
-3. `Player` — authority for all game-logic dispatch; handles `item_used` and `item_dropped` signals from UI
-4. `Item` (Resource base) — id (StringName), name, weight, category enum, texture, stackable flag; extended by `HealthItem` and `WeaponItem`
-5. `Collectable` — scene that Player can interact with; reused for item drop by instantiating `item.collectable_scene`
+1. `EquipmentData` (Resource) — owns `weapon_slot: WeaponItem` and `tool_slot: Item` (both nullable); emits `equipment_changed`; pure data, no scene tree dependency; GUT-testable in isolation
+2. `EquipmentHUD` (Control scene, always visible) — renders two slot nodes in `HBoxContainer`; observes `equipment_changed`; emits `unequip_requested`; lives in `CanvasLayer` as sibling to `InventoryUI`
+3. `ContextMenu` (`PopupMenu` child of `InventoryUI`) — built dynamically at right-click time using explicit `const` IDs; dispatches to `_equip_selected()`, `_use_selected()`, `_drop_selected()`
+4. `Player` (modified) — gains `@export var equipment: EquipmentData`; implements `hit()` writing `attack.damage` from `equipment.weapon_slot` before the hitbox fires; toggles `EquippedWeaponSprite` visibility
+5. `world.gd` (modified) — wires `EquipmentData` to player, inventory UI, and equipment HUD; handles `unequip_requested` from HUD
+
+**New files:** `scripts/resources/equipment_data.gd`, `scripts/equipment_hud.gd`, `scenes/equipment_hud.tscn`, `tests/unit/test_equipment_data.gd`
+
+**Modified files:** `scripts/player.gd`, `scripts/inventory_ui.gd`, `scripts/inventory_slot_ui.gd`, `scripts/world.gd`, `scenes/world.tscn`
 
 ### Critical Pitfalls
 
-1. **HIT state never exits** — Add state transition back to MOVE on attack animation completion. Must fix before any other work; blocks all combat iteration.
-2. **Item identity by name string** — Replace `slot.item.name == item.name` with `slot.item.id == item.id` everywhere. Add `@export var id: StringName` to `Item` before defining any new items.
-3. **No consumable dispatch contract** — Do not add `use()` to Item Resource. Player dispatches by `item.category` enum. UI emits `item_used(item)`; Player acts. Decide this pattern before writing any use logic.
-4. **Shared Resource mutation across sessions** — Call `inventory = inventory.duplicate(true)` in `Player._ready()` to deep-copy slots and items; without this, inventory state bleeds between play sessions.
-5. **Fixed grid vs. dynamic slot count** — Instantiate exactly N slots at `_ready()` (e.g., 20). Never add/remove slots based on item count. Empty slots display as blank.
+1. **Equipment state mixed into `Inventory.slots`** — breaks the 15-slot grid, weight accounting, and stacking invariants. Use a separate `EquipmentData` Resource; never add nullable equipment slots to `Inventory`. This decision must be locked before writing any equip logic.
 
----
+2. **Equip is not atomic** — if `inventory.remove()` and the equipment slot assignment are not in the same function, the item can exist in both places. Write a unit test that asserts the item is absent from every bag slot immediately after `equip()` returns.
+
+3. **`hit()` reads `WeaponItem.damage` directly instead of writing through the `Attack` node** — `HitboxComponent._on_body_entered` reads `body.attack` (the `Attack` node on Player), not a float. The fix is `attack.damage = equipment.weapon_slot.damage` before the hitbox fires, then restore fist damage on unequip.
+
+4. **`PopupMenu.id_pressed` vs `index_pressed` confusion** — when menu items are conditionally added, position indices shift. Always use `add_item(label, CONST_ID)` with named constants and connect `id_pressed`, not `index_pressed`.
+
+5. **Unequip with full bag loses the item** — check bag capacity before unequipping; do not clear `equipped_weapon` unless `inventory.insert()` returns 0. Show the existing rejection label if the bag is full.
 
 ## Implications for Roadmap
 
-Based on combined research, the dependency chain is clear and dictates a strict phase order. Each phase has hard prerequisites from the phase before it.
+Four natural implementation phases emerge from the dependency chain. Each is independently deliverable and testable before the next begins.
 
-### Phase 1: Combat Fix + Inventory Foundation
+### Phase 1: Data Foundation + Context Menu Architecture
 
-**Rationale:** The HIT state bug makes the game unplayable and blocks all combat iteration. Item identity by name string will corrupt any new item work. The `Inventory.changed` signal and Resource duplication are prerequisites for every UI feature. These must all land together before any visible UI work.
+**Rationale:** `EquipmentData` Resource is the dependency that everything else reads. All critical architectural decisions must be locked here — separate resource, explicit menu IDs, HUD placement outside `InventoryUI` — or every subsequent phase requires rework. The right-click signal extension on `InventorySlotUI` is a trivial one-branch addition that unblocks all context menu work.
 
-**Delivers:** Playable combat loop; correct item identity; inventory signal bus; Resource duplication safety; `collectable_scene` field on Item; `floori()` fix for weight calculation.
+**Delivers:** `EquipmentData` Resource with signals and equip/unequip methods; GUT unit tests for the resource; `slot_right_clicked` signal on `InventorySlotUI`; `PopupMenu` child wired into `InventoryUI` with correct `const` ID strategy; context menu build logic filtering by `item.category`; HUD scene structure decision locked (sibling not child); weight accounting decision locked (equipped items do not count against bag weight).
 
-**Addresses:** Fix HIT state exit (FEATURES.md table stakes); item id field; inventory signal (ARCHITECTURE.md foundation).
+**Avoids:** Pitfall 1 (wrong data layer), Pitfall 3 (id/index confusion), Pitfall 9 (wrong menu for HUD slots), Pitfall 14 (HUD hidden with inventory)
 
-**Avoids:** Pitfalls 1 (HIT state), 2 (name-string identity), 4 (float truncation), 5 (signal stub), 9 (shared Resource mutation).
+### Phase 2: Equip / Unequip Flow
 
-**Research flag:** Standard patterns — no phase research needed.
+**Rationale:** The equip transaction is the most complex logic with the highest bug risk — atomicity, full-bag rejection, swap-on-re-equip. It must be solid and fully tested before the HUD or combat wiring observes it.
 
----
+**Delivers:** `_equip_selected()` in `InventoryUI` (atomic remove + slot-set + swap); `_on_unequip_requested()` in `world.gd` with bag-full rejection; inventory weight correctly reflecting equipped state; unit tests covering equip, unequip, swap, and full-bag rejection.
 
-### Phase 2: Grid Inventory UI
+**Avoids:** Pitfall 4 (stale slot reference verified before acting), Pitfall 6 (item in both bag and slot), Pitfall 7 (unequip with full bag loses item), Pitfall 8 (double-refresh preserves selection state), Pitfall 11 (weight ambiguity resolved)
 
-**Rationale:** Depends entirely on Phase 1 (`Inventory.changed` signal, fixed slot model). Delivers the first visible inventory experience. Equipment slot layout decision must be made here (separate panel reserved, even if empty), to avoid structural rework in Phase 3.
+### Phase 3: Combat Wiring + HUD Strip
 
-**Delivers:** Working grid UI (N×M fixed slots), item icons, quantity labels, weight display (current/max), full-inventory feedback toast, equipment slot panel placeholder.
+**Rationale:** With the data model correct, `Player.hit()` and `EquipmentHUD` can be wired — both observe `equipment_changed` and have no dependency on each other. `hit()` is the payoff feature of the entire milestone; the HUD strip is the primary visibility feature.
 
-**Addresses:** Grid UI with icons + quantities, weight feedback, rejection message (FEATURES.md table stakes).
+**Delivers:** `player.gd hit()` writing `attack.damage` from `equipment.weapon_slot` with fist fallback; `EquipmentHUD` scene always visible in `CanvasLayer`; `EquipmentSlotUI` nodes rendering equipped item icons; `world.gd` wiring connecting all components; placeholder `Sprite2D` visual on player toggled by equipment signals.
 
-**Avoids:** Pitfalls 6 (dynamic slot count), 7 (equipment slot architecture), 10 (no full-inventory feedback).
+**Avoids:** Pitfall 5 (Attack node mismatch — weapon damage routes through existing `attack` property), Pitfall 10 (Sprite2D layering — minimal placeholder, no z-index tuning)
 
-**Research flag:** Standard patterns — GridContainer behavior is well-documented in Godot 4.
+### Phase 4: Integration Polish + Edge Case Coverage
 
----
+**Rationale:** After all functional phases are in place, a focused integration pass addresses the minor pitfalls and ensures the feature is coherent across all input paths.
 
-### Phase 3: Item Use + Item Drop
+**Delivers:** `PopupMenu` position clamped to viewport (not raw mouse position); `PopupMenu` hidden when inventory closes; pure context-menu-data function extracted and unit-tested (not the `PopupMenu` node); right-click on HUD slot correctly shows "Unequip" not "Equip" via slot context parameter.
 
-**Rationale:** Both depend on the working grid UI for interaction surface. Item use requires `HealthComponent` (already exists). Item drop requires `item.collectable_scene: PackedScene` field (added in Phase 1) and Player handling world instantiation — UI must never touch the scene tree.
-
-**Delivers:** Consuming health items from inventory (removes item, heals player), dropping items back to world as collectables, UI feedback on both actions.
-
-**Addresses:** Consume health item from inventory, item drop (FEATURES.md table stakes).
-
-**Avoids:** Pitfalls 3 (no dispatch contract), 11 (drop logic in UI layer).
-
-**Research flag:** Standard patterns — dispatch and signal flow are well-established in this codebase.
-
----
-
-### Phase 4: Enemy Loot + Combat Feel
-
-**Rationale:** Now that inventory is functional end-to-end, enemy loot drops have a destination. Knockback enhances combat feel. Both are low-to-medium complexity and share the item drop infrastructure from Phase 3.
-
-**Delivers:** Enemies drop configurable loot on death, item pickup toasts, knockback on player hit, HitboxComponent null-reference assertions.
-
-**Addresses:** Enemy loot drops, item pickup toast, knockback (FEATURES.md table stakes and differentiators).
-
-**Avoids:** Pitfall 12 (HitboxComponent null reference).
-
-**Research flag:** Standard patterns — death signals and loot spawning follow existing component patterns.
-
----
-
-### Phase 5: Equipment Slots + Hotbar
-
-**Rationale:** Requires the equipment panel placeholder from Phase 2 and the item category enum from Phase 1. Weapon equip affecting attack stats requires `Player` to hold `equipped_weapon: WeaponItem` and apply it to the attack system.
-
-**Delivers:** Separate equipment slots (weapon, tool) above bag grid, hotbar row always visible, weapon equip changes attack stats, item tooltips on hover.
-
-**Addresses:** Equipment slots, hotbar, weapon stats, tooltip (FEATURES.md differentiators).
-
-**Research flag:** May need brief research on Godot hotbar UI patterns and `InputEvent` handling for hotkey-to-slot mapping.
-
----
-
-### Phase 6: Resource Harvesting
-
-**Rationale:** Depends on the item drop system (Phase 3), enemy loot patterns (Phase 4), and — eventually — a tool equip system (Phase 5). `HarvestableComponent` follows the same component pattern as `HitboxComponent`. This is a large feature requiring its own planning.
-
-**Delivers:** Trees and rocks as harvestable nodes, tool-gated harvesting, resource item types, HarvestableComponent.
-
-**Addresses:** Resource harvesting (FEATURES.md differentiator).
-
-**Research flag:** Needs phase research — HarvestableComponent is new architecture; tool-gating logic and tile interaction patterns need validation.
-
----
+**Avoids:** Pitfall 2 (popup off-screen at edges), Pitfall 12 (popup leaks when inventory closes), Pitfall 13 (GUT tests crash on PopupMenu Window subclass)
 
 ### Phase Ordering Rationale
 
-- Phase 1 before everything: two confirmed blockers (HIT state, name-string identity) corrupt all downstream work if not fixed first.
-- Phase 2 before 3: item use and drop need UI interaction surface.
-- Phase 3 before 4: loot drops need a functional inventory to land in.
-- Phase 4 before 5: equipment slot UI builds on the same slot scene established in Phase 2; combat feel improvements are natural companions to loot.
-- Phase 5 before 6: tool equip is a prerequisite for tool-gated harvesting.
+- Data before UI: `EquipmentData` must exist before `EquipmentHUD` or `InventoryUI` can observe it — resource-first is the established v1.0 pattern
+- Architecture decisions front-loaded in Phase 1: HUD placement, menu ID strategy, and weight accounting have zero rework cost when decided early but force scene restructure if decided late
+- Equip/unequip before HUD wiring: the HUD displays equipment state; rendering partially-correct state during development is confusing
+- Combat wiring after equip logic: `hit()` reads `equipment.weapon_slot` which only has meaning after equip/unequip is correct
+- Polish phase last: minor pitfalls (popup position, leak on close) do not block functionality and are cheap to fix in isolation after the main flow works
 
 ### Research Flags
 
-Phases likely needing deeper research during planning:
-- **Phase 5 (Equipment + Hotbar):** Hotkey-to-hotbar-slot input mapping and UI layout for always-visible hotbar need verification against Godot 4 patterns.
-- **Phase 6 (Resource Harvesting):** HarvestableComponent is new architecture with no existing analogue in the codebase; harvesting interaction patterns need design.
+Phases with standard, well-documented patterns — skip research-phase:
+- **Phase 1:** `EquipmentData` follows the exact `Inventory` Resource pattern already in the codebase; `PopupMenu` API is stable Godot 4.2+ with high-confidence training data
+- **Phase 2:** `inventory.insert/remove` contracts are fully tested across 88 unit tests; equip logic is pure GDScript data manipulation with no Godot API uncertainty
+- **Phase 3:** `CanvasLayer` + `HBoxContainer` for always-visible HUD is the standard Godot 4 pattern; `EquipmentHUD` rendering mirrors `InventoryUI` directly
 
-Phases with standard patterns (skip research-phase):
-- **Phase 1:** All fixes follow established GDScript and Resource patterns.
-- **Phase 2:** GridContainer grid UI is documented and stable in Godot 4.
-- **Phase 3:** Item use and drop follow the existing signal/dispatch pattern.
-- **Phase 4:** Loot drops and knockback follow existing component patterns.
-
----
+Phases needing runtime verification (not deeper research — confirm in editor):
+- **Phase 3 (`hit()` integration):** The `attack.damage` mutation approach is MEDIUM confidence — needs one runtime test to confirm `HitboxComponent` reads the mutated value correctly. If mutation is too late in the frame, the fallback is to swap the entire `Attack` node reference on equip.
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | HIGH | Verified directly from `project.godot`, Makefile, and existing source files |
-| Features | HIGH | Table stakes confirmed via direct code audit and genre conventions; differentiator ordering is MEDIUM |
-| Architecture | HIGH | Three-layer pattern is already implemented correctly; extension points are clear |
-| Pitfalls | HIGH | Critical pitfalls confirmed in source code; moderate pitfalls confirmed by pattern analysis |
+| Stack | HIGH | Engine version read directly from `project.godot`; `PopupMenu` and `Resource` patterns confirmed from codebase inspection and stable Godot 4 training data |
+| Features | HIGH | Table stakes derived from direct codebase audit — all prerequisite code confirmed present; anti-features grounded in explicit PROJECT.md scope constraints |
+| Architecture | HIGH | Three-layer pattern verified across 88 existing unit tests; component boundaries follow v1.0 established contracts; one MEDIUM point on `attack.damage` mutation timing |
+| Pitfalls | HIGH | 13 of 14 pitfalls rated HIGH confidence; all sourced from direct code path inspection; Sprite2D layering (Pitfall 10) is MEDIUM due to AnimationTree interaction variability |
 
 **Overall confidence:** HIGH
 
 ### Gaps to Address
 
-- **Godot version mismatch:** Makefile uses 4.2.2 for headless tests; project declares 4.3. Update `GODOT_VERSION` in Makefile before CI diverges from editor behavior.
-- **ResourceSaver sub-resource bundling:** `ResourceSaver.FLAG_BUNDLE_RESOURCES` may be required when saving `Inventory` containing nested `InventorySlot` and `Item` sub-resources. Validate during Phase 1 or when save system is added.
-- **Differentiator effort estimates:** Complexity estimates for Phase 5 and 6 features are informed but not verified against implementation. Re-estimate during phase planning.
-
----
+- **`attack.damage` mutation timing (MEDIUM):** During Phase 3, confirm at runtime that writing `attack.damage` in `hit()` before triggering the hitbox animation results in `HitboxComponent` reading the updated value. Fallback: swap the entire `Attack` node reference on equip rather than mutating damage inline.
+- **`popup()` exact overload syntax (MEDIUM):** Verify against Godot editor autocomplete during Phase 1 whether to use `popup(Rect2i)` or `popup_on_parent(Rect2i)`. Both are valid approaches; the exact method name needs confirmation in 4.3.
+- **Makefile version mismatch:** `GODOT_VERSION ?= 4.2.2` should be updated to match the `4.3` declared in `project.godot` to avoid test/editor divergence.
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- Direct codebase inspection (`project.godot`, `Makefile`, `scripts/resources/`, `scripts/player.gd`, `scripts/inventory.gd`, `scripts/inventory_ui.gd`) — all stack, architecture, and pitfall findings
-- `CONCERNS.md` in repository — confirmed HIT state bug
+- Direct codebase inspection: `scripts/player.gd`, `scripts/inventory_ui.gd`, `scripts/inventory_slot_ui.gd`, `scripts/resources/item.gd`, `scripts/resources/weapon_item.gd`, `scripts/resources/inventory.gd`, `scripts/attack.gd`, `components/hitbox_component.gd`
+- `.planning/PROJECT.md` — milestone scope, anti-features, technical debt constraints
+- `project.godot` — confirmed Godot 4.3 feature version
+- `Makefile` — confirmed GUT and gdtoolkit toolchain; noted version mismatch
 
 ### Secondary (MEDIUM confidence)
-- Godot 4 documentation (engine knowledge through August 2025) — GridContainer behavior, ResourceSaver flags, `user://` path semantics
-- Genre conventions (Stardew Valley, Terraria, Valheim) — feature expectations and anti-feature rationale
+- Godot 4 training data (through August 2025) — `PopupMenu` API (`add_item`, `id_pressed`, `popup()`), `CanvasLayer` HUD patterns, `_gui_input` `MOUSE_BUTTON_RIGHT` handling
+- Genre conventions (Stardew Valley, Terraria, Diablo) — right-click context menu expectations, equip-removes-from-bag model
 
 ### Tertiary (LOW confidence)
-- Complexity estimates for Phase 5 and 6 features — informed inference; needs validation during phase planning
+- None — all findings are grounded in codebase inspection or stable Godot API patterns
 
 ---
-
-*Research completed: 2026-03-10*
+*Research completed: 2026-03-13*
 *Ready for roadmap: yes*

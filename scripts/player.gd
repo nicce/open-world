@@ -1,12 +1,14 @@
 class_name Player extends CharacterBody2D
 
 signal health_changed(new_value: int)
+signal item_collected(item_name: String)
 
 enum PlayerStates { MOVE, HIT, DEAD }
 
 @export var speed: float = 80.0
 @export var attack: Attack
 @export var inventory: Inventory
+@export var equipment_data: EquipmentData
 
 var health_depleated: bool = false
 var current_state = PlayerStates.MOVE
@@ -21,6 +23,8 @@ var animation_state: AnimationNodeStateMachinePlayback = animation_tree.get("par
 func _ready() -> void:
 	inventory = inventory.clone()
 	animation_tree.animation_finished.connect(_on_animation_finished)
+	if equipment_data:
+		$WeaponIndicator.set_equipment_data(equipment_data)
 
 
 func _physics_process(_delta):
@@ -64,14 +68,16 @@ func move():
 		animation_state.travel("Idle")
 
 	if Input.is_action_just_pressed("hit"):
+		hit()
 		current_state = PlayerStates.HIT
 		animation_state.travel("Fist")
 
 	move_and_slide()
 
 
-func hit():  # TODO how do we handle different equipped weapons?
-	pass
+func hit() -> void:
+	if equipment_data != null and equipment_data.weapon != null:
+		attack.damage = int(equipment_data.weapon.damage)
 
 
 func die():
@@ -90,4 +96,7 @@ func increase_health(value: int):
 
 
 func collect(item) -> bool:
-	return inventory.insert(item) == 0
+	var success := inventory.insert(item) == 0
+	if success:
+		item_collected.emit(item.name)
+	return success
