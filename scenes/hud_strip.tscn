@@ -41,7 +41,7 @@ mouse_filter = 2
 [node name="WeaponSlot" type="Panel" parent="HBoxContainer/WeaponSlotGroup"]
 modulate = Color(1, 1, 1, 0.4)
 custom_minimum_size = Vector2(48, 48)
-mouse_filter = 2
+mouse_filter = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_weapon")
 
 [node name="IconRect" type="TextureRect" parent="HBoxContainer/WeaponSlotGroup/WeaponSlot"]
@@ -75,7 +75,7 @@ mouse_filter = 2
 [node name="ToolSlot" type="Panel" parent="HBoxContainer/ToolSlotGroup"]
 modulate = Color(1, 1, 1, 0.4)
 custom_minimum_size = Vector2(48, 48)
-mouse_filter = 2
+mouse_filter = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_tool")
 
 [node name="IconRect" type="TextureRect" parent="HBoxContainer/ToolSlotGroup/ToolSlot"]
@@ -101,3 +101,5 @@ mouse_filter = 2
 theme_override_font_sizes/font_size = 11
 text = "T"
 horizontal_alignment = 1
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
