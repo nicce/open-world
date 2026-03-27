@@ -134,6 +134,12 @@ Before implementing any task:
 
 If an implementation changes or extends the architecture, update the affected documents in `/docs` as part of the same task. Code and docs must stay in sync.
 
+### Iteration guardrails
+
+- **Max 4 attempts per problem.** If a fix, test, or investigation has not succeeded after 4 iterations, stop and report the blocker instead of continuing to iterate.
+- **Unknown tag.** When a solution cannot be found within the attempt limit, respond with `[UNKNOWN]` at the start of the message, describe what was tried and what is unclear, and ask the user for guidance. Do not guess or invent a solution.
+- **No brute-forcing.** If an approach is clearly not working, do not keep repeating it with minor variations. Change strategy or escalate to the user.
+
 ## Git Workflow
 
 - Work on feature branches with the prefix `claude/`.
