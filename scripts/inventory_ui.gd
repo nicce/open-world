@@ -150,7 +150,14 @@ func _on_slot_right_clicked(slot_node: Panel) -> void:
 	elif item is HealthItem:
 		_popup_menu.add_item("Consume", MENU_CONSUME)
 	_popup_menu.add_item("Drop", MENU_DROP)
-	_popup_menu.popup(Rect2i(get_viewport().get_mouse_position(), Vector2i.ZERO))
+	var pos: Vector2 = get_viewport().get_mouse_position()
+	var vp: Vector2 = get_viewport().get_visible_rect().size
+	var popup_min := _popup_menu.get_contents_minimum_size()
+	if popup_min == Vector2.ZERO:
+		popup_min = Vector2(120.0, 60.0)
+	pos.x = clampf(pos.x, 0.0, vp.x - popup_min.x)
+	pos.y = clampf(pos.y, 0.0, vp.y - popup_min.y)
+	_popup_menu.popup(Rect2i(pos, Vector2i.ZERO))
 
 
 func _on_context_menu_id_pressed(id: int) -> void:
