@@ -1,6 +1,14 @@
 name: Claude Code
 
 on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - "**/*.gd"
+      - "**/*.tscn"
+      - "**/*.tres"
+      - "**/*.res"
+      - "project.godot"
   issue_comment:
     types: [created]
   pull_request_review_comment:
