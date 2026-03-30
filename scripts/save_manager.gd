@@ -6,7 +6,7 @@ const TMP_PATH = "user://save.tmp"
 
 func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
 	var json_string = JSON.stringify(data)
-	var current_tmp_path = path.replace(".json", ".tmp")
+	var current_tmp_path = path.get_basename() + ".tmp"
 
 	var file = FileAccess.open(current_tmp_path, FileAccess.WRITE)
 	if not file:
@@ -46,12 +46,12 @@ func load_data(path: String = SAVE_PATH) -> Dictionary:
 	return json.data
 
 
-func save_game(player: Player) -> void:
+func save_game(player: Player, path: String = SAVE_PATH) -> Error:
 	var data = {"player": player.to_dict()}
-	save_data(data)
+	return save_data(data, path)
 
 
-func load_game(player: Player) -> void:
-	var result = load_data()
+func load_game(player: Player, path: String = SAVE_PATH) -> void:
+	var result = load_data(path)
 	if result.has("player"):
 		player.from_dict(result["player"])

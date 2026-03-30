@@ -1,5 +1,7 @@
 extends GutTest
 
+const TEST_SAVE_PATH = "user://test_player_round_trip.json"
+
 var player_scene = preload("res://scenes/player.tscn")
 var player: Player
 
@@ -12,8 +14,8 @@ func before_each():
 func after_each():
 	if is_instance_valid(player):
 		player.free()
-	if FileAccess.file_exists(SaveManager.SAVE_PATH):
-		DirAccess.remove_absolute(SaveManager.SAVE_PATH)
+	if FileAccess.file_exists(TEST_SAVE_PATH):
+		DirAccess.remove_absolute(TEST_SAVE_PATH)
 
 func test_player_to_dict():
 	player.position = Vector2(100, 200)
@@ -35,13 +37,13 @@ func test_player_from_dict():
 func test_player_round_trip():
 	player.position = Vector2(123, 456)
 	player.health_component.health = 75
-	SaveManager.save_game(player)
-	
+	SaveManager.save_game(player, TEST_SAVE_PATH)
+
 	var new_player = player_scene.instantiate()
 	new_player.inventory = Inventory.new()
 	add_child(new_player)
-	SaveManager.load_game(new_player)
-	
+	SaveManager.load_game(new_player, TEST_SAVE_PATH)
+
 	assert_eq(new_player.position, Vector2(123, 456))
 	assert_eq(new_player.health_component.health, 75)
 	new_player.free()

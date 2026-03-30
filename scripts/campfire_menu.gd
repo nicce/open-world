@@ -9,7 +9,9 @@ func _ready() -> void:
 
 func _on_save_button_pressed() -> void:
 	if player:
-		SaveManager.save_game(player)
+		var err = SaveManager.save_game(player)
+		if err != OK:
+			push_error("Failed to save game: %s" % error_string(err))
 	_on_close_button_pressed()
 
 

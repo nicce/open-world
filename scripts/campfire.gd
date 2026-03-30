@@ -42,11 +42,7 @@ func _process(_delta):
 func open_menu():
 	var menu = campfire_menu_scene.instantiate()
 	menu.player = player_ref
-	var canvas_layer = get_tree().root.find_child("CanvasLayer", true, true)
-	if canvas_layer:
-		canvas_layer.add_child(menu)
-	else:
-		get_tree().root.add_child(menu)
+	get_tree().root.add_child(menu)
 
 
 func _on_burn_timer_timeout() -> void:
