@@ -98,3 +98,26 @@ func clone() -> Inventory:
 		slot_copy.max_stack = slot.max_stack
 		copy.slots.append(slot_copy)
 	return copy
+
+
+func to_dict() -> Dictionary:
+	var slots_dict := {}
+	for i in range(slots.size()):
+		if not slots[i].is_empty():
+			slots_dict[str(i)] = slots[i].to_dict()
+	return {"slots": slots_dict}
+
+
+func from_dict(dict: Dictionary) -> void:
+	# Clear all slots first (D-06)
+	for slot in slots:
+		slot.item = null
+		slot.quantity = 0
+
+	var slots_dict = dict.get("slots", {})
+	for i_str in slots_dict:
+		var i = i_str.to_int()
+		if i >= 0 and i < slots.size():
+			slots[i].from_dict(slots_dict[i_str])
+
+	inventory_changed.emit()

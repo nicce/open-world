@@ -46,3 +46,17 @@ func remove(amount: int = 1) -> int:
 		item = null
 		quantity = 0
 	return removed
+
+
+func to_dict() -> Dictionary:
+	return {"id": item.id if item else "", "qty": quantity}
+
+
+func from_dict(dict: Dictionary) -> void:
+	var id = dict.get("id", "")
+	if id == "":
+		item = null
+		quantity = 0
+	else:
+		item = ItemRegistry.get_item(id)
+		quantity = dict.get("qty", 0)

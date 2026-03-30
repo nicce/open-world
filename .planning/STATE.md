@@ -2,26 +2,26 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Save & Load
-status: ready to plan
-stopped_at: Roadmap created — phases 9-12 defined
+status: completed
+stopped_at: Phase 9 completed — serialisation primitives in place
 last_updated: "2026-03-30"
 progress:
   total_phases: 4
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  completed_phases: 1
+  total_plans: 3
+  completed_plans: 3
 ---
 
 # Project State
 
 ## Current Position
 
-Phase: 9 of 12 (Foundation — ItemRegistry and Resource Serialisation)
-Plan: 0 of ? in current phase
+Phase: 10 of 12 (SaveManager and JSON I/O)
+Plan: 0 of 2 in current phase
 Status: Ready to plan
-Last activity: 2026-03-30 — v1.2 roadmap created; phases 9-12 defined
+Last activity: 2026-03-30 — Phase 9 completed (ItemRegistry and Resource Serialisation)
 
-Progress: [████████░░░░░░░░░░░░] 40% (8/12 phases complete across all milestones)
+Progress: [██████████░░░░░░░░░░] 50% (9/12 phases complete across all milestones)
 
 ## Project Reference
 
