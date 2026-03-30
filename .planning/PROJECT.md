@@ -43,9 +43,20 @@ A satisfying item and inventory system that makes picking things up, equipping w
 - ✓ Equipped weapon drives player hit() attack; fist as fallback — v1.1 (CMBT-03, CMBT-04)
 - ✓ Placeholder visual indicator on player when weapon is equipped — v1.1 (CMBT-05)
 
+## Current Milestone: v1.2 Save & Load
+
+**Goal:** Persist player progress (stats, inventory, equipment, world state) to disk and restore it on game start, with autosave on key events.
+
+**Target features:**
+- JSON save file in `user://`
+- Serialise player stats + inventory + equipment
+- Serialise world state (collected items, enemy state)
+- Load on game start
+- Autosave on sleep/area transition
+
 ### Active
 
-*(empty — define requirements for next milestone via `/gsd:new-milestone`)*
+<!-- Current scope. Building toward these. -->
 
 ### Out of Scope
 
@@ -121,4 +132,4 @@ Technical debt (non-blocking):
 | world.gd as single wiring point | All set_*() calls co-located in _ready() — discoverable, consistent | ✓ Good — used across 3 phases |
 
 ---
-*Last updated: 2026-03-27 after v1.1 milestone*
+*Last updated: 2026-03-30 after v1.2 milestone start*
