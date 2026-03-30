@@ -88,6 +88,18 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   4. Autosave does not fire while the player is dead (no corrupt/inconsistent save state)
 **Plans**: [To be planned]
 
+### Phase 13: Campfire Menu Polish — Keyboard Navigation and Fire Control
+**Goal**: The campfire menu is fully keyboard-driven and exposes fire control so the player can light or extinguish the fire from the menu
+**Depends on**: Phase 10
+**Requirements**: UI-01, UI-02, FIRE-01
+**Success Criteria** (what must be TRUE):
+  1. Arrow keys (up/down) move focus between menu buttons; Enter/Space activates the focused button
+  2. The menu can be closed with the interact key (E) or a close button without touching the mouse
+  3. The campfire menu contains a "Light Fire" / "Extinguish Fire" option that toggles fire state
+  4. The fire option label reflects current fire state (shows "Light Fire" when out, "Extinguish Fire" when burning)
+  5. Adding wood via the menu (or lighting via menu) starts the burn timer correctly
+**Plans**: [To be planned]
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -104,3 +116,4 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/2 | Not started | - |
 | 11. Full Round-Trip — Inventory and Equipment | v1.2 | 0/3 | Not started | - |
 | 12. Autosave Triggers and Polish | v1.2 | 0/3 | Not started | - |
+| 13. Campfire Menu Polish — Keyboard Navigation and Fire Control | v1.2 | 0/1 | Not started | - |
