@@ -4,6 +4,7 @@
 
 - ✅ **v1.0 Inventory & Combat** — Phases 1–4 (shipped 2026-03-13)
 - ✅ **v1.1 Equipment Slots** — Phases 5–8 (shipped 2026-03-27)
+- 🚧 **v1.2 Save & Load** — Phases 9–12 (in progress)
 
 ## Phases
 
@@ -31,6 +32,57 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 </details>
 
+### 🚧 v1.2 Save & Load (In Progress)
+
+**Milestone Goal:** Persist player progress (stats, inventory, equipment) to disk and restore it on game start, with autosave on key events.
+
+## Phase Details
+
+### Phase 9: Foundation — ItemRegistry and Resource Serialisation
+**Goal**: All save/load data contracts exist as pure, unit-tested logic — no file I/O yet
+**Depends on**: Phase 8
+**Requirements**: REG-01, REG-02, SER-01, SER-02, SER-03, SER-04, SER-05
+**Success Criteria** (what must be TRUE):
+  1. ItemRegistry autoload resolves any registered item id to its typed Resource instance
+  2. ItemRegistry returns null and logs a warning for any unknown id (does not crash)
+  3. Inventory.to_dict() / from_dict() round-trip preserves all slot item ids and quantities
+  4. EquipmentData.to_dict() / from_dict() round-trip preserves weapon and tool slot contents
+  5. HealthComponent.load_health(value) sets HP to the given value without triggering _ready() re-init
+**Plans**: TBD
+
+### Phase 10: SaveManager — Write Path and Player Round-Trip
+**Goal**: Player can save and load position and HP via a file that survives game restart
+**Depends on**: Phase 9
+**Requirements**: SAVE-01, SAVE-02, SAVE-04
+**Success Criteria** (what must be TRUE):
+  1. Saving writes a valid JSON file to user://save.json using atomic write (no corrupt file on partial write)
+  2. After a save, restarting the game restores the player to the saved position
+  3. After a save, restarting the game restores the player's HP to the saved value
+  4. If no save file exists on start, the game launches normally with no error
+**Plans**: TBD
+
+### Phase 11: Full Round-Trip — Inventory and Equipment
+**Goal**: All player-owned items survive a save/load cycle exactly as they were
+**Depends on**: Phase 10
+**Requirements**: SAVE-03
+**Success Criteria** (what must be TRUE):
+  1. After a save and restart, the player's bag contains the same items in the same quantities
+  2. After a save and restart, the player's equipped weapon and tool slots are restored
+  3. Inventory UI and HUD strip reflect the loaded state immediately on game start without additional interaction
+  4. Items do not appear in both the bag and equipment slots after load (EQUIP-05 invariant holds)
+**Plans**: TBD
+
+### Phase 12: Autosave Triggers and Polish
+**Goal**: The game saves automatically at key moments and the save file is version-stamped
+**Depends on**: Phase 11
+**Requirements**: TRIG-01, TRIG-02, TRIG-03
+**Success Criteria** (what must be TRUE):
+  1. Sleeping at the campfire triggers a save (progress is preserved without manual action)
+  2. The game autosaves on a configurable interval without player intervention
+  3. The save file contains a version key that can be inspected for future migration support
+  4. Autosave does not fire while the player is dead (no corrupt/inconsistent save state)
+**Plans**: TBD
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -43,3 +95,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 6. Equip/Unequip Flow | v1.1 | 2/2 | Complete | 2026-03-19 |
 | 7. Combat Wiring + HUD Strip | v1.1 | 2/2 | Complete | 2026-03-20 |
 | 8. Integration Polish | v1.1 | 3/3 | Complete | 2026-03-27 |
+| 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 0/? | Not started | - |
+| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/? | Not started | - |
+| 11. Full Round-Trip — Inventory and Equipment | v1.2 | 0/? | Not started | - |
+| 12. Autosave Triggers and Polish | v1.2 | 0/? | Not started | - |

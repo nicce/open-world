@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Save & Load
-status: defining requirements
-stopped_at: Defining requirements
+status: ready to plan
+stopped_at: Roadmap created — phases 9-12 defined
 last_updated: "2026-03-30"
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -16,17 +16,19 @@ progress:
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-03-30 — Milestone v1.2 started
+Phase: 9 of 12 (Foundation — ItemRegistry and Resource Serialisation)
+Plan: 0 of ? in current phase
+Status: Ready to plan
+Last activity: 2026-03-30 — v1.2 roadmap created; phases 9-12 defined
+
+Progress: [████████░░░░░░░░░░░░] 40% (8/12 phases complete across all milestones)
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-30 after v1.2 milestone start)
 
 **Core value:** A satisfying item and inventory system that makes picking things up, equipping weapons, using consumables, and managing weight feel meaningful
-**Current focus:** v1.2 Save & Load — defining requirements
+**Current focus:** Phase 9 — Foundation (ItemRegistry and Resource Serialisation)
 
 ## Shipped Milestones
 
@@ -38,6 +40,11 @@ See: .planning/PROJECT.md (updated 2026-03-30 after v1.2 milestone start)
 ### Decisions
 
 All decisions logged in PROJECT.md Key Decisions table.
+Key constraints for v1.2:
+- Serialise item ids (StringName), never Resource objects — JSON.stringify produces {} for GDScript objects
+- from_dict() must mutate Resource instances in place — replacement silently orphans signal subscriptions
+- SaveManager.load_game() must be last call in world.gd._ready() — after all UI subscriptions are wired
+- Atomic write: write to user://save.tmp, verify JSON parses, then rename to user://save.json
 
 ### Pending Todos
 
@@ -45,10 +52,12 @@ None.
 
 ### Blockers/Concerns
 
+- Phase 11: Inventory slot assignment API needs verification — direct slot write may require a set_slot() method if slots array is not publicly accessible
+- Phase 11: gold_key.tscn collectable_id field existence needs audit before wiring collected_ids tracking
 - Godot version mismatch: Makefile uses 4.2.2 for headless tests; project declares 4.3. Fix before CI diverges.
 
 ## Session Continuity
 
-Last session: 2026-03-27
-Stopped at: v1.1 milestone complete
+Last session: 2026-03-30
+Stopped at: Roadmap created — ready to plan Phase 9
 Resume file: None

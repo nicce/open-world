@@ -59,26 +59,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| REG-01 | — | Pending |
-| REG-02 | — | Pending |
-| SER-01 | — | Pending |
-| SER-02 | — | Pending |
-| SER-03 | — | Pending |
-| SER-04 | — | Pending |
-| SER-05 | — | Pending |
-| SAVE-01 | — | Pending |
-| SAVE-02 | — | Pending |
-| SAVE-03 | — | Pending |
-| SAVE-04 | — | Pending |
-| TRIG-01 | — | Pending |
-| TRIG-02 | — | Pending |
-| TRIG-03 | — | Pending |
+| REG-01 | Phase 9 | Pending |
+| REG-02 | Phase 9 | Pending |
+| SER-01 | Phase 9 | Pending |
+| SER-02 | Phase 9 | Pending |
+| SER-03 | Phase 9 | Pending |
+| SER-04 | Phase 9 | Pending |
+| SER-05 | Phase 9 | Pending |
+| SAVE-01 | Phase 10 | Pending |
+| SAVE-02 | Phase 10 | Pending |
+| SAVE-03 | Phase 11 | Pending |
+| SAVE-04 | Phase 10 | Pending |
+| TRIG-01 | Phase 12 | Pending |
+| TRIG-02 | Phase 12 | Pending |
+| TRIG-03 | Phase 12 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 14 total
-- Mapped to phases: 0
-- Unmapped: 14 ⚠️
+- Mapped to phases: 14
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-30 after initial definition*
+*Last updated: 2026-03-30 after roadmap creation*
