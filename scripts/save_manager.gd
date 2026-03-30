@@ -1,14 +1,13 @@
 extends Node
 
 const SAVE_PATH = "user://save.json"
-const TMP_PATH = "user://save.tmp"
 
 
 func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
 	var json_string = JSON.stringify(data)
-	var current_tmp_path = path.get_basename() + ".tmp"
+	var tmp_path = path + ".tmp"
 
-	var file = FileAccess.open(current_tmp_path, FileAccess.WRITE)
+	var file = FileAccess.open(tmp_path, FileAccess.WRITE)
 	if not file:
 		return FileAccess.get_open_error()
 
@@ -18,9 +17,10 @@ func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
 	if FileAccess.file_exists(path):
 		var err = DirAccess.remove_absolute(path)
 		if err != OK:
+			DirAccess.remove_absolute(tmp_path)
 			return err
 
-	var err = DirAccess.rename_absolute(current_tmp_path, path)
+	var err = DirAccess.rename_absolute(tmp_path, path)
 	return err
 
 
@@ -28,22 +28,16 @@ func load_data(path: String = SAVE_PATH) -> Dictionary:
 	if not FileAccess.file_exists(path):
 		return {}
 
-	var file = FileAccess.open(path, FileAccess.READ)
-	if not file:
-		return {}
+	var json_string := FileAccess.get_file_as_string(path)
+	var data = JSON.parse_string(json_string)
 
-	var json_string = file.get_as_text()
-	file.close()
+	if data is Dictionary:
+		return data
 
-	var json = JSON.new()
-	var err = json.parse(json_string)
-	if err != OK:
-		return {}
+	if data != null:
+		push_warning("Save data in '%s' is not a valid dictionary." % path)
 
-	if typeof(json.data) != TYPE_DICTIONARY:
-		return {}
-
-	return json.data
+	return {}
 
 
 func save_game(player: Player, path: String = SAVE_PATH) -> Error:
