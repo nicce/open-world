@@ -48,7 +48,10 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   3. Inventory.to_dict() / from_dict() round-trip preserves all slot item ids and quantities
   4. EquipmentData.to_dict() / from_dict() round-trip preserves weapon and tool slot contents
   5. HealthComponent.load_health(value) sets HP to the given value without triggering _ready() re-init
-**Plans**: TBD
+**Plans**: 3 plans
+- [ ] 09-01-PLAN.md — Create Item Resources and ItemRegistry Autoload
+- [ ] 09-02-PLAN.md — Implement Inventory Sparse Dict Serialisation
+- [ ] 09-03-PLAN.md — Implement Equipment and Health Serialisation
 
 ### Phase 10: SaveManager — Write Path and Player Round-Trip
 **Goal**: Player can save and load position and HP via a file that survives game restart
@@ -59,7 +62,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. After a save, restarting the game restores the player to the saved position
   3. After a save, restarting the game restores the player's HP to the saved value
   4. If no save file exists on start, the game launches normally with no error
-**Plans**: TBD
+**Plans**: [To be planned]
 
 ### Phase 11: Full Round-Trip — Inventory and Equipment
 **Goal**: All player-owned items survive a save/load cycle exactly as they were
@@ -70,7 +73,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. After a save and restart, the player's equipped weapon and tool slots are restored
   3. Inventory UI and HUD strip reflect the loaded state immediately on game start without additional interaction
   4. Items do not appear in both the bag and equipment slots after load (EQUIP-05 invariant holds)
-**Plans**: TBD
+**Plans**: [To be planned]
 
 ### Phase 12: Autosave Triggers and Polish
 **Goal**: The game saves automatically at key moments and the save file is version-stamped
@@ -81,7 +84,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. The game autosaves on a configurable interval without player intervention
   3. The save file contains a version key that can be inspected for future migration support
   4. Autosave does not fire while the player is dead (no corrupt/inconsistent save state)
-**Plans**: TBD
+**Plans**: [To be planned]
 
 ## Progress
 
@@ -95,7 +98,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 6. Equip/Unequip Flow | v1.1 | 2/2 | Complete | 2026-03-19 |
 | 7. Combat Wiring + HUD Strip | v1.1 | 2/2 | Complete | 2026-03-20 |
 | 8. Integration Polish | v1.1 | 3/3 | Complete | 2026-03-27 |
-| 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 0/? | Not started | - |
-| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/? | Not started | - |
-| 11. Full Round-Trip — Inventory and Equipment | v1.2 | 0/? | Not started | - |
-| 12. Autosave Triggers and Polish | v1.2 | 0/? | Not started | - |
+| 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 0/3 | Not started | - |
+| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/3 | Not started | - |
+| 11. Full Round-Trip — Inventory and Equipment | v1.2 | 0/3 | Not started | - |
+| 12. Autosave Triggers and Polish | v1.2 | 0/3 | Not started | - |

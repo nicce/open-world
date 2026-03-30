@@ -36,3 +36,9 @@ func increase(value: int):
 
 	if health_bar:
 		health_bar.update(health)
+
+
+func load_health(value: int) -> void:
+	health = clampi(value, 0, max_health)
+	if health_bar:
+		health_bar.update(health)

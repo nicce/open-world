@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cr7slj52y23lg" path="res://art/items/GoldKey.png" id="1_key_tex"]
+[ext_resource type="Script" path="res://scripts/resources/item.gd" id="2_key_script"]
+
+[resource]
+script = ExtResource("2_key_script")
+id = &"gold_key"
+name = "Gold Key"
+texture = ExtResource("1_key_tex")
+weight = 1.0
+category = 0
+consumable = false

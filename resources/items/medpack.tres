@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HealthItem" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://46x056us305m" path="res://art/potions/Medipack.png" id="1_med_tex"]
+[ext_resource type="Script" path="res://scripts/resources/health_item.gd" id="2_med_script"]
+
+[resource]
+script = ExtResource("2_med_script")
+health = 50
+id = &"medpack"
+name = "Medpack"
+texture = ExtResource("1_med_tex")
+weight = 0.2
+category = 1
+consumable = true
