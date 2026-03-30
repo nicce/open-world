@@ -100,3 +100,17 @@ func collect(item) -> bool:
 	if success:
 		item_collected.emit(item.name)
 	return success
+
+
+func to_dict() -> Dictionary:
+	return {
+		"position": {"x": position.x, "y": position.y},
+		"health": health_component.health
+	}
+
+
+func from_dict(dict: Dictionary) -> void:
+	if dict.has("position"):
+		position = Vector2(dict.position.x, dict.position.y)
+	if dict.has("health"):
+		health_component.load_health(dict.health)
