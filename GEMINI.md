@@ -1,4 +1,4 @@
-# GEMINI.md — open-world
+# CLAUDE.md — open-world
 
 ## Project Overview
 
@@ -60,40 +60,40 @@ Player uses an explicit enum state machine (`MOVE`, `HIT`, `DEAD`) in `scripts/p
 
 ## Key Systems
 
-| System           | Script                           | Scene                              |
-| ---------------- | -------------------------------- | ---------------------------------- |
-| Player           | `scripts/player.gd`              | `scenes/player.tscn`               |
-| Enemy (snake)    | `scripts/snake.gd`               | `scenes/snake.tscn`                |
-| Health           | `scripts/health_component.gd`    | `components/health_component.tscn` |
-| Hitbox / damage  | `scripts/hitbox_component.gd`    | `components/hitbox_component.tscn` |
-| Camera shake     | `scripts/advanced_camera.gd`     | (child of world)                   |
-| Campfire         | `scripts/campfire.gd`            | `scenes/campfire.tscn`             |
-| Inventory data   | `scripts/resources/inventory.gd` | —                                  |
-| Inventory UI     | `scripts/inventory_ui.gd`        | `scenes/inventory_ui.tscn`         |
-| Collectables     | `scripts/collectable.gd`         | (per-item scenes)                  |
-| Background music | `scripts/background_music.gd`    | `scenes/background_music.tscn`     |
+| System | Script | Scene |
+|---|---|---|
+| Player | `scripts/player.gd` | `scenes/player.tscn` |
+| Enemy (snake) | `scripts/snake.gd` | `scenes/snake.tscn` |
+| Health | `scripts/health_component.gd` | `components/health_component.tscn` |
+| Hitbox / damage | `scripts/hitbox_component.gd` | `components/hitbox_component.tscn` |
+| Camera shake | `scripts/advanced_camera.gd` | (child of world) |
+| Campfire | `scripts/campfire.gd` | `scenes/campfire.tscn` |
+| Inventory data | `scripts/resources/inventory.gd` | — |
+| Inventory UI | `scripts/inventory_ui.gd` | `scenes/inventory_ui.tscn` |
+| Collectables | `scripts/collectable.gd` | (per-item scenes) |
+| Background music | `scripts/background_music.gd` | `scenes/background_music.tscn` |
 
 ## Input Mappings (defined in project.godot)
 
-| Action ID   | Description | Default Keys          |
-| ----------- | ----------- | --------------------- |
-| `left`      | Move left   | A / Left Arrow        |
-| `right`     | Move right  | D / Right Arrow       |
-| `up`        | Move up     | W / Up Arrow          |
-| `down`      | Move down   | S / Down Arrow        |
-| `hit`       | Attack      | X / Left Mouse Button |
-| `interact`  | Interact    | E                     |
-| `inventory` | Inventory   | Tab / I               |
-| `jump`      | Jump        | Space                 |
+| Action ID | Description | Default Keys |
+|---|---|---|
+| `left` | Move left | A / Left Arrow |
+| `right` | Move right | D / Right Arrow |
+| `up` | Move up | W / Up Arrow |
+| `down` | Move down | S / Down Arrow |
+| `hit` | Attack | X / Left Mouse Button |
+| `interact` | Interact | E |
+| `inventory` | Inventory | Tab / I |
+| `jump` | Jump | Space |
 
 ## Physics Layers
 
-| Layer | Name      |
-| ----- | --------- |
-| 2     | player    |
-| 3     | enemies   |
-| 4     | weapons   |
-| 5     | no_affect |
+| Layer | Name |
+|---|---|
+| 2 | player |
+| 3 | enemies |
+| 4 | weapons |
+| 5 | no_affect |
 
 ## Testing & Linting
 
