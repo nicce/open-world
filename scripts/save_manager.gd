@@ -3,6 +3,7 @@ extends Node
 const SAVE_PATH = "user://save.json"
 const TMP_PATH = "user://save.tmp"
 
+
 func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
 	var json_string = JSON.stringify(data)
 	var current_tmp_path = path.replace(".json", ".tmp")
@@ -21,6 +22,7 @@ func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
 
 	var err = DirAccess.rename_absolute(current_tmp_path, path)
 	return err
+
 
 func load_data(path: String = SAVE_PATH) -> Dictionary:
 	if not FileAccess.file_exists(path):
@@ -45,9 +47,7 @@ func load_data(path: String = SAVE_PATH) -> Dictionary:
 
 
 func save_game(player: Player) -> void:
-	var data = {
-		"player": player.to_dict()
-	}
+	var data = {"player": player.to_dict()}
 	save_data(data)
 
 

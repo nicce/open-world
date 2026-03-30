@@ -103,10 +103,7 @@ func collect(item) -> bool:
 
 
 func to_dict() -> Dictionary:
-	return {
-		"position": {"x": position.x, "y": position.y},
-		"health": health_component.health
-	}
+	return {"position": {"x": position.x, "y": position.y}, "health": health_component.health}
 
 
 func from_dict(dict: Dictionary) -> void:
