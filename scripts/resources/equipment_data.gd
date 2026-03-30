@@ -35,10 +35,7 @@ func unequip_tool() -> Item:
 
 
 func to_dict() -> Dictionary:
-	return {
-		"weapon": weapon.id if weapon else null,
-		"tool": tool.id if tool else null
-	}
+	return {"weapon": weapon.id if weapon else null, "tool": tool.id if tool else null}
 
 
 func from_dict(dict: Dictionary) -> void:

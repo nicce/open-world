@@ -49,10 +49,7 @@ func remove(amount: int = 1) -> int:
 
 
 func to_dict() -> Dictionary:
-	return {
-		"id": item.id if item else "",
-		"qty": quantity
-	}
+	return {"id": item.id if item else "", "qty": quantity}
 
 
 func from_dict(dict: Dictionary) -> void:
