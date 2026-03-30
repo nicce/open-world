@@ -2,11 +2,11 @@
 
 ## What This Is
 
-A top-down 2D game built with Godot Engine 4.2+ and GDScript, aiming for a balanced loop of survival, farming, and combat. The player moves through a tile-based world, fights enemies, collects and manages items in a grid inventory, and interacts with objects. v1.0 shipped a complete item lifecycle: pickup → grid inventory → use/drop → world.
+A top-down 2D game built with Godot Engine 4.2+ and GDScript, aiming for a balanced loop of survival, farming, and combat. The player moves through a tile-based world, fights enemies, collects and manages items in a grid inventory, and interacts with objects. v1.1 shipped a complete equipment layer: weapon and tool slots with right-click context menu, equipped-weapon combat wiring, and an always-visible HUD strip.
 
 ## Core Value
 
-A satisfying item and inventory system that makes picking things up, using consumables, and managing weight feel meaningful — everything else in the game depends on items working correctly.
+A satisfying item and inventory system that makes picking things up, equipping weapons, using consumables, and managing weight feel meaningful — everything else in the game depends on items working correctly.
 
 ## Requirements
 
@@ -32,19 +32,20 @@ A satisfying item and inventory system that makes picking things up, using consu
 - ✓ Consumable use (E key) restores HP — v1.0 (ITEM-01)
 - ✓ Item drop (Q key) spawns collectable in world — v1.0 (ITEM-02)
 - ✓ Pickup notification label fades in/out — v1.0 (ITEM-03)
-
-### Active
-
-<!-- v1.1 Equipment Slots -->
-- [ ] Right-click context menu on inventory items (Equip / Consume / Drop by type)
-- [ ] Equipping moves item from bag to equipment slot; unequipping returns it to bag
-- [ ] Tool slot exists in UI (gameplay wired in future milestone)
-
-### Validated
-
+- ✓ EquipmentData Resource with weapon/tool slots, equipment_changed signal — v1.1 (EQUIP-05)
+- ✓ Right-click context menu on bag items (Equip/Consume/Drop by type) — v1.1 (CTXMENU-01, CTXMENU-02)
+- ✓ Context menu dismisses on inventory close — v1.1 (CTXMENU-04)
+- ✓ Atomic equip/unequip: weapon moves between bag and slot, swap on re-equip, full-bag rejection — v1.1 (EQUIP-01, EQUIP-02, EQUIP-03)
+- ✓ Tool slot exists in UI (gameplay wired in future milestone) — v1.1 (EQUIP-04)
+- ✓ Item cannot exist simultaneously in bag and equipment slot — v1.1 (EQUIP-05)
+- ✓ Right-click equipment slot shows Unequip/Drop context menu — v1.1 (CTXMENU-03)
 - ✓ Always-visible HUD strip with weapon and tool equipment slots — v1.1 (HUD-01, HUD-02)
 - ✓ Equipped weapon drives player hit() attack; fist as fallback — v1.1 (CMBT-03, CMBT-04)
 - ✓ Placeholder visual indicator on player when weapon is equipped — v1.1 (CMBT-05)
+
+### Active
+
+*(empty — define requirements for next milestone via `/gsd:new-milestone`)*
 
 ### Out of Scope
 
@@ -56,11 +57,10 @@ A satisfying item and inventory system that makes picking things up, using consu
 Feature groups available for upcoming milestones, roughly in suggested build order. Each group becomes a milestone or part of one — scope at planning time via `/gsd:new-milestone`.
 
 **Near-term (foundational mechanics):**
-- **Expanded Combat** — weapon equip logic in player.gd, Sword/Bow scenes, weapon animations, enemy loot drops
-- **Equipment Slots** — weapon/armour/tool slots separate from bag grid, equip by slot-click, show equipped weapon on player
+- **Expanded Combat** — Sword/Bow scenes, weapon animations, enemy loot drops
 - **More Enemies** — Slime, Bandit, SpawnPoint with night spawning, aggro/de-aggro range, enemy health bars, Inspector-tunable stats
-- **UI & HUD Polish** — HUD health bar, hotbar (quick-access row), equipped weapon icon, pause menu (Resume/Save/Quit)
-- **Save & Load** — JSON save in `user://`, serialise player stats + inventory + world state, load on start, autosave on sleep/transition
+- **UI & HUD Polish** — HUD health bar, hotbar (quick-access row), pause menu (Resume/Save/Quit), item tooltips on hover
+- **Save & Load** — JSON save in `user://`, serialise player stats + inventory + equipment + world state, load on start, autosave on sleep/transition
 
 **Mid-term (survival loop):**
 - **Hunger & Stamina** — hunger/stamina stats, drain over time, bars in HUD, FoodItem resource, sprint (hold Shift) drains stamina
@@ -77,22 +77,24 @@ Feature groups available for upcoming milestones, roughly in suggested build ord
 
 ## Context
 
-**v1.0 shipped 2026-03-13.** 4 phases, 11 plans, 88 unit tests, ~2,100 GDScript LOC.
+**v1.1 shipped 2026-03-27.** 8 phases total (4 per milestone), 20 plans, 144 unit tests, ~17,600 GDScript LOC.
 
 Architecture patterns established and proven:
 - Signal-driven communication (no tight coupling) — used across all inventory/UI/world wiring
-- Resource classes for data (Item, Inventory, InventorySlot extend Resource)
+- Resource classes for data (Item, Inventory, InventorySlot, EquipmentData extend Resource)
 - Component composition (HealthComponent, HitboxComponent, PlayerDetectionComponent)
 - Enum state machine for Player (MOVE/HIT/DEAD)
 - GUT inner-class stub pattern for testing CharacterBody2D without scene tree
+- world.gd as single wiring hub — all `set_*()` calls for UI nodes live in `_ready()`
+- PopupMenu pattern: named const IDs + `id_pressed` (not `index_pressed`) to avoid positional shift
+- Atomic transaction ordering: remove from source BEFORE placing in destination
 
-Technical debt from v1.0 (non-blocking):
-- CMBT-01/02 need Godot editor runtime verification (animation names, knockback feel)
-- `func hit(): pass` stub in player.gd — weapon equip system not yet designed
-- `drop` action missing from CLAUDE.md Input Mappings table
-- Partial-insert (amount > 1) suppresses insert_rejected — latent INV-02 edge case
-- `scripts/lake_world.gd` exists but may be orphaned — audit before building world expansion
+Technical debt (non-blocking):
+- Godot version mismatch: Makefile uses 4.2.2 for headless tests; project declares 4.3 — fix before CI diverges
+- `scripts/lake_world.gd` may be orphaned — audit before building world expansion
 - `scenes/abandoned_village.gd` is misplaced (should be under `scripts/`) — audit and relocate
+- Partial-insert (amount > 1) suppresses `insert_rejected` — latent INV-02 edge case
+- CMBT-01/02 need Godot editor runtime verification (animation names, knockback feel)
 
 ## Constraints
 
@@ -111,19 +113,12 @@ Technical debt from v1.0 (non-blocking):
 | Placeholder art throughout v1 | Unblocks all mechanic work | ✓ Good — zero art blockers |
 | clone() instead of duplicate() for inventory | Godot 4.3 blocks overriding native duplicate() on Resource | ✓ Good — tests confirm isolation |
 | insert_rejected on any complete failure | Slot-full was silently dropped; elif remaining > 0 covers both cases | ✓ Good — Phase 4 gap closure |
+| EquipmentData separate from Inventory | Mixing them would corrupt 15-slot grid and weight accounting | ✓ Good — clean separation of concerns |
+| Equip transaction: remove-before-place | Prevents item existing in both bag and slot simultaneously | ✓ Good — EQUIP-05 invariant holds |
+| PopupMenu named const IDs + id_pressed | index_pressed breaks when menu items are conditionally added | ✓ Good — used consistently across InventoryUI + HudStrip |
+| HUD strip as sibling of InventoryUI in CanvasLayer | Not a child — must stay visible when inventory panel is closed | ✓ Good — HUD-01 confirmed working |
+| hit() reads damage at call time, no caching | Caching via equipment_changed would require careful teardown | ✓ Good — simpler, timing-safe |
+| world.gd as single wiring point | All set_*() calls co-located in _ready() — discoverable, consistent | ✓ Good — used across 3 phases |
 
 ---
-## Current Milestone: v1.1 Equipment Slots
-
-**Goal:** Add weapon and tool equipment slots with right-click context menu, gameplay wiring for the equipped weapon, and a placeholder visual indicator on the player.
-
-**Target features:**
-- Always-visible HUD strip with weapon (W) and tool (T) slots
-- Right-click context menu on bag items and equipment slots
-- Equip/unequip flow moves items between bag and slot
-- Equipped weapon drives hit() attack (fist fallback)
-- Tool slot UI only — harvesting logic deferred
-- Placeholder indicator on player when weapon equipped
-
----
-*Last updated: 2026-03-20 — Phase 7 complete: combat wiring + HUD strip; 3 requirements validated*
+*Last updated: 2026-03-27 after v1.1 milestone*
