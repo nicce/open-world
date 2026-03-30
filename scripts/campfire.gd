@@ -6,11 +6,13 @@ var is_fire: bool = false
 var interactable: bool = false
 var inventory: int = 0
 var burn_timer: Timer
+var player_ref: Player = null
 
 @onready var light_flicker_animation: AnimationPlayer = $Flicker
 @onready var fire_scene = $Fire
 @onready var smoke_scene = $Smoke
 @onready var fire_light = $PointLight2D
+@onready var campfire_menu_scene = preload("res://scenes/campfire_menu.tscn")
 
 
 func _ready():
@@ -26,25 +28,37 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if interactable && Input.is_action_just_pressed("interact"):
-		add_wood(1)
-
 	if inventory > 0:
 		fire()
 	else:
 		smoke()
 
 
+func _process(_delta):
+	if interactable && Input.is_action_just_pressed("interact"):
+		open_menu()
+
+
+func open_menu():
+	var menu = campfire_menu_scene.instantiate()
+	menu.player = player_ref
+	get_tree().root.add_child(menu)
+
+
 func _on_burn_timer_timeout() -> void:
 	withdraw_wood(1)
 
 
-func _on_interact_area_body_entered(_body):
-	interactable = true
+func _on_interact_area_body_entered(body):
+	if body is Player:
+		player_ref = body
+		interactable = true
 
 
-func _on_interact_area_body_exited(_body):
-	interactable = false
+func _on_interact_area_body_exited(body):
+	if body is Player:
+		player_ref = null
+		interactable = false
 
 
 # lights the fire and light animation if not already on

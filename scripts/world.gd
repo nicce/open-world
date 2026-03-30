@@ -20,6 +20,7 @@ func _ready() -> void:
 	player.item_collected.connect(_on_item_collected)
 	fade_timer.timeout.connect(_on_fade_timer_timeout)
 	pickup_timer.timeout.connect(_on_pickup_timer_timeout)
+	SaveManager.load_game(player)
 
 
 func _on_insert_rejected() -> void:

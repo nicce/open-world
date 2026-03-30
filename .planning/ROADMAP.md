@@ -49,9 +49,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   4. EquipmentData.to_dict() / from_dict() round-trip preserves weapon and tool slot contents
   5. HealthComponent.load_health(value) sets HP to the given value without triggering _ready() re-init
 **Plans**: 3 plans
-- [ ] 09-01-PLAN.md — Create Item Resources and ItemRegistry Autoload
-- [ ] 09-02-PLAN.md — Implement Inventory Sparse Dict Serialisation
-- [ ] 09-03-PLAN.md — Implement Equipment and Health Serialisation
+- [x] 09-01-PLAN.md — Create Item Resources and ItemRegistry Autoload
+- [x] 09-02-PLAN.md — Implement Inventory Sparse Dict Serialisation
+- [x] 09-03-PLAN.md — Implement Equipment and Health Serialisation
 
 ### Phase 10: SaveManager — Write Path and Player Round-Trip
 **Goal**: Player can save and load position and HP via a file that survives game restart
@@ -62,7 +62,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. After a save, restarting the game restores the player to the saved position
   3. After a save, restarting the game restores the player's HP to the saved value
   4. If no save file exists on start, the game launches normally with no error
-**Plans**: [To be planned]
+**Plans**: 2 plans
+- [ ] 10-01-PLAN.md — SaveManager and File I/O
+- [ ] 10-02-PLAN.md — Integration and Player Round-Trip
 
 ### Phase 11: Full Round-Trip — Inventory and Equipment
 **Goal**: All player-owned items survive a save/load cycle exactly as they were
@@ -86,6 +88,18 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   4. Autosave does not fire while the player is dead (no corrupt/inconsistent save state)
 **Plans**: [To be planned]
 
+### Phase 13: Campfire Menu Polish — Keyboard Navigation and Fire Control
+**Goal**: The campfire menu is fully keyboard-driven and exposes fire control so the player can light or extinguish the fire from the menu
+**Depends on**: Phase 10
+**Requirements**: UI-01, UI-02, FIRE-01
+**Success Criteria** (what must be TRUE):
+  1. Arrow keys (up/down) move focus between menu buttons; Enter/Space activates the focused button
+  2. The menu can be closed with the interact key (E) or a close button without touching the mouse
+  3. The campfire menu contains a "Light Fire" / "Extinguish Fire" option that toggles fire state
+  4. The fire option label reflects current fire state (shows "Light Fire" when out, "Extinguish Fire" when burning)
+  5. Adding wood via the menu (or lighting via menu) starts the burn timer correctly
+**Plans**: [To be planned]
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -98,7 +112,8 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 6. Equip/Unequip Flow | v1.1 | 2/2 | Complete | 2026-03-19 |
 | 7. Combat Wiring + HUD Strip | v1.1 | 2/2 | Complete | 2026-03-20 |
 | 8. Integration Polish | v1.1 | 3/3 | Complete | 2026-03-27 |
-| 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 0/3 | Not started | - |
-| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/3 | Not started | - |
+| 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 3/3 | Complete | 2026-03-30 |
+| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/2 | Not started | - |
 | 11. Full Round-Trip — Inventory and Equipment | v1.2 | 0/3 | Not started | - |
 | 12. Autosave Triggers and Polish | v1.2 | 0/3 | Not started | - |
+| 13. Campfire Menu Polish — Keyboard Navigation and Fire Control | v1.2 | 0/1 | Not started | - |

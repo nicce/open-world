@@ -3,25 +3,25 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Save & Load
 status: completed
-stopped_at: Phase 9 completed — serialisation primitives in place
+stopped_at: Phase 10 completed — Player position/HP persistence via Campfire menu
 last_updated: "2026-03-30"
 progress:
   total_phases: 4
-  completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  completed_phases: 2
+  total_plans: 5
+  completed_plans: 5
 ---
 
 # Project State
 
 ## Current Position
 
-Phase: 10 of 12 (SaveManager and JSON I/O)
-Plan: 0 of 2 in current phase
+Phase: 11 of 12 (Full Round-Trip — Inventory and Equipment)
+Plan: 0 of ? in current phase
 Status: Ready to plan
-Last activity: 2026-03-30 — Phase 9 completed (ItemRegistry and Resource Serialisation)
+Last activity: 2026-03-30 — Phase 10 completed (SaveManager and Player Round-Trip)
 
-Progress: [██████████░░░░░░░░░░] 50% (9/12 phases complete across all milestones)
+Progress: [████████████░░░░░░░░] 60% (10/12 phases complete across all milestones)
 
 ## Project Reference
 
