@@ -7,13 +7,13 @@
 
 [sub_resource type="Resource" id="medpack_item"]
 script = ExtResource("3_health")
+health = 20
 id = &"medpack"
 name = "Medpack"
 texture = ExtResource("4_medpack_tex")
 weight = 0.2
 category = 1
 consumable = true
-health = 20
 
 [sub_resource type="Resource" id="slot_0"]
 script = ExtResource("2_slot")

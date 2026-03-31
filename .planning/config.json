@@ -10,5 +10,9 @@
     "verifier": true,
     "nyquist_validation": true,
     "_auto_chain_active": false
+  },
+  "git": {
+    "branching_strategy": "phase",
+    "phase_branch_template": "claude/phase-{phase}-{slug}"
   }
 }

@@ -1,7 +1,6 @@
-[gd_scene load_steps=65 format=3 uid="uid://c8xkbjmxthcvl"]
+[gd_scene load_steps=66 format=3 uid="uid://c8xkbjmxthcvl"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_s88sy"]
-[ext_resource type="Resource" uid="uid://c3equipdata01" path="res://scripts/resources/player_equipment_data.tres" id="equip_data"]
 [ext_resource type="Texture2D" uid="uid://cqk3km5v2jj5t" path="res://art/characters/player.png" id="2_cgwfd"]
 [ext_resource type="PackedScene" uid="uid://cecw6b2xcismr" path="res://scenes/advanced_camera.tscn" id="3_0t7ah"]
 [ext_resource type="Texture2D" uid="uid://cicdf808ohb8b" path="res://art/characters/player_n_test.png" id="3_86m0i"]
@@ -15,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/attack.gd" id="11_e62re"]
 [ext_resource type="PackedScene" uid="uid://dkj2ngfwp080f" path="res://scenes/health_bar.tscn" id="12_hwcny"]
 [ext_resource type="Script" path="res://scripts/weapon_indicator.gd" id="13_windic"]
+[ext_resource type="Resource" uid="uid://c3equipdata01" path="res://scripts/resources/player_equipment_data.tres" id="equip_data"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bkdk2"]
 radius = 7.0
@@ -473,13 +473,13 @@ offset_right = 95.0
 offset_bottom = 35.0
 
 [node name="WeaponIndicator" type="Node2D" parent="."]
-position = Vector2(0, -24)
 visible = false
+position = Vector2(0, -24)
 script = ExtResource("13_windic")
 
 [node name="IconRect" type="TextureRect" parent="WeaponIndicator"]
-custom_minimum_size = Vector2(16, 16)
 visible = false
+custom_minimum_size = Vector2(16, 16)
 expand_mode = 1
 stretch_mode = 6
 

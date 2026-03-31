@@ -268,7 +268,7 @@ shape = SubResource("CapsuleShape2D_unp06")
 debug_color = Color(0.266667, 0.635294, 0, 0.419608)
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_ts5fn")]
-max_health = 20
+max_health = 5
 health_bar = NodePath("../HealthBar")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_3vipc")]
@@ -301,7 +301,7 @@ parameters/Move/blend_position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("6_ajp4j")
-damage = 10
+damage = 5
 cooldown = 0.5
 
 [node name="AnimationDamage" parent="." instance=ExtResource("7_0texe")]
