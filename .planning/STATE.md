@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Save & Load
-status: verifying
+status: executing
 stopped_at: Completed 12-autosave-triggers-and-polish-02-PLAN.md
-last_updated: "2026-03-31T08:22:04.950Z"
-last_activity: 2026-03-31
+last_updated: "2026-03-31T12:57:07.161Z"
+last_activity: 2026-03-31 -- Phase 13 execution started
 progress:
   percent: 60
 ---
@@ -14,10 +14,10 @@ progress:
 
 ## Current Position
 
-Phase: 13
-Plan: Not started
-Status: Phase complete — ready for verification
-Last activity: 2026-03-31
+Phase: 13 (campfire-menu-polish-keyboard-navigation-and-fire-control) — EXECUTING
+Plan: 1 of 1
+Status: Executing Phase 13
+Last activity: 2026-03-31 -- Phase 13 execution started
 
 Progress: [████████████░░░░░░░░] 60% (10/12 phases complete across all milestones)
 
@@ -26,7 +26,7 @@ Progress: [████████████░░░░░░░░] 60% (10
 See: .planning/PROJECT.md (updated 2026-03-30 after v1.2 milestone start)
 
 **Core value:** A satisfying item and inventory system that makes picking things up, equipping weapons, using consumables, and managing weight feel meaningful
-**Current focus:** Phase 12 — autosave-triggers-and-polish
+**Current focus:** Phase 13 — campfire-menu-polish-keyboard-navigation-and-fire-control
 
 ## Shipped Milestones
 

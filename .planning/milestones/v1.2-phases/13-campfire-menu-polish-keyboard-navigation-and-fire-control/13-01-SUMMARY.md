@@ -91,6 +91,7 @@ All three automated gates pass:
 
 - `4279bbe` — feat: add fire_enabled flag and light/extinguish methods to campfire
 - `3e26746` — feat: add keyboard nav and fire-toggle button to campfire menu
+- `37ccdc1` — fix: preserve fire state when paused with no wood inventory
 
 ## Deviations from Plan
 
@@ -103,6 +104,10 @@ All three automated gates pass:
 - **Fix:** Added `if fire_scene == null: is_fire = true; return` guard to `fire()` and `if smoke_scene == null: is_fire = false; return` guard to `smoke()`.
 - **Files modified:** `scripts/campfire.gd`
 - **Commit:** `4279bbe`
+
+## Bug found during checkpoint
+
+`_physics_process` used `else: smoke()`, so any frame where `fire_enabled=true` but `inventory=0` (free fire) immediately extinguished the fire when the tree unpaused on menu close. Fixed by changing to `elif not fire_enabled: smoke()`. Also added depletion handling to `_on_burn_timer_timeout`: when wood inventory hits 0, `fire_enabled` is set false and `smoke()` is called so wood depletion still extinguishes correctly.
 
 ## Known Stubs
 
