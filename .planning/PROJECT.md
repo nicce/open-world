@@ -42,6 +42,9 @@ A satisfying item and inventory system that makes picking things up, equipping w
 - ✓ Always-visible HUD strip with weapon and tool equipment slots — v1.1 (HUD-01, HUD-02)
 - ✓ Equipped weapon drives player hit() attack; fist as fallback — v1.1 (CMBT-03, CMBT-04)
 - ✓ Placeholder visual indicator on player when weapon is equipped — v1.1 (CMBT-05)
+- ✓ Campfire sleep triggers save automatically (TRIG-01) — v1.2 Phase 12
+- ✓ Autosave on configurable interval (300s default) with dead-player guard (TRIG-02) — v1.2 Phase 12
+- ✓ Save file version-stamped with SAVE_VERSION = "1.0" key (TRIG-03) — v1.2 Phase 12
 
 ## Current Milestone: v1.2 Save & Load
 
@@ -132,4 +135,4 @@ Technical debt (non-blocking):
 | world.gd as single wiring point | All set_*() calls co-located in _ready() — discoverable, consistent | ✓ Good — used across 3 phases |
 
 ---
-*Last updated: 2026-03-30 after v1.2 milestone start*
+*Last updated: 2026-03-31 after Phase 12 (Autosave Triggers and Polish) complete*
