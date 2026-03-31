@@ -63,6 +63,11 @@ func start_autosave(player: Player) -> void:
 	_autosave_player = player
 	if _autosave_timer:
 		_autosave_timer.queue_free()
+		_autosave_timer = null
+
+	if autosave_interval_seconds <= 0:
+		return
+
 	_autosave_timer = Timer.new()
 	_autosave_timer.wait_time = autosave_interval_seconds
 	_autosave_timer.autostart = true
@@ -79,7 +84,7 @@ func stop_autosave() -> void:
 
 
 func _should_autosave() -> bool:
-	if _autosave_player == null:
+	if not is_instance_valid(_autosave_player):
 		return false
 	if _autosave_player.current_state == Player.PlayerStates.DEAD:
 		return false
