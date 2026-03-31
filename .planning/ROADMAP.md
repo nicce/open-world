@@ -100,7 +100,8 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   3. The campfire menu contains a "Light Fire" / "Extinguish Fire" option that toggles fire state
   4. The fire option label reflects current fire state (shows "Light Fire" when out, "Extinguish Fire" when burning)
   5. Adding wood via the menu (or lighting via menu) starts the burn timer correctly
-**Plans**: [To be planned]
+**Plans**: 1 plan
+- [ ] 13-01-PLAN.md — Keyboard navigation, E-key close, and fire-toggle button
 
 ### Phase 14: Technical Debt and Architectural Polish (Improvement Notes)
 **Goal**: Address technical debt and architectural improvements identified during v1.2 audit.
