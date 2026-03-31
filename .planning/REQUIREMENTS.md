@@ -37,7 +37,7 @@ Requirements for milestone v1.2 Save & Load. Each maps to roadmap phases.
 
 ### World State
 
-- **WORLD-01**: Picked-up collectables do not respawn after load
+- **WORLD-01**: Picked-up collectables do not respawn after load — *needs discuss-phase to scope respawn rules: tools (e.g. axe) should never respawn; consumables and resources (e.g. herbs, ore) may respawn on a timer; enemies always respawn*
 - **WORLD-02**: Dead enemies do not respawn after load
 
 ### Save UX
