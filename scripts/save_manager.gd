@@ -3,6 +3,12 @@ extends Node
 const SAVE_PATH = "user://save.json"
 const SAVE_VERSION: String = "1.0"
 
+## Autosave interval in seconds. Set to 0 to disable autosave.
+var autosave_interval_seconds: float = 300.0
+
+var _autosave_player: Player = null
+var _autosave_timer: Timer = null
+
 
 func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
 	data["version"] = SAVE_VERSION
@@ -51,3 +57,37 @@ func load_game(player: Player, path: String = SAVE_PATH) -> void:
 	var result = load_data(path)
 	if result.has("player"):
 		player.from_dict(result["player"])
+
+
+func start_autosave(player: Player) -> void:
+	_autosave_player = player
+	if _autosave_timer:
+		_autosave_timer.queue_free()
+	_autosave_timer = Timer.new()
+	_autosave_timer.wait_time = autosave_interval_seconds
+	_autosave_timer.autostart = true
+	_autosave_timer.timeout.connect(_on_autosave_timeout)
+	add_child(_autosave_timer)
+
+
+func stop_autosave() -> void:
+	if _autosave_timer:
+		_autosave_timer.stop()
+		_autosave_timer.queue_free()
+		_autosave_timer = null
+	_autosave_player = null
+
+
+func _should_autosave() -> bool:
+	if _autosave_player == null:
+		return false
+	if _autosave_player.current_state == Player.PlayerStates.DEAD:
+		return false
+	return true
+
+
+func _on_autosave_timeout() -> void:
+	if _should_autosave():
+		var err = save_game(_autosave_player)
+		if err != OK:
+			push_warning("Autosave failed: %s" % error_string(err))

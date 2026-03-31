@@ -48,3 +48,37 @@ func test_save_includes_version() -> void:
 func test_save_version_is_string() -> void:
 	assert_true(SaveManager.SAVE_VERSION is String, "SAVE_VERSION should be a String")
 	assert_eq(SaveManager.SAVE_VERSION, "1.0", "Initial version should be 1.0")
+
+
+func test_autosave_interval_default() -> void:
+	assert_eq(SaveManager.autosave_interval_seconds, 300.0, "Default autosave interval should be 300 seconds")
+
+
+func test_autosave_interval_configurable() -> void:
+	var original = SaveManager.autosave_interval_seconds
+	SaveManager.autosave_interval_seconds = 60.0
+	assert_eq(SaveManager.autosave_interval_seconds, 60.0, "Autosave interval should be configurable")
+	SaveManager.autosave_interval_seconds = original
+
+
+func test_should_autosave_returns_false_when_no_player() -> void:
+	SaveManager._autosave_player = null
+	assert_false(SaveManager._should_autosave(), "Should not autosave without player")
+
+
+func test_should_autosave_returns_false_when_dead() -> void:
+	var player = Player.new()
+	player.current_state = Player.PlayerStates.DEAD
+	SaveManager._autosave_player = player
+	assert_false(SaveManager._should_autosave(), "Should not autosave when player is dead")
+	SaveManager._autosave_player = null
+	player.free()
+
+
+func test_should_autosave_returns_true_when_alive() -> void:
+	var player = Player.new()
+	player.current_state = Player.PlayerStates.MOVE
+	SaveManager._autosave_player = player
+	assert_true(SaveManager._should_autosave(), "Should autosave when player is alive")
+	SaveManager._autosave_player = null
+	player.free()
