@@ -16,7 +16,10 @@ func _on_save_button_pressed() -> void:
 
 
 func _on_sleep_button_pressed() -> void:
-	print("Sleeping... (Phase 12 placeholder)")
+	if player:
+		var err = SaveManager.save_game(player)
+		if err != OK:
+			push_error("Failed to save game on sleep: %s" % error_string(err))
 	_on_close_button_pressed()
 
 

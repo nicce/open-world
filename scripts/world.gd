@@ -21,6 +21,7 @@ func _ready() -> void:
 	fade_timer.timeout.connect(_on_fade_timer_timeout)
 	pickup_timer.timeout.connect(_on_pickup_timer_timeout)
 	SaveManager.load_game(player)
+	SaveManager.start_autosave(player)
 
 
 func _on_insert_rejected() -> void:

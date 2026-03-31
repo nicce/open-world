@@ -86,7 +86,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. The game autosaves on a configurable interval without player intervention
   3. The save file contains a version key that can be inspected for future migration support
   4. Autosave does not fire while the player is dead (no corrupt/inconsistent save state)
-**Plans**: [To be planned]
+**Plans**: 2 plans
+- [x] 12-01-PLAN.md — Version key in save format and campfire sleep save trigger
+- [x] 12-02-PLAN.md — Autosave timer with configurable interval and dead-player guard
 
 ### Phase 13: Campfire Menu Polish — Keyboard Navigation and Fire Control
 **Goal**: The campfire menu is fully keyboard-driven and exposes fire control so the player can light or extinguish the fire from the menu
@@ -115,5 +117,5 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 3/3 | Complete | 2026-03-30 |
 | 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/2 | Not started | - |
 | 11. Full Round-Trip — Inventory and Equipment | v1.2 | 1/1 | Complete   | 2026-03-31 |
-| 12. Autosave Triggers and Polish | v1.2 | 0/3 | Not started | - |
+| 12. Autosave Triggers and Polish | v1.2 | 2/2 | Complete    | 2026-03-31 |
 | 13. Campfire Menu Polish — Keyboard Navigation and Fire Control | v1.2 | 0/1 | Not started | - |
