@@ -85,3 +85,25 @@ func test_withdraw_exact_inventory_empties_campfire() -> void:
 	var remaining := _campfire.withdraw_wood(5)
 	assert_eq(remaining, 0)
 	assert_eq(_campfire.inventory, 0)
+
+
+# --- fire_enabled flag ---
+
+func test_fire_enabled_defaults_to_true() -> void:
+	assert_true(_campfire.fire_enabled)
+
+
+func test_extinguish_sets_fire_enabled_false() -> void:
+	# extinguish() calls smoke() which touches scene nodes — skip the visual side,
+	# test only the flag by patching is_fire to false so smoke()'s guard is a no-op.
+	_campfire.is_fire = false
+	_campfire.fire_enabled = true
+	_campfire.extinguish()
+	assert_false(_campfire.fire_enabled)
+
+
+func test_light_sets_fire_enabled_true() -> void:
+	_campfire.fire_enabled = false
+	_campfire.is_fire = true  # fire() guard: if !is_fire — already true means no-op visual path
+	_campfire.light()
+	assert_true(_campfire.fire_enabled)
