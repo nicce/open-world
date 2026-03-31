@@ -24,7 +24,7 @@ Requirements for milestone v1.2 Save & Load. Each maps to roadmap phases.
 
 - [ ] **SAVE-01**: Player can save game to user://save.json via atomic write (write .tmp, verify, rename)
 - [ ] **SAVE-02**: SaveManager persists player position and current HP
-- [ ] **SAVE-03**: SaveManager persists inventory contents and equipped items
+- [x] **SAVE-03**: SaveManager persists inventory contents and equipped items
 - [ ] **SAVE-04**: Game loads existing save automatically on start
 
 ### Save Triggers
@@ -68,7 +68,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SER-05 | Phase 9 | Pending |
 | SAVE-01 | Phase 10 | Pending |
 | SAVE-02 | Phase 10 | Pending |
-| SAVE-03 | Phase 11 | Pending |
+| SAVE-03 | Phase 11 | Complete |
 | SAVE-04 | Phase 10 | Pending |
 | TRIG-01 | Phase 12 | Pending |
 | TRIG-02 | Phase 12 | Pending |
