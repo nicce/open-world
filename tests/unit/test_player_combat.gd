@@ -48,6 +48,7 @@ func test_hit_without_weapon_leaves_fist_damage() -> void:
 	# CMBT-04: no weapon — hit() must not touch attack.damage.
 	var player := PlayerStub.new()
 	player.attack = _make_attack(5)
+	player.base_damage = 5
 	player.equipment_data = EquipmentData.new()  # weapon is null
 
 	player.hit()
@@ -60,6 +61,7 @@ func test_hit_without_equipment_data_leaves_fist_damage() -> void:
 	# CMBT-04 edge: equipment_data itself is null — must not crash.
 	var player := PlayerStub.new()
 	player.attack = _make_attack(5)
+	player.base_damage = 5
 	player.equipment_data = null
 
 	player.hit()
@@ -79,4 +81,24 @@ func test_hit_casts_float_damage_to_int() -> void:
 	player.hit()
 
 	assert_eq(player.attack.damage, 7, "hit() must truncate float weapon damage to int")
+	player.free()
+
+
+func test_hit_resets_to_base_damage_after_unequip() -> void:
+	# Verify that damage is reset to base_damage when no weapon is equipped.
+	var player := PlayerStub.new()
+	player.attack = _make_attack(1)
+	player.base_damage = 1
+	var ed := EquipmentData.new()
+	ed.weapon = _make_weapon(15.0)
+	player.equipment_data = ed
+
+	# Equip and hit
+	player.hit()
+	assert_eq(player.attack.damage, 15, "Damage should be 15 with weapon")
+
+	# Unequip and hit
+	ed.weapon = null
+	player.hit()
+	assert_eq(player.attack.damage, 1, "Damage should reset to base_damage (1) after unequip")
 	player.free()
