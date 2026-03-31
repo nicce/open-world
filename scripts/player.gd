@@ -74,8 +74,15 @@ func move():
 			current_state = PlayerStates.HIT
 			hit()
 			animation_state.travel("Fist")
+			# Fallback: Reset state after 0.5s if animation_finished doesn't fire
+			get_tree().create_timer(0.5).timeout.connect(_on_hit_timeout)
 
 	move_and_slide()
+
+
+func _on_hit_timeout() -> void:
+	if current_state == PlayerStates.HIT:
+		on_player_state_reset()
 
 
 func hit() -> void:
