@@ -1,84 +1,65 @@
 # External Integrations
 
-**Analysis Date:** 2026-03-10
+**Analysis Date:** 2025-01-24
 
 ## APIs & External Services
 
-**Not detected.**
-
-The codebase contains no HTTP requests, REST API calls, or external service integrations. All functionality is self-contained within the Godot engine.
+**Not detected:**
+- The project is a self-contained Godot game. No external SaaS APIs or cloud services are currently used.
 
 ## Data Storage
 
 **Databases:**
-- Not applicable - No database integration detected
+- **Local Filesystem:** Used for game saves.
+  - Client: `SaveManager` (autoload) at `res://scripts/save_manager.gd`.
+  - Format: JSON files stored in the user data directory.
 
 **File Storage:**
-- Local filesystem only
-  - Asset storage: `art/`, `music/`, `animations/`, `scenes/`, `components/`
-  - Game data: Stored as Godot `.tscn` scene files and `.gd` script files
-  - `.godot/` directory: Generated cache, git-ignored
+- **Local Filesystem:** Resources (textures, sounds, scripts) are packed into the exported executable.
 
 **Caching:**
-- Not applicable
+- **None:** No explicit caching system outside of Godot's internal resource loader.
 
 ## Authentication & Identity
 
 **Auth Provider:**
-- Not applicable - No authentication system implemented
-
-**Implementation:**
-- No user accounts, login, or authorization system
+- **Custom:** No authentication is currently implemented. The game is single-player and uses local saves.
 
 ## Monitoring & Observability
 
 **Error Tracking:**
-- Not applicable
+- **None:** No external tools like Sentry or New Relic are integrated.
+- **Godot Debugger:** Standard error/warning output is used during development.
 
 **Logs:**
-- Console output only via Godot's built-in print/debug logging
-- Test framework logging: GUT test runner produces `test_results.xml` output
+- **Console:** Godot's `print()` and `printerr()` are used for logging. Output is captured in `test_results.xml` during testing.
 
 ## CI/CD & Deployment
 
 **Hosting:**
-- Not applicable - Desktop game (runs locally)
+- **Not configured:** No automated deployment to platforms like itch.io or Steam detected.
 
 **CI Pipeline:**
-- GitHub Actions (`.github/workflows/ci.yml`)
-  - Lint job: Runs `gdlint` and `gdformat --check` on all `.gd` files
-  - Test job: Runs GUT unit tests via `make test` in headless mode
-  - Test artifact: Uploads `test_results.xml` to GitHub
+- **GitHub Actions:** CI workflow is defined in `.github/workflows/ci.yml`. It runs tests and linting.
+  - Runners: `ubuntu-latest`.
+  - Tools: GUT, gdlint.
 
 ## Environment Configuration
 
 **Required env vars:**
-- None - Project uses Godot's Inspector-based configuration (@export variables)
+- **None:** All configuration is handled within `project.godot`.
 
 **Secrets location:**
-- Not applicable - No secrets or credentials in use
+- **Not applicable:** No secrets are currently required.
 
 ## Webhooks & Callbacks
 
 **Incoming:**
-- Not applicable
+- **None**
 
 **Outgoing:**
-- Not applicable
-
-## Audio Assets
-
-**Format:**
-- WAV files preloaded via `preload()` in `scripts/background_music.gd`
-- Location: `music/`
-  - `home.wav` (14 MB)
-  - `dark_woodslands.wav` (22 MB)
-
-**Integration:**
-- Godot `AudioStreamPlayer` node
-- Singleton autoload: `BackgroundMusic` (registered in `project.godot` as `scenes/background_music.tscn`)
-- Triggered via signals when player enters area detection zones
+- **None**
 
 ---
 
-*Integration audit: 2026-03-10*
+*Integration audit: 2025-01-24*

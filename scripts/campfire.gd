@@ -5,6 +5,7 @@ var wood_burn_time_in_seconds: int = 60
 var is_fire: bool = false
 var interactable: bool = false
 var inventory: int = 0
+var fire_enabled: bool = true
 var burn_timer: Timer
 var player_ref: Player = null
 
@@ -28,25 +29,30 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if inventory > 0:
+	if fire_enabled and inventory > 0:
 		fire()
-	else:
+	elif not fire_enabled:
 		smoke()
 
 
-func _process(_delta):
-	if interactable && Input.is_action_just_pressed("interact"):
+func _unhandled_input(event: InputEvent) -> void:
+	if interactable and event.is_action_pressed("interact"):
+		get_viewport().set_input_as_handled()
 		open_menu()
 
 
 func open_menu():
 	var menu = campfire_menu_scene.instantiate()
 	menu.player = player_ref
+	menu.campfire = self
 	get_tree().root.add_child(menu)
 
 
 func _on_burn_timer_timeout() -> void:
 	withdraw_wood(1)
+	if inventory == 0:
+		fire_enabled = false
+		smoke()
 
 
 func _on_interact_area_body_entered(body):
@@ -63,6 +69,9 @@ func _on_interact_area_body_exited(body):
 
 # lights the fire and light animation if not already on
 func fire() -> void:
+	if fire_scene == null:  # headless / unit test guard
+		is_fire = true
+		return
 	if !is_fire:
 		smoke_scene.visible = false
 		fire_scene.visible = true
@@ -75,6 +84,9 @@ func fire() -> void:
 
 # removes fire and start the smoke
 func smoke() -> void:
+	if smoke_scene == null:  # headless / unit test guard
+		is_fire = false
+		return
 	if is_fire:
 		fire_scene.visible = false
 		light_flicker_animation.stop()
@@ -83,6 +95,20 @@ func smoke() -> void:
 		burn_timer.stop()
 
 	is_fire = false
+
+
+# Lights the campfire regardless of inventory.
+# TODO(wood-cost): When wood/log items are added, gate this on inventory > 0
+# and transfer one wood unit from player inventory before calling fire().
+func light() -> void:
+	fire_enabled = true
+	fire()
+
+
+# Extinguishes the campfire. Wood inventory is preserved; timer is paused.
+func extinguish() -> void:
+	fire_enabled = false
+	smoke()
 
 
 # add wood to the campfire inventory, will return the amount of wood that didn't got added

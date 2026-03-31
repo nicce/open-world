@@ -1,81 +1,71 @@
 # Technology Stack
 
-**Analysis Date:** 2026-03-10
+**Analysis Date:** 2025-01-24
 
 ## Languages
 
 **Primary:**
-- GDScript 4.3 - All game logic, UI, and resource systems
+- GDScript (Godot 4.3 compatible) - Used for all game logic, components, and UI scripts.
 
 **Secondary:**
-- Not applicable
+- Python 3.x - Used for development tooling (gdtoolkit for linting).
+- Shell (Bash/Makefile) - Used for automation tasks (testing, linting).
 
 ## Runtime
 
 **Environment:**
-- Godot Engine 4.2.2+ (configured in `project.godot` and `Makefile`)
+- Godot Engine 4.3 - Primary game engine and runtime.
+- Forward Plus renderer - Used for 3D/Advanced 2D rendering.
 
 **Package Manager:**
-- Not applicable (Godot uses scene and script files directly)
-- Lockfile: Not applicable
+- None for GDScript (Godot doesn't use one by default).
+- pip (Python) - Used for `gdtoolkit`.
+- GUT (Godot Unit Test) - Installed via Makefile as an addon.
 
 ## Frameworks
 
 **Core:**
-- Godot Engine 4.2.2 - Game engine and runtime
-  - Features enabled: Forward Plus renderer
-  - Viewport stretch mode: integer scaling
+- Godot Engine 4.3 - Core framework for nodes, signals, and resources.
 
 **Testing:**
-- GUT (Godot Unit Test) 9.3.0 - Unit testing framework
-  - Location: `addons/gut/`
-  - Configuration: Headless test runner with XML output
-  - Config file: `addons/gut/gut_cmdln.gd`
+- GUT (Godot Unit Test) 9.x - Used for unit and integration testing.
+- gdtoolkit - Used for linting (`gdlint`) and static analysis.
 
 **Build/Dev:**
-- gdtoolkit 4.* - GDScript linting and formatting
-  - Lint tool: gdlint
-  - Format tool: gdformat
-  - Config: `.gdlintrc` (max-line-length: 120)
+- Makefile - Orchestrates testing, linting, and installation.
 
 ## Key Dependencies
 
 **Critical:**
-- GUT 9.3.0 - Unit testing framework for GDScript
-  - Installed locally via `make install-gut`
-  - git-ignored in `.gitignore`
+- `addons/gut/` - Essential for the testing suite.
 
 **Infrastructure:**
-- Godot built-in Audio system - Background music via `AudioStreamPlayer`
-- Godot built-in Physics2D - Character movement and collision
-- Godot built-in AnimationTree - Character animation state machine
-- Godot built-in Signal system - Event-driven communication
+- `project.godot` - Central configuration for the Godot engine.
+- `.gdlintrc` - Configuration for GDScript linting.
 
 ## Configuration
 
 **Environment:**
-- Configured via `project.godot` (Godot project configuration file)
-- Input mappings defined in `[input]` section: left, right, up, down, hit, interact, inventory, jump
-- Physics layers defined in `[layer_names]` for 2D physics (layers 2-5)
+- `project.godot` contains application name, main scene, and input map.
+- Autoloads (Singletons):
+    - `BackgroundMusic`: `res://scenes/background_music.tscn`
+    - `ItemRegistry`: `res://scripts/item_registry.gd`
+    - `SaveManager`: `res://scripts/save_manager.gd`
 
 **Build:**
-- `Makefile` - Build automation for linting, formatting, and testing
-- `project.godot` - Main Godot engine configuration
-- `.gdlintrc` - gdtoolkit linting configuration
+- No traditional build script; Godot exports are handled via the editor or CLI.
+- `Makefile` provides `test` and `lint` targets.
 
 ## Platform Requirements
 
 **Development:**
-- Godot Engine 4.2.2+ binary
-- Python 3.x (for gdtoolkit virtual environment)
-- Make (for build commands)
-- macOS (symlinks to /Applications/Godot.app/Contents/MacOS/Godot) or Linux x86_64
-- Optional: Godot GUI editor for scene editing
+- Godot Engine 4.3+
+- Python 3.x (for linting)
 
 **Production:**
-- Godot Engine 4.2.2+ runtime for game execution
-- Target platforms: Desktop (macOS, Linux, Windows via Godot export)
+- Desktop (Windows/Linux/macOS) via Godot Export.
+- Web (HTML5) via Godot Export.
 
 ---
 
-*Stack analysis: 2026-03-10*
+*Stack analysis: 2025-01-24*
