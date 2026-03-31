@@ -30,7 +30,7 @@ Requirements for milestone v1.2 Save & Load. Each maps to roadmap phases.
 ### Save Triggers
 
 - [x] **TRIG-01**: Game saves when player sleeps at campfire
-- [ ] **TRIG-02**: Game autosaves on a configurable interval (property on SaveManager)
+- [x] **TRIG-02**: Game autosaves on a configurable interval (property on SaveManager)
 - [x] **TRIG-03**: Save file includes a version key for future migration support
 
 ## Future Requirements
@@ -71,7 +71,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAVE-03 | Phase 11 | Complete |
 | SAVE-04 | Phase 10 | Pending |
 | TRIG-01 | Phase 12 | Complete |
-| TRIG-02 | Phase 12 | Pending |
+| TRIG-02 | Phase 12 | Complete |
 | TRIG-03 | Phase 12 | Complete |
 
 **Coverage:**

@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Save & Load
-status: executing
-stopped_at: Completed 12-autosave-triggers-and-polish-01-PLAN.md
-last_updated: "2026-03-31T08:15:13.173Z"
+status: verifying
+stopped_at: Completed 12-autosave-triggers-and-polish-02-PLAN.md
+last_updated: "2026-03-31T08:19:01.361Z"
 last_activity: 2026-03-31
 progress:
   percent: 60
@@ -16,7 +16,7 @@ progress:
 
 Phase: 12 (autosave-triggers-and-polish) — EXECUTING
 Plan: 2 of 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-03-31
 
 Progress: [████████████░░░░░░░░] 60% (10/12 phases complete across all milestones)
@@ -47,6 +47,7 @@ Key constraints for v1.2:
 - [Phase 11-full-round-trip-inventory-and-equipment]: inventory.from_dict called before equipment_data.from_dict to preserve EQUIP-05 invariant
 - [Phase 12-autosave-triggers-and-polish]: Version injected in save_data() so all save paths get versioning automatically
 - [Phase 12-autosave-triggers-and-polish]: Sleep button mirrors save button pattern exactly for code consistency
+- [Phase 12-autosave-triggers-and-polish]: Timer added as child of SaveManager autoload; start_autosave() called after load_game() in world._ready() to prevent premature fire; dead-player guard skips saves when Player.current_state == DEAD
 
 ### Pending Todos
 
@@ -60,6 +61,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-31T08:15:13.170Z
-Stopped at: Completed 12-autosave-triggers-and-polish-01-PLAN.md
+Last session: 2026-03-31T08:19:01.358Z
+Stopped at: Completed 12-autosave-triggers-and-polish-02-PLAN.md
 Resume file: None
