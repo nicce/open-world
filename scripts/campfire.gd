@@ -31,7 +31,7 @@ func _ready():
 func _physics_process(_delta):
 	if fire_enabled and inventory > 0:
 		fire()
-	else:
+	elif not fire_enabled:
 		smoke()
 
 
@@ -50,6 +50,9 @@ func open_menu():
 
 func _on_burn_timer_timeout() -> void:
 	withdraw_wood(1)
+	if inventory == 0:
+		fire_enabled = false
+		smoke()
 
 
 func _on_interact_area_body_entered(body):
