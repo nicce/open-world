@@ -12,6 +12,8 @@ enum PlayerStates { MOVE, HIT, DEAD }
 
 var health_depleated: bool = false
 var current_state = PlayerStates.MOVE
+var base_damage: int = 1
+var hit_timeout_remaining: float = 0.0
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready
@@ -25,16 +27,20 @@ func _ready() -> void:
 	animation_tree.animation_finished.connect(_on_animation_finished)
 	if equipment_data:
 		$WeaponIndicator.set_equipment_data(equipment_data)
+	if attack:
+		base_damage = attack.damage
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	match current_state:
 		PlayerStates.MOVE:
 			move()
 		PlayerStates.DEAD:
 			pass
 		PlayerStates.HIT:
-			pass
+			hit_timeout_remaining -= delta
+			if hit_timeout_remaining <= 0:
+				on_player_state_reset()
 
 
 func _on_animation_finished(anim_name: StringName) -> void:
@@ -72,17 +78,11 @@ func move():
 	if Input.is_action_just_pressed("hit"):
 		if animation_state:
 			current_state = PlayerStates.HIT
+			hit_timeout_remaining = 0.5
 			hit()
 			animation_state.travel("Fist")
-			# Fallback: Reset state after 0.5s if animation_finished doesn't fire
-			get_tree().create_timer(0.5).timeout.connect(_on_hit_timeout)
 
 	move_and_slide()
-
-
-func _on_hit_timeout() -> void:
-	if current_state == PlayerStates.HIT:
-		on_player_state_reset()
 
 
 func hit() -> void:
@@ -90,6 +90,8 @@ func hit() -> void:
 		return
 	if equipment_data != null and equipment_data.weapon != null:
 		attack.damage = int(equipment_data.weapon.damage)
+	else:
+		attack.damage = base_damage
 
 
 func die():
