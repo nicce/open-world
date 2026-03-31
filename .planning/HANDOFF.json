@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-03-31T13:22:05.621Z",
+  "phase": "14",
+  "phase_name": "Technical Debt and Architectural Polish (Improvement Notes)",
+  "phase_dir": ".planning/milestones/v1.2-phases/14-technical-debt-and-architectural-polish-improvement-notes",
+  "plan": null,
+  "task": null,
+  "total_tasks": null,
+  "status": "paused",
+  "completed_tasks": [
+    {"id": "discuss", "name": "discuss-phase 14 (--auto)", "status": "done", "commit": "a5c9464"},
+    {"id": "context", "name": "14-CONTEXT.md written with 12 auto-selected decisions", "status": "done", "commit": "a5c9464"}
+  ],
+  "remaining_tasks": [
+    {"id": "plan", "name": "Run /gsd:plan-phase 14 to create PLAN.md files", "status": "not_started"},
+    {"id": "execute", "name": "Run /gsd:execute-phase 14 to implement all changes", "status": "not_started"},
+    {"id": "verify", "name": "Manual verification of breaking changes (Medicpack → inventory)", "status": "not_started"}
+  ],
+  "blockers": [],
+  "human_actions_pending": [
+    {
+      "action": "Manual in-game verification after execution",
+      "context": "Medicpack no longer heals instantly — it adds a HealthItem to inventory. Player must verify consume flow works end-to-end.",
+      "blocking": false
+    }
+  ],
+  "decisions": [
+    {"decision": "HitboxComponent emits hit_taken(attack) signal instead of calling health_component.damage() via @export", "rationale": "Remove tight coupling so component is reusable without HealthComponent", "phase": "14"},
+    {"decision": "HealthComponent emits health_changed(current, max) signal instead of calling health_bar.update() via @export", "rationale": "UI decoupling — HealthComponent should not know about HealthBar nodes", "phase": "14"},
+    {"decision": "SpawnerComponent created as reusable component; abandoned_village.gd and lake_world.gd refactored to use it", "rationale": "Identical copy-paste spawning logic in both world scripts", "phase": "14"},
+    {"decision": "Item identity already uses .id comparison in inventory.gd — audit only", "rationale": "Lines 67+79 already use slot.item.id == item.id", "phase": "14"},
+    {"decision": "InventoryUI gets grab_focus() on first slot + _unhandled_input for Tab/I close (Phase 13 pattern)", "rationale": "Consistency with campfire menu keyboard nav", "phase": "14"},
+    {"decision": "Collection feedback = gold flash modulate ~0.4s on receiving InventorySlotUI", "rationale": "Visible but non-intrusive feedback matching HUD strip gold color", "phase": "14"},
+    {"decision": "Hover tooltips use Godot built-in tooltip_text on slot buttons", "rationale": "Zero custom UI needed; Godot handles positioning and display", "phase": "14"},
+    {"decision": "Convert _process polling to _unhandled_input in collectable.gd and medicpack.gd", "rationale": "Same pattern as Phase 13 campfire; removes per-frame Input polling", "phase": "14"},
+    {"decision": "Replace assert() in collectable.gd with push_warning() + early return", "rationale": "assert crashes in release builds; graceful degradation preferred", "phase": "14"},
+    {"decision": "Medicpack converts to standard Collectable that adds HealthItem to inventory (breaking change)", "rationale": "Roadmap intent: all collectables use uniform pipeline", "phase": "14"},
+    {"decision": "State machine fuzzing: MOVE→HIT, HIT→HIT, HIT→DEAD, DEAD invariant tests", "rationale": "Complex state transitions identified as coverage gap", "phase": "14"},
+    {"decision": "UI integration tests: context menu conditions + keyboard focus (headless-compatible paths only)", "rationale": "Test logic not visuals", "phase": "14"}
+  ],
+  "uncommitted_files": [],
+  "next_action": "Run /gsd:plan-phase 14 — CONTEXT.md is ready, research + planning is the next step",
+  "context_notes": "Phase 13 (campfire keyboard nav) fully shipped and merged (PR #14). Phase 14 discuss completed in --auto mode. All 12 decisions are documented in 14-CONTEXT.md. No blockers. Ready to plan immediately."
+}
