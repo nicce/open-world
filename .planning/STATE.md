@@ -2,24 +2,22 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Save & Load
-status: completed
-stopped_at: Phase 10 completed — Player position/HP persistence via Campfire menu
-last_updated: "2026-03-30"
+status: verifying
+stopped_at: Completed 11-full-round-trip-inventory-and-equipment-01-PLAN.md
+last_updated: "2026-03-31T07:42:54.724Z"
+last_activity: 2026-03-31
 progress:
-  total_phases: 4
-  completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
+  percent: 60
 ---
 
 # Project State
 
 ## Current Position
 
-Phase: 11 of 12 (Full Round-Trip — Inventory and Equipment)
-Plan: 0 of ? in current phase
-Status: Ready to plan
-Last activity: 2026-03-30 — Phase 10 completed (SaveManager and Player Round-Trip)
+Phase: 11 (Full Round-Trip — Inventory and Equipment) — EXECUTING
+Plan: 1 of 1
+Status: Phase complete — ready for verification
+Last activity: 2026-03-31
 
 Progress: [████████████░░░░░░░░] 60% (10/12 phases complete across all milestones)
 
@@ -28,7 +26,7 @@ Progress: [████████████░░░░░░░░] 60% (10
 See: .planning/PROJECT.md (updated 2026-03-30 after v1.2 milestone start)
 
 **Core value:** A satisfying item and inventory system that makes picking things up, equipping weapons, using consumables, and managing weight feel meaningful
-**Current focus:** Phase 9 — Foundation (ItemRegistry and Resource Serialisation)
+**Current focus:** Phase 11 — Full Round-Trip — Inventory and Equipment
 
 ## Shipped Milestones
 
@@ -41,10 +39,12 @@ See: .planning/PROJECT.md (updated 2026-03-30 after v1.2 milestone start)
 
 All decisions logged in PROJECT.md Key Decisions table.
 Key constraints for v1.2:
+
 - Serialise item ids (StringName), never Resource objects — JSON.stringify produces {} for GDScript objects
 - from_dict() must mutate Resource instances in place — replacement silently orphans signal subscriptions
 - SaveManager.load_game() must be last call in world.gd._ready() — after all UI subscriptions are wired
 - Atomic write: write to user://save.tmp, verify JSON parses, then rename to user://save.json
+- [Phase 11-full-round-trip-inventory-and-equipment]: inventory.from_dict called before equipment_data.from_dict to preserve EQUIP-05 invariant
 
 ### Pending Todos
 
@@ -58,6 +58,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-30
-Stopped at: Roadmap created — ready to plan Phase 9
+Last session: 2026-03-31T07:42:54.721Z
+Stopped at: Completed 11-full-round-trip-inventory-and-equipment-01-PLAN.md
 Resume file: None

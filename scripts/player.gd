@@ -103,7 +103,12 @@ func collect(item) -> bool:
 
 
 func to_dict() -> Dictionary:
-	return {"position": {"x": position.x, "y": position.y}, "health": health_component.health}
+	return {
+		"position": {"x": position.x, "y": position.y},
+		"health": health_component.health,
+		"inventory": inventory.to_dict(),
+		"equipment": equipment_data.to_dict() if equipment_data else {}
+	}
 
 
 func from_dict(dict: Dictionary) -> void:
@@ -111,3 +116,7 @@ func from_dict(dict: Dictionary) -> void:
 		position = Vector2(dict.position.x, dict.position.y)
 	if dict.has("health"):
 		health_component.load_health(dict.health)
+	if dict.has("inventory") and inventory:
+		inventory.from_dict(dict["inventory"])
+	if dict.has("equipment") and equipment_data:
+		equipment_data.from_dict(dict["equipment"])

@@ -4,6 +4,7 @@ const TEST_SAVE_PATH = "user://test_player_round_trip.json"
 
 var player_scene = preload("res://scenes/player.tscn")
 var player: Player
+var sword_res = preload("res://resources/items/sword.tres")
 
 func before_each():
 	player = player_scene.instantiate()
@@ -46,4 +47,69 @@ func test_player_round_trip():
 
 	assert_eq(new_player.position, Vector2(123, 456))
 	assert_eq(new_player.health_component.health, 75)
+	new_player.free()
+
+
+func test_inventory_round_trip():
+	player.inventory = Inventory.new()
+	for i in range(5):
+		player.inventory.slots.append(InventorySlot.new())
+	player.inventory.insert(sword_res, 1)
+	SaveManager.save_game(player, TEST_SAVE_PATH)
+
+	var new_player = player_scene.instantiate()
+	new_player.inventory = Inventory.new()
+	for i in range(5):
+		new_player.inventory.slots.append(InventorySlot.new())
+	add_child(new_player)
+	SaveManager.load_game(new_player, TEST_SAVE_PATH)
+
+	assert_true(new_player.inventory.has_item(sword_res, 1), "inventory should contain sword after load")
+	new_player.free()
+
+
+func test_equipment_round_trip():
+	player.inventory = Inventory.new()
+	for i in range(5):
+		player.inventory.slots.append(InventorySlot.new())
+	if player.equipment_data:
+		player.equipment_data.equip_weapon(sword_res)
+	SaveManager.save_game(player, TEST_SAVE_PATH)
+
+	var new_player = player_scene.instantiate()
+	new_player.inventory = Inventory.new()
+	for i in range(5):
+		new_player.inventory.slots.append(InventorySlot.new())
+	add_child(new_player)
+	SaveManager.load_game(new_player, TEST_SAVE_PATH)
+
+	if new_player.equipment_data:
+		assert_not_null(new_player.equipment_data.weapon, "weapon slot should be restored after load")
+		assert_eq(new_player.equipment_data.weapon.id, &"sword", "equipped weapon id should be sword")
+	new_player.free()
+
+
+func test_equip05_invariant_after_load():
+	player.inventory = Inventory.new()
+	for i in range(5):
+		player.inventory.slots.append(InventorySlot.new())
+	player.inventory.insert(sword_res, 1)
+	player.inventory.remove(sword_res, 1)
+	if player.equipment_data:
+		player.equipment_data.equip_weapon(sword_res)
+	SaveManager.save_game(player, TEST_SAVE_PATH)
+
+	var new_player = player_scene.instantiate()
+	new_player.inventory = Inventory.new()
+	for i in range(5):
+		new_player.inventory.slots.append(InventorySlot.new())
+	add_child(new_player)
+	SaveManager.load_game(new_player, TEST_SAVE_PATH)
+
+	if new_player.equipment_data:
+		assert_not_null(new_player.equipment_data.weapon, "weapon should be in equipment slot")
+		assert_false(
+			new_player.inventory.has_item(sword_res, 1),
+			"sword must NOT be in bag after load (EQUIP-05)"
+		)
 	new_player.free()
