@@ -102,6 +102,16 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   5. Adding wood via the menu (or lighting via menu) starts the burn timer correctly
 **Plans**: [To be planned]
 
+### Phase 14: Technical Debt and Architectural Polish (Improvement Notes)
+**Goal**: Address technical debt and architectural improvements identified during v1.2 audit.
+**Details**: See `.planning/milestones/v1.2-ROADMAP.md` for the full breakdown of Phase 14.
+**Success Criteria**:
+  1. Hitbox/Health components use pure signal communication (no tight coupling)
+  2. SpawnerComponent exists and handles all enemy spawning
+  3. UI/UX focus management is implemented across all menus
+  4. Test coverage for state transitions and UI logic is increased
+**Plans**: [To be planned]
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -115,7 +125,8 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 7. Combat Wiring + HUD Strip | v1.1 | 2/2 | Complete | 2026-03-20 |
 | 8. Integration Polish | v1.1 | 3/3 | Complete | 2026-03-27 |
 | 9. Foundation — ItemRegistry and Resource Serialisation | v1.2 | 3/3 | Complete | 2026-03-30 |
-| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 0/2 | Not started | - |
-| 11. Full Round-Trip — Inventory and Equipment | v1.2 | 1/1 | Complete   | 2026-03-31 |
-| 12. Autosave Triggers and Polish | v1.2 | 2/2 | Complete    | 2026-03-31 |
-| 13. Campfire Menu Polish — Keyboard Navigation and Fire Control | v1.2 | 0/1 | Not started | - |
+| 10. SaveManager — Write Path and Player Round-Trip | v1.2 | 2/2 | Complete | 2026-03-31 |
+| 11. Full Round-Trip — Inventory and Equipment | v1.2 | 1/1 | Complete | 2026-03-31 |
+| 12. Autosave Triggers and Polish | v1.2 | 2/2 | Complete | 2026-03-31 |
+| 13. Campfire Menu Polish — Keyboard Navigation and Fire Control | v1.2 | 0/1 | In Progress | - |
+| 14. Technical Debt and Architectural Polish | v1.2 | 0/0 | Planned | - |
