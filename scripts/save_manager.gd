@@ -1,9 +1,11 @@
 extends Node
 
 const SAVE_PATH = "user://save.json"
+const SAVE_VERSION: String = "1.0"
 
 
 func save_data(data: Dictionary, path: String = SAVE_PATH) -> Error:
+	data["version"] = SAVE_VERSION
 	var json_string = JSON.stringify(data)
 	var tmp_path = path + ".tmp"
 

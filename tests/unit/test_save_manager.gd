@@ -35,3 +35,16 @@ func test_atomic_write_uses_tmp() -> void:
 
 func test_save_manager_autoload_constant() -> void:
 	assert_eq(SaveManager.SAVE_PATH, "user://save.json", "SAVE_PATH constant should be correct")
+
+
+func test_save_includes_version() -> void:
+	var data = {"player": {"position": {"x": 0.0, "y": 0.0}}}
+	SaveManager.save_data(data, TEST_SAVE_PATH)
+	var loaded = SaveManager.load_data(TEST_SAVE_PATH)
+	assert_true(loaded.has("version"), "Save data should contain version key")
+	assert_eq(loaded["version"], SaveManager.SAVE_VERSION, "Version should match SAVE_VERSION constant")
+
+
+func test_save_version_is_string() -> void:
+	assert_true(SaveManager.SAVE_VERSION is String, "SAVE_VERSION should be a String")
+	assert_eq(SaveManager.SAVE_VERSION, "1.0", "Initial version should be 1.0")
